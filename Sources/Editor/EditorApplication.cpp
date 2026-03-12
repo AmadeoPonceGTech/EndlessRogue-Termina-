@@ -27,9 +27,6 @@ EditorApplication::EditorApplication()
 
 EditorApplication::~EditorApplication()
 {
-    m_AudioSource->Stop();
-    delete m_AudioSource;
-    delete m_AudioData;
 }
 
 void EditorApplication::OnUpdate(float dt)
