@@ -21,7 +21,7 @@ namespace Termina {
         ResourceViewCache* ViewCache;
         SamplerCache* SampCache;
         PassIO* IO;
-        World* World;
+        World* CurrentWorld;
 
         uint FrameIndex;
         int32 Width;

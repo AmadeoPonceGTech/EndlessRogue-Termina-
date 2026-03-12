@@ -7,7 +7,7 @@ namespace Termina {
     {
     public:
         CubesPass();
-        ~CubesPass() override = default;
+        ~CubesPass() override;
 
         void Resize(int32 width, int32 height) override;
         void Execute(RenderPassExecuteInfo& Info) override;

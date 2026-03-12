@@ -38,6 +38,12 @@ namespace Termina {
         server.WatchPipeline("Assets/Shaders/Cubes.hlsl", rpDesc, PipelineType::Graphics);
     }
 
+    CubesPass::~CubesPass()
+    {
+        delete m_ColorTexture;
+        delete m_DepthTexture;
+    }
+
     void CubesPass::Resize(int32 width, int32 height)
     {
         m_ColorTexture->Resize(width, height);
@@ -61,7 +67,7 @@ namespace Termina {
         re->SetPipeline(server.GetPipeline("Assets/Shaders/Cubes.hlsl"));
         re->SetViewport(0.0f, 0.0f, static_cast<float>(info.Width), static_cast<float>(info.Height));
         re->SetScissorRect(0.0f, 0.0f, static_cast<float>(info.Width), static_cast<float>(info.Height));
-        for (auto& entity : info.World->GetActors()) {
+        for (auto& entity : info.CurrentWorld->GetActors()) {
             glm::mat4 transform = entity->GetComponent<Transform>().GetWorldMatrix();
             re->SetConstants(sizeof(glm::mat4), &transform);
             re->Draw(36, 1, 0, 0);

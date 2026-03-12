@@ -44,6 +44,7 @@ namespace Termina {
     RendererSystem::~RendererSystem()
     {
         m_Device->WaitIdle();
+        m_PassIO.Clear();
 
         for (RenderPass* pass : m_RenderPasses) {
             delete pass;
@@ -108,7 +109,7 @@ namespace Termina {
                 .ViewCache = m_ResourceViewCache,
                 .SampCache = m_SamplerCache,
                 .IO = &m_PassIO,
-                .World = Application::GetSystem<WorldSystem>()->GetCurrentWorld(),
+                .CurrentWorld = Application::GetSystem<WorldSystem>()->GetCurrentWorld(),
 
                 .FrameIndex = frameIndex,
                 .Width = pixelWidth,
