@@ -17,6 +17,7 @@ namespace Termina {
         {
             T* system = new T(std::forward<Args>(args)...);
             m_Subsystems[typeid(T)] = system;
+            system->RegisterComponents();
             return system;
         }
 
@@ -25,7 +26,7 @@ namespace Termina {
         {
             return reinterpret_cast<T*>(m_Subsystems[typeid(T)]);
         }
-        
+
         void Begin();
         void Clean();
 
@@ -43,7 +44,7 @@ namespace Termina {
     private:
         std::unordered_map<std::type_index, ISystem*> m_Subsystems;
         std::vector<ISystem*> m_UpdateList;
-        
+
         bool m_IsInEditor = false;
     };
 }

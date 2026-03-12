@@ -11,10 +11,13 @@
 
 #include "ImGui/imgui.h"
 #include "Termina/Audio/AudioSystem.hpp"
+#include "Termina/World/ComponentRegistry.hpp"
+#include "Termina/World/WorldSystem.hpp"
 
 EditorApplication::EditorApplication()
     : Application("Editor")
 {
+    m_SystemManager.AddSystem<Termina::WorldSystem>();
     m_SystemManager.AddSystem<Termina::RendererSystem>(m_Window);
     m_SystemManager.AddSystem<Termina::ShaderManager>();
     auto audioSystem = m_SystemManager.AddSystem<Termina::AudioSystem>();
@@ -23,6 +26,8 @@ EditorApplication::EditorApplication()
     RegisterPanel<WorldHierarchyPanel>();
     RegisterPanel<InspectorPanel>();
     RegisterPanel<ContentViewerPanel>();
+
+    Termina::ComponentRegistry::Get().Report();
 }
 
 EditorApplication::~EditorApplication()

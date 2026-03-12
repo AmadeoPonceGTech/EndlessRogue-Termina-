@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/System.hpp"
+#include <Termina/Core/System.hpp>
 
 namespace Termina {
     class Actor;
@@ -30,7 +30,7 @@ namespace Termina {
         virtual void OnAttach(Actor* newParent) {}
         virtual void OnDetach(Actor* oldParent) {}
         virtual void Inspect() {}
-        
+
         void SetOwner(Actor* actor) { m_Owner = actor; }
         Actor* GetOwner() { return m_Owner; }
 

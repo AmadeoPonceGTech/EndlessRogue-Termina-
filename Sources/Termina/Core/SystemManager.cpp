@@ -11,6 +11,7 @@ namespace Termina {
     void SystemManager::Clean()
     {
         for (auto [_, system] : m_Subsystems) {
+            system->UnregisterComponents();
             delete system;
         }
         m_Subsystems.clear();

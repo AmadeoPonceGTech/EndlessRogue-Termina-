@@ -1,6 +1,7 @@
 #include "Transform.hpp"
 
 #include <Termina/World/Actor.hpp>
+#include <Termina/World/ComponentRegistry.hpp>
 
 #include <GLM/gtx/matrix_decompose.hpp>
 #include <GLM/gtx/quaternion.hpp>

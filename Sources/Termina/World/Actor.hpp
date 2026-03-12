@@ -8,10 +8,10 @@
 
 #include <Termina/Core/Common.hpp>
 #include <Termina/Core/ID.hpp>
+#include <Termina/World/Component.hpp>
 
 namespace Termina {
     class World;
-    class Component;
 
     class Actor
     {

@@ -28,6 +28,9 @@ namespace Termina {
         virtual void Render(float deltaTime) {};
         virtual void PostRender(float deltaTime) {};
 
+        virtual void RegisterComponents() {};
+        virtual void UnregisterComponents() {};
+
         virtual UpdateFlags GetUpdateFlags() const = 0;
         virtual std::string GetName() const = 0;
         virtual int GetPriority() const = 0;
