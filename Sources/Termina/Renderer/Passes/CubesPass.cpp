@@ -30,7 +30,7 @@ namespace Termina {
 
         RenderPipelineDesc rpDesc = RenderPipelineDesc().AddColorAttachmentFormat(TextureFormat::RGBA8_UNORM)
                                                         .SetName("Cubes Pipeline")
-                                                        .SetCullMode(PipelineCullMode::BACK)
+                                                        .SetCullMode(PipelineCullMode::NONE)
                                                         .SetDepthAttachmentFormat(TextureFormat::D32_FLOAT)
                                                         .SetDepthCompareOp(PipelineCompareOp::LESS)
                                                         .SetDepthReadEnabled(true)
