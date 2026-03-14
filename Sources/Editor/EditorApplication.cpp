@@ -34,7 +34,7 @@ EditorApplication::EditorApplication(const std::string& projectPath)
     m_SystemManager.AddSystem<Termina::RendererSystem>(m_Window);
     m_SystemManager.AddSystem<Termina::ShaderManager>();
     m_SystemManager.AddSystem<Termina::AudioSystem>();
-    m_SystemManager.AddSystem<Termina::ScriptSystem>();
+    //m_SystemManager.AddSystem<Termina::ScriptSystem>();
     m_SystemManager.AddSystem<Termina::AssetSystem>();
     m_SystemManager.AddSystem<Termina::PhysicsSystem>();
 

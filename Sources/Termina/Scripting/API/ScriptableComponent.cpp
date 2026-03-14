@@ -8,9 +8,16 @@ namespace TerminaScript {
         Awake();
     }
 
-    void ScriptableComponent::Instantiate(Termina::Actor* actor)
+    Termina::Actor* ScriptableComponent::Instantiate(Termina::Actor* actor)
     {
-        m_Owner->GetParentWorld()->SpawnActorFrom(actor);
+        return m_Owner->GetParentWorld()->SpawnActorFrom(actor);
+    }
+
+    Termina::Actor* ScriptableComponent::Instantiate(const Prefab& prefab)
+    {
+        if (!prefab.IsValid())
+            return nullptr;
+        return m_Owner->GetParentWorld()->SpawnActorFromJSON(prefab.Path);
     }
 
     void ScriptableComponent::Destroy(Termina::Actor* actor)

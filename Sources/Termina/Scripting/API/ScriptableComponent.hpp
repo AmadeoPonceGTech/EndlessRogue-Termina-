@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Termina/World/World.hpp>
+#include "Prefab.hpp"
 
 namespace TerminaScript {
     /// Represents a scriptable component that can be attached to an actor.
@@ -51,8 +52,10 @@ namespace TerminaScript {
     protected:
         friend class ScriptManager;
 
-        /// Instantiates a new actor.
-        void Instantiate(Termina::Actor* actor);
+        /// Instantiates a new actor by cloning an existing one.
+        Termina::Actor* Instantiate(Termina::Actor* actor);
+        /// Instantiates a new actor from a prefab asset.
+        Termina::Actor* Instantiate(const Prefab& prefab);
         /// Destroys the given actor.
         void Destroy(Termina::Actor* actor);
 

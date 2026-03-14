@@ -144,6 +144,37 @@ namespace Termina {
         }
     }
 
+    bool UIUtils::PrefabPicker(std::string& path)
+    {
+        const std::string label = path.empty()
+            ? "No Prefab"
+            : std::filesystem::path(path).filename().string();
+
+        ImVec2 size = ImVec2(ImGui::GetContentRegionAvail().x, 0);
+        ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyleColorVec4(ImGuiCol_FrameBg));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImGui::GetStyleColorVec4(ImGuiCol_FrameBgHovered));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImGui::GetStyleColorVec4(ImGuiCol_FrameBgActive));
+        ImGui::Button(label.c_str(), size);
+        ImGui::PopStyleColor(3);
+
+        if (ImGui::BeginDragDropTarget())
+        {
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+            {
+                const char* dropped = static_cast<const char*>(payload->Data);
+                if (dropped && dropped[0] != '\0' &&
+                    std::filesystem::path(dropped).extension() == ".trp")
+                {
+                    path = dropped;
+                    ImGui::EndDragDropTarget();
+                    return true;
+                }
+            }
+            ImGui::EndDragDropTarget();
+        }
+        return false;
+    }
+
     bool UIUtils::TryReceiveAssetImpl(const std::string& current, const std::function<void(const std::string&)>& callback)
     {
         const std::string label = current.empty()

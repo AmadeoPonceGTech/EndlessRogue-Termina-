@@ -26,12 +26,9 @@
 ## TODO
 
 ### Saturday
-- Project system
-- Physics system (implement different types of colliders)
 - Scene transition API
-- Spawn from Prefab API
+- Physics system (implement different types of colliders)
 - Asset compression and packing on export
-- First release of the engine to a standalone executable
 
 ## Sunday
 - Cook torrance BRDF

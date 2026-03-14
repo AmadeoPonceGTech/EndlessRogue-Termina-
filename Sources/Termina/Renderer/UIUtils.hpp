@@ -38,6 +38,8 @@ namespace Termina {
 
         // Drag and drop — assets (path-based)
         static void AssetPickerSource(const std::string& path);
+        /// Renders a drop-target button for a prefab (.trp) asset. Returns true if the path changed.
+        static bool PrefabPicker(std::string& path);
 
         template<typename T>
         static bool TryReceiveAsset(const AssetHandle<T>& handle, const std::function<void(const std::string&)>& callback)

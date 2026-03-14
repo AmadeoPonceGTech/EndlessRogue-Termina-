@@ -14,7 +14,7 @@ Termina is a game engine made in about a week.
 - Shader hot reload
 - Actor model and world serialization/deserialization
 - Asset system
-- Fully fledged editor
+- Fully fledged editor, launcher, and project system
 
 ## Dependencies
 
