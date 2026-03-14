@@ -13,6 +13,7 @@ namespace Termina {
 
         void Load(const char* path);
         void* GetSymbol(const char* name);
+        bool IsValid() const { return m_Handle != nullptr; }
 
     private:
         void* m_Handle = nullptr;

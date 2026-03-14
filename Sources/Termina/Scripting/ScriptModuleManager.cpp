@@ -21,6 +21,10 @@ namespace Termina {
         }
 
         auto dll = std::make_unique<DLL>(path.c_str());
+        if (!dll->IsValid()) {
+            TN_WARN("Module '%s': DLL '%s' not found, scripting disabled.", name.c_str(), path.c_str());
+            return false;
+        }
         void* regSym = dll->GetSymbol("RegisterComponents");
         if (!regSym) {
             TN_ERROR("'%s' has no RegisterComponents symbol.", path.c_str());

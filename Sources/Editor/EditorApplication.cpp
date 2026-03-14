@@ -34,7 +34,7 @@ EditorApplication::EditorApplication(const std::string& projectPath)
     m_SystemManager.AddSystem<Termina::RendererSystem>(m_Window);
     m_SystemManager.AddSystem<Termina::ShaderManager>();
     m_SystemManager.AddSystem<Termina::AudioSystem>();
-    //m_SystemManager.AddSystem<Termina::ScriptSystem>();
+    m_SystemManager.AddSystem<Termina::ScriptSystem>();
     m_SystemManager.AddSystem<Termina::AssetSystem>();
     m_SystemManager.AddSystem<Termina::PhysicsSystem>();
 
@@ -82,6 +82,7 @@ void EditorApplication::OnUpdate(float dt)
     if (m_DebugWindows.Scripts)       GetSystem<Termina::ScriptSystem>()->ShowDebugWindow(&m_DebugWindows.Scripts);
     if (m_DebugWindows.Shaders)       GetSystem<Termina::ShaderManager>()->ShowDebugWindow(&m_DebugWindows.Shaders);
     if (m_DebugWindows.Assets)        GetSystem<Termina::AssetSystem>()->ShowDebugWindow(&m_DebugWindows.Assets);
+    if (m_DebugWindows.Log)           Termina::Logger::ShowLogWindow(&m_DebugWindows.Log);
 }
 
 void EditorApplication::OnPostRender(float dt)
@@ -213,6 +214,7 @@ void EditorApplication::RenderDockspace()
             if (Termina::UIUtils::MenuItem("Scripts",        nullptr, m_DebugWindows.Scripts))       m_DebugWindows.Scripts       = !m_DebugWindows.Scripts;
             if (Termina::UIUtils::MenuItem("Shaders",        nullptr, m_DebugWindows.Shaders))       m_DebugWindows.Shaders       = !m_DebugWindows.Shaders;
             if (Termina::UIUtils::MenuItem("Assets",         nullptr, m_DebugWindows.Assets))        m_DebugWindows.Assets        = !m_DebugWindows.Assets;
+            if (Termina::UIUtils::MenuItem("Log",            nullptr, m_DebugWindows.Log))           m_DebugWindows.Log           = !m_DebugWindows.Log;
             Termina::UIUtils::EndMenu();
         }
 

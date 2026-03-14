@@ -108,7 +108,7 @@ namespace Termina {
             restored->SetCurrentPath(m_PrePlayPath);
             m_CurrentWorld->OnShutdown();
             m_CurrentWorld = std::move(restored);
-            m_CurrentWorld->OnInit();
+            // LoadFromFile already ran OnInit (Pass 3) — no second call needed.
             std::filesystem::remove(m_PlaySnapshot);
             m_PlaySnapshot.clear();
         }
@@ -145,7 +145,7 @@ namespace Termina {
             if (loaded)
             {
                 TransitionTo(std::move(candidate));
-                m_CurrentWorld->OnInit();
+                // LoadFromFile already ran OnInit (Pass 3) — no second call needed.
                 m_IsPlaying = true;
                 m_CurrentWorld->OnPlay();
             }

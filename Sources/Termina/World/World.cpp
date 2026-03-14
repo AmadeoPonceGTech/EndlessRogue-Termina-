@@ -204,15 +204,36 @@ namespace Termina {
     {
         if (!actor) return;
 
-        if (m_MainCamera == actor) m_MainCamera = nullptr;
+        // Defer the erase if a lifecycle loop is currently iterating m_Actors.
+        // FlushPendingDestroy() is called after every lifecycle dispatch.
+        if (m_Iterating)
+        {
+            m_PendingDestroy.push_back(actor);
+            return;
+        }
+
+        if (m_MainCamera    == actor) m_MainCamera    = nullptr;
         if (m_AudioListener == actor) m_AudioListener = nullptr;
 
-        for (uint64 i = 0; i < m_Actors.size(); ++i) {
-            if (m_Actors[i]->GetID() == actor->GetID()) {
-                m_Actors.erase(m_Actors.begin() + i);
-                break;
-            }
+        m_Actors.erase(
+            std::remove_if(m_Actors.begin(), m_Actors.end(),
+                [actor](const auto& a) { return a.get() == actor; }),
+            m_Actors.end());
+    }
+
+    void World::FlushPendingDestroy()
+    {
+        for (Actor* actor : m_PendingDestroy)
+        {
+            if (m_MainCamera    == actor) m_MainCamera    = nullptr;
+            if (m_AudioListener == actor) m_AudioListener = nullptr;
+
+            m_Actors.erase(
+                std::remove_if(m_Actors.begin(), m_Actors.end(),
+                    [actor](const auto& a) { return a.get() == actor; }),
+                m_Actors.end());
         }
+        m_PendingDestroy.clear();
     }
 
     Actor* World::GetActorById(uint64 id)
@@ -246,14 +267,33 @@ namespace Termina {
         return rootActors;
     }
 
+// Macro for lifecycle dispatches that must tolerate Instantiate() (push_back)
+// and Destroy() (erase) called by component callbacks.
+//
+// - m_Iterating flag causes DestroyActor() to defer erases to m_PendingDestroy.
+// - The count is captured *before* the loop so newly spawned actors (appended
+//   via push_back) are not iterated this frame — they were already initialised
+//   by SpawnActor()->OnInit().
+// - Index-based access (m_Actors[i]) is reallocation-safe: operator[] always
+//   recomputes the base pointer, unlike a cached iterator or range-for.
+#define TN_WORLD_DISPATCH(call)                          \
+    do {                                                 \
+        m_Iterating = true;                              \
+        const size_t _n = m_Actors.size();               \
+        for (size_t _i = 0; _i < _n; ++_i)              \
+            m_Actors[_i]->call;                          \
+        m_Iterating = false;                             \
+        FlushPendingDestroy();                           \
+    } while (0)
+
     void World::OnInit()
     {
-        for (auto& actor : m_Actors) actor->OnInit();
+        TN_WORLD_DISPATCH(OnInit());
     }
 
     void World::OnShutdown()
     {
-        for (auto& actor : m_Actors) actor->OnShutdown();
+        TN_WORLD_DISPATCH(OnShutdown());
     }
 
     void World::OnPlay()
@@ -262,57 +302,57 @@ namespace Termina {
         if (renderer) {
             renderer->SetCurrentCamera(GetMainCamera());
         }
-        for (auto& actor : m_Actors) actor->OnPlay();
+        TN_WORLD_DISPATCH(OnPlay());
     }
 
     void World::OnStop()
     {
-        for (auto& actor : m_Actors) actor->OnStop();
+        TN_WORLD_DISPATCH(OnStop());
     }
 
     void World::OnPreUpdate(float deltaTime)
     {
-        for (auto& actor : m_Actors) actor->OnPreUpdate(deltaTime);
+        TN_WORLD_DISPATCH(OnPreUpdate(deltaTime));
     }
 
     void World::OnUpdate(float deltaTime)
     {
-        for (auto& actor : m_Actors) actor->OnUpdate(deltaTime);
+        TN_WORLD_DISPATCH(OnUpdate(deltaTime));
     }
 
     void World::OnPostUpdate(float deltaTime)
     {
-        for (auto& actor : m_Actors) actor->OnPostUpdate(deltaTime);
+        TN_WORLD_DISPATCH(OnPostUpdate(deltaTime));
     }
 
     void World::OnPrePhysics(float deltaTime)
     {
-        for (auto& actor : m_Actors) actor->OnPrePhysics(deltaTime);
+        TN_WORLD_DISPATCH(OnPrePhysics(deltaTime));
     }
 
     void World::OnPhysics(float deltaTime)
     {
-        for (auto& actor : m_Actors) actor->OnPhysics(deltaTime);
+        TN_WORLD_DISPATCH(OnPhysics(deltaTime));
     }
 
     void World::OnPostPhysics(float deltaTime)
     {
-        for (auto& actor : m_Actors) actor->OnPostPhysics(deltaTime);
+        TN_WORLD_DISPATCH(OnPostPhysics(deltaTime));
     }
 
     void World::OnPreRender(float deltaTime)
     {
-        for (auto& actor : m_Actors) actor->OnPreRender(deltaTime);
+        TN_WORLD_DISPATCH(OnPreRender(deltaTime));
     }
 
     void World::OnRender(float deltaTime)
     {
-        for (auto& actor : m_Actors) actor->OnRender(deltaTime);
+        TN_WORLD_DISPATCH(OnRender(deltaTime));
     }
 
     void World::OnPostRender(float deltaTime)
     {
-        for (auto& actor : m_Actors) actor->OnPostRender(deltaTime);
+        TN_WORLD_DISPATCH(OnPostRender(deltaTime));
     }
 
     void World::Clear()
@@ -432,8 +472,18 @@ namespace Termina {
         }
 
         // Pass 3: Initialize all actors.
-        for (auto& actor : m_Actors)
-            actor->OnInit();
+        // Use index-based iteration so Instantiate() calls inside Awake()
+        // (which push_back to m_Actors) cannot invalidate our loop state.
+        // Only initialize the actors that existed before this pass — newly
+        // spawned pool actors are already initialized by SpawnActor()->OnInit().
+        {
+            m_Iterating = true;
+            const size_t initCount = m_Actors.size();
+            for (size_t i = 0; i < initCount; ++i)
+                m_Actors[i]->OnInit();
+            m_Iterating = false;
+            FlushPendingDestroy();
+        }
     }
 
     void World::SaveToFile(const std::string& filename)

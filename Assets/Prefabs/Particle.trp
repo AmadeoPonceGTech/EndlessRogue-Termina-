@@ -1,0 +1,42 @@
+{
+    "actors": [
+        {
+            "active": true,
+            "components": [
+                {
+                    "active": true,
+                    "data": {
+                        "position": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "type": "Transform"
+                },
+                {
+                    "active": true,
+                    "data": {
+                        "model": "Assets/Models/Cube/Cube.gltf"
+                    },
+                    "type": "Mesh Component"
+                }
+            ],
+            "id": "10925900451253801436",
+            "name": "Particle",
+            "parentId": null
+        }
+    ],
+    "version": 1
+}

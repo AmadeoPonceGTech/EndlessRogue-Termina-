@@ -67,7 +67,11 @@ namespace Termina {
         void SetAudioListener(Actor* listener) { m_AudioListener = listener; }
         Actor* GetAudioListener() const { return m_AudioListener; }
     private:
+        void FlushPendingDestroy();
+
         std::vector<std::shared_ptr<Actor>> m_Actors;
+        std::vector<Actor*>                 m_PendingDestroy;
+        bool                                m_Iterating = false;
 
         Actor* m_MainCamera = nullptr;
         Actor* m_AudioListener = nullptr;

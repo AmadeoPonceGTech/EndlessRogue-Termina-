@@ -3,6 +3,7 @@
 #include "Common.hpp"
 
 #include <string>
+#include <vector>
 
 namespace Termina {
 
@@ -15,6 +16,14 @@ namespace Termina {
         kWarning,
         kError,
         kFatal,
+    };
+
+    struct LogEntry
+    {
+        ELogLevel   level;
+        std::string file;
+        int         line;
+        std::string message;
     };
 
     class Logger
@@ -32,6 +41,12 @@ namespace Termina {
         static void Warning(const char* file, int line, const char* format, ...);
         static void Error(const char* file, int line, const char* format, ...);
         static void Fatal(const char* file, int line, const char* format, ...);
+
+        static void ClearLog();
+        static void ShowLogWindow(bool* open = nullptr);
+
+        static constexpr int kMaxLogEntries = 1000;
+
     private:
         static void Output(ELogLevel level, const char* file, int line, const char* message);
     };

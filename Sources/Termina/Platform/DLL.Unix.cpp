@@ -105,7 +105,7 @@ namespace Termina {
         const char* loadPath = m_TempPath.empty() ? path : m_TempPath.c_str();
         m_Handle = dlopen(loadPath, RTLD_NOW | RTLD_LOCAL);
         if (!m_Handle) {
-            TN_FATAL("Failed to load DLL %s: %s", loadPath, dlerror());
+            TN_ERROR("Failed to load DLL %s: %s", loadPath, dlerror());
         }
     }
 

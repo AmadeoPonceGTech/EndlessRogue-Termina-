@@ -28,8 +28,14 @@ namespace Termina {
 
     private:
         void RebuildWatches();
+        std::string GetLibName() const;
 
         std::vector<FileSystem::Watch> m_Watches;
         bool m_PendingReload = false;
+
+#if defined(TRMN_DEBUG)
+        std::string m_GameCodeDir = "GameCode";
+        std::string m_AssemblyName = "GameAssembly";
+#endif
     };
 }

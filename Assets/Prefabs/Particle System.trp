@@ -1,0 +1,59 @@
+{
+    "actors": [
+        {
+            "active": true,
+            "components": [
+                {
+                    "active": true,
+                    "data": {
+                        "position": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "type": "Transform"
+                },
+                {
+                    "active": true,
+                    "data": {
+                        "emitRate": 20.0,
+                        "gravity": [
+                            0.0,
+                            -5.0,
+                            0.0
+                        ],
+                        "initialScale": [
+                            0.11999999731779099,
+                            0.11999999731779099,
+                            0.11999999731779099
+                        ],
+                        "lifetime": 2.5,
+                        "lifetimeVar": 0.5,
+                        "poolSize": 100,
+                        "prefab": "",
+                        "speedMax": 7.0,
+                        "speedMin": 3.0,
+                        "spreadAngle": 25.0
+                    },
+                    "type": "Particle System"
+                }
+            ],
+            "id": "7769821295908457467",
+            "name": "Particle System",
+            "parentId": null
+        }
+    ],
+    "version": 1
+}

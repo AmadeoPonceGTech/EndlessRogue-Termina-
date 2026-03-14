@@ -45,5 +45,6 @@ private:
         bool Scripts       = false;
         bool Shaders       = false;
         bool Assets        = false;
+        bool Log           = false;
     } m_DebugWindows;
 };

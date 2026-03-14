@@ -7,20 +7,31 @@
 #include "Core/Logger.hpp"
 
 #include <ImGui/imgui.h>
+#include <cstring>
 
 namespace Termina {
+    std::string ScriptSystem::GetLibName() const
+    {
+#if defined(TRMN_DEBUG)
+        const std::string& base = m_AssemblyName;
+#else
+        const std::string base = "GameAssembly";
+#endif
+#if defined(TRMN_LINUX)
+        return "lib" + base + ".so";
+#elif defined(TRMN_WINDOWS)
+        return base + ".dll";
+#elif defined(TRMN_MACOS)
+        return "lib" + base + ".dylib";
+#endif
+    }
+
     ScriptSystem::ScriptSystem()
     {
-#if defined(TRMN_LINUX)
-        std::string libName = "libGameAssembly.so";
-#elif defined(TRMN_WINDOWS)
-        std::string libName = "GameAssembly.dll";
-#elif defined(TRMN_MACOS)
-        std::string libName = "libGameAssembly.dylib";
-#endif
-
-        ScriptModuleManager::Get().Load("Game", libName);
+        ScriptModuleManager::Get().Load("Game", GetLibName());
+#if defined(TRMN_DEBUG)
         RebuildWatches();
+#endif
     }
 
     ScriptSystem::~ScriptSystem()
@@ -31,28 +42,39 @@ namespace Termina {
 
     bool ScriptSystem::Compile()
     {
-        return LaunchProcess::Launch("xmake", {"build", "GameAssembly"}) == 0;
+#if defined(TRMN_DEBUG)
+        return LaunchProcess::Launch("xmake", {"build", m_AssemblyName}) == 0;
+#else
+        return true;
+#endif
     }
 
     bool ScriptSystem::Recompile()
     {
-        LaunchProcess::Launch("xmake", {"clean", "GameAssembly"});
-        return LaunchProcess::Launch("xmake", {"build", "GameAssembly"}) == 0;
+#if defined(TRMN_DEBUG)
+        LaunchProcess::Launch("xmake", {"clean", m_AssemblyName});
+        return LaunchProcess::Launch("xmake", {"build", m_AssemblyName}) == 0;
+#else
+        return true;
+#endif
     }
 
     void ScriptSystem::RebuildWatches()
     {
+#if defined(TRMN_DEBUG)
         m_Watches.clear();
-        if (FileSystem::DirectoryExists("GameCode")) {
-            for (auto& file : FileSystem::GetFilesRecursive("GameCode")) {
+        if (FileSystem::DirectoryExists(m_GameCodeDir)) {
+            for (auto& file : FileSystem::GetFilesRecursive(m_GameCodeDir)) {
                 if (FileSystem::HasExtension(file, ".cpp") || FileSystem::HasExtension(file, ".hpp"))
                     m_Watches.push_back(FileSystem::WatchFile(file));
             }
         }
+#endif
     }
 
     void ScriptSystem::Update(float deltaTime)
     {
+#if defined(TRMN_DEBUG)
         // Execute reload at start of frame (priority -1 ensures we run before WorldSystem)
         // so no component list is being iterated when we add/remove components.
         if (m_PendingReload) {
@@ -75,6 +97,7 @@ namespace Termina {
                 return;
             }
         }
+#endif
     }
 
     void ScriptSystem::ShowDebugWindow(bool* open)
@@ -84,6 +107,50 @@ namespace Termina {
             ImGui::End();
             return;
         }
+
+#if defined(TRMN_DEBUG)
+        ImGui::SeparatorText("Settings");
+
+        char dirBuf[256];
+        char nameBuf[256];
+        std::strncpy(dirBuf, m_GameCodeDir.c_str(), sizeof(dirBuf) - 1);
+        std::strncpy(nameBuf, m_AssemblyName.c_str(), sizeof(nameBuf) - 1);
+
+        if (ImGui::InputText("Script Directory", dirBuf, sizeof(dirBuf)))
+        {
+            m_GameCodeDir = dirBuf;
+            RebuildWatches();
+        }
+        if (ImGui::InputText("Assembly Name", nameBuf, sizeof(nameBuf)))
+            m_AssemblyName = nameBuf;
+
+        ImGui::Spacing();
+        ImGui::SeparatorText("Actions");
+
+        if (ImGui::Button("Build"))
+            Compile();
+        ImGui::SameLine();
+        if (ImGui::Button("Rebuild"))
+            Recompile();
+        ImGui::SameLine();
+#endif
+        {
+            bool alreadyLoaded = ScriptModuleManager::Get().IsLoaded("Game");
+            if (alreadyLoaded)
+                ImGui::BeginDisabled();
+            if (ImGui::Button("Load"))
+                ScriptModuleManager::Get().Load("Game", GetLibName());
+            if (alreadyLoaded)
+                ImGui::EndDisabled();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Reload"))
+        {
+            World* world = Application::GetSystem<WorldSystem>()->GetCurrentWorld();
+            ScriptModuleManager::Get().Reload("Game", world);
+        }
+
+        ImGui::SeparatorText("Status");
 
         ImGui::Text("Pending reload: %s", m_PendingReload ? "yes" : "no");
         ImGui::Text("Watched files: %zu", m_Watches.size());

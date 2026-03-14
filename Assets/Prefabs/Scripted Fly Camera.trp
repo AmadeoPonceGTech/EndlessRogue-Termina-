@@ -63,10 +63,10 @@
                         "wasRotating": false,
                         "yaw": 0.0
                     },
-                    "type": "FlyCamComponent"
+                    "type": "Fly Cam Component"
                 }
             ],
-            "id": "14506066668633990541",
+            "id": "3743158622577730482",
             "name": "Scripted Fly Camera",
             "parentId": null
         }
