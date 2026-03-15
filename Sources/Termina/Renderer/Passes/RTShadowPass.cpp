@@ -188,7 +188,7 @@ namespace Termina {
         ComputeEncoder* ce = info.Ctx->CreateComputeEncoder("RT Shadow Pass");
         ce->SetPipeline(pipeline);
         ce->SetConstants(sizeof(pc), &pc);
-        ce->Dispatch(info.Width, info.Height, 1, 8, 8, 1);
+        ce->Dispatch((info.Width + 7) / 8, (info.Height + 7) / 8, 1, 8, 8, 1);
         ce->End();
 
         // -----------------------------------------------------------------------

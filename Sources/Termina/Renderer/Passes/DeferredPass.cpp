@@ -121,7 +121,7 @@ namespace Termina {
         ComputeEncoder* ce = info.Ctx->CreateComputeEncoder("Deferred Pass");
         ce->SetPipeline(server.GetComputePipeline("__TERMINA__/CORE_SHADERS/Deferred.hlsl"));
         ce->SetConstants(sizeof(pc), &pc);
-        ce->Dispatch(info.Width, info.Height, 1, 8, 8, 1);
+        ce->Dispatch((info.Width + 7) / 8, (info.Height + 7) / 8, 1, 8, 8, 1);
         ce->End();
 
         info.IO->RegisterTexture("HDRColor", m_HDRTexture);

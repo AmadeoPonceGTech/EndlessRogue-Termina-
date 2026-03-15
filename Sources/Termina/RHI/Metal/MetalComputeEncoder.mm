@@ -88,7 +88,7 @@ namespace Termina {
 
     void MetalComputeEncoder::Dispatch(uint32 x, uint32 y, uint32 z, uint32 gx, uint32 gy, uint32 gz)
     {
-        [m_CommandEncoder dispatchThreads:MTLSizeMake(x, y, z) threadsPerThreadgroup:MTLSizeMake(gx, gy, gz)];
+        [m_CommandEncoder dispatchThreadgroups:MTLSizeMake(x, y, z) threadsPerThreadgroup:MTLSizeMake(gx, gy, gz)];
     }
 
     void MetalComputeEncoder::End()

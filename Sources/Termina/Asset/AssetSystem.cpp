@@ -1,4 +1,8 @@
 #include "AssetSystem.hpp"
+#include "Texture/TextureAsset.hpp"
+#include "Audio/AudioAsset.hpp"
+#include "Material/MaterialAsset.hpp"
+#include "Model/ModelAsset.hpp"
 #include "Texture/TextureLoader.hpp"
 #include "Audio/AudioLoader.hpp"
 #include "Material/MaterialLoader.hpp"
@@ -9,6 +13,13 @@
 #include <vector>
 
 namespace Termina {
+
+    // Explicit template instantiations for AssetHandle<T>
+    template class AssetHandle<TextureAsset>;
+    template class AssetHandle<AudioAsset>;
+    template class AssetHandle<MaterialAsset>;
+    template class AssetHandle<ModelAsset>;
+
     AssetSystem::AssetSystem()
     {
         m_TextureLoader = std::make_unique<TextureLoader>();
