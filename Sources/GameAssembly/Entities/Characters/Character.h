@@ -4,12 +4,7 @@
 class Character : public Entity
 {
 public:
-    Character() = default;
+    Character();
 
-    virtual void checkAbilites() = 0;
-
-    void firstAbility() override;
-    void secondAbility() override;
-    void thirdAbility() override;
-    void fourthAbility() override;
+    virtual void checkAbilities() = 0;
 };

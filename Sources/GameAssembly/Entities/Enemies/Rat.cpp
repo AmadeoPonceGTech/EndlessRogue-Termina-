@@ -2,7 +2,7 @@
 
 Rat::Rat() {
     name = "Rat";
-    eClass = EClass::Assassin;
+    entityClass = EClass::ASSASSIN;
     description = "Le rat est un animal discret, très proche de l'homme";
 
     level = 1;

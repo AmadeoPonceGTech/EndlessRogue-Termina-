@@ -2,18 +2,18 @@
 #include <iostream>
 
 enum class EClass {
-    Assassin,
-    ClosedDPS,
-    RangedDPS,
-    Tank,
-    Support
+    ASSASSIN,
+    CLOSEDDPS,
+    RANGEDDPS,
+    TANK,
+    SUPPORT
 };
 
 class Entity
 {
 protected:
     std::string name;
-    EClass eClass;
+    EClass entityClass;
     std::string description;
 
     int level;
