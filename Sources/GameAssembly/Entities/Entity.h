@@ -1,14 +1,23 @@
 #pragma once
 #include <iostream>
 
+enum class EClass {
+    Assassin,
+    ClosedDPS,
+    RangedDPS,
+    Tank,
+    Support
+};
+
 class Entity
 {
 protected:
     std::string name;
-    std::string eClass;
+    EClass eClass;
     std::string description;
 
     int level;
+    int maxLevel;
 
     float baseHealth; // lvl 1 value
     float currentHealth;
@@ -33,10 +42,12 @@ protected:
     float speed;
 
 public:
+    virtual ~Entity() = default;
+
     Entity() = default;
 
-    virtual void firstAbility() = 0;
-    virtual void secondAbility() = 0;
-    virtual void thirdAbility() = 0;
-    virtual void fourthAbility() = 0;
+    virtual void firstAbility(bool isPassive) = 0;
+    virtual void secondAbility(bool isPassive) = 0;
+    virtual void thirdAbility(bool isPassive) = 0;
+    virtual void fourthAbility(bool isPassive) = 0;
 };
