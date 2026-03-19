@@ -21,5 +21,7 @@ public :
     float firstAbility(Character& target);
     void secondAbility(Character& target);
     float thirdAbility(Character& target);
-    std::vector<float> fourthAbility(const std::vector<Character>& targets);
+
+    /// \brief Prend le vector des characters présents sur le terrain, et renvoie un vector des degats qu'ils doivent prendre dans l'ordre
+    std::vector<float> fourthAbility(const std::vector<Character*>& targets);
 };

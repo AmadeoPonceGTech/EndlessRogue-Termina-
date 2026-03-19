@@ -77,11 +77,12 @@ float Rat::thirdAbility(Character& target) {
     return dmgDealt;
 }
 
-// std::vector<float> Rat::fourthAbility(const std::vector<Character>& targets) {
-//     std::vector<float> dmgDealt;
-//     for (auto target : targets) {
-//         target.setIsPoisoned(true);
-//
-//     }
-//
-// }
+std::vector<float> Rat::fourthAbility(const std::vector<Character*>& targets) {
+    std::vector<float> dmgsDealt;
+    for (auto target : targets) {
+        target->setIsPoisoned(true);
+        float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+        dmgsDealt.push_back(dmgDealt);
+    }
+    return dmgsDealt;
+}
