@@ -1,8 +1,10 @@
 #pragma once
+#include <memory>
 #include <Termina/Scripting/API/ScriptingAPI.hpp>
 #include "ImGui/imgui.h"
 #include "ImGui/ImGuizmo.h"
 #include "ImGui/imgui_internal.h"
+#include "RogueGameplay.h"
 
 using namespace TerminaScript;
 
@@ -16,6 +18,7 @@ enum GameState {
 class Game : public TerminaScript::ScriptableComponent
 {
 public:
+    std::unique_ptr<RogueGameplay> gameplay;
     GameState gameState = GameCharacterStats;
 
     Game() = default;
