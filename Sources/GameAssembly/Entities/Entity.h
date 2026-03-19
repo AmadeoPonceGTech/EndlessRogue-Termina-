@@ -1,7 +1,10 @@
 #pragma once
 #include <iostream>
 #include <ctime>
+#include <cmath>
 #include <vector>
+#include <random>
+#include <memory>
 
 enum class EClass {
     ASSASSIN,
@@ -45,10 +48,12 @@ protected:
 
     float baseAttackDamage;
     float currentAttackDamage;
+    /// \brief current without buff/debuff
     float maxAttackDamage;
 
     float baseAttackPower;
     float currentAttackPower;
+    /// \brief current without buff/debuff
     float maxAttackPower;
 
     float baseArmor;
