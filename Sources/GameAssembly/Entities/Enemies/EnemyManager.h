@@ -16,6 +16,7 @@ public:
     }
 
     void clearEnemies();
+    void deleteEnemy(Enemy& enemy);
     const std::vector<std::unique_ptr<Enemy>>& getEnemies() const;
 
 private:
