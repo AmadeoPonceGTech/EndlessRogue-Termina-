@@ -78,8 +78,8 @@ public:
 
     Entity();
 
-    // virtual void startTurn() = 0;
-    // virtual void endTurn() = 0;
+    virtual void startTurn() = 0;
+    virtual void endTurn() = 0;
 
 #pragma region Getters
 

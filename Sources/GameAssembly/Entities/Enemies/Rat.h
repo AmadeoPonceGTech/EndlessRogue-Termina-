@@ -9,13 +9,15 @@ class Character;
 class Rat : public Enemy, public TerminaScript::ScriptableComponent
 {
 public :
-    Rat(int level);
+    Rat(int floor);
     Rat(Termina::Actor* owner) : TerminaScript::ScriptableComponent(owner) {}
+
+    void startTurn() override;
+    void endTurn() override;
 
     void Start() override;
     void Update(float deltaTime) override;
 
-    void checkAbilities() override;
     void dropArtefacts() override;
 
     float firstAbility(Character& target);

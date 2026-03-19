@@ -3,14 +3,14 @@
 #include "../Characters/Character.h"
 
 
-Rat::Rat(int _level) {
+Rat::Rat(int floor) {
     std::srand(std::time({}));
 
     name = "Rat";
     entityClass = EClass::ASSASSIN;
     description = "The rat is a discreet animal, very close to humans.";
 
-    level = _level;
+    level = floor;
 
     finalArmor = 40;
     finalPR = 30;
@@ -41,17 +41,13 @@ Rat::Rat(int _level) {
     burn = Burn::NOT_BURNED;
 }
 
-void Rat::Start() {
+void Rat::Start() {}
 
-}
+void Rat::Update(float deltaTime) {}
 
-void Rat::Update(float deltaTime) {
+void Rat::startTurn() {}
 
-}
-
-void Rat::checkAbilities() {
-
-}
+void Rat::endTurn() {}
 
 void Rat::dropArtefacts() {
 

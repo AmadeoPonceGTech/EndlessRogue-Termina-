@@ -6,6 +6,9 @@ class Enemy : public Entity
 public:
     Enemy();
 
+    virtual void startTurn() = 0;
+    virtual void endTurn() = 0;
+
     float currentXP;
     float XPNeeded;
 
@@ -13,5 +16,4 @@ public:
     float finalPR;
 
     virtual void dropArtefacts() = 0;
-    virtual void checkAbilities() = 0;
 };
