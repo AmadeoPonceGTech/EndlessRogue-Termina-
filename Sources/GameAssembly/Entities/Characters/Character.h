@@ -3,13 +3,21 @@
 
 class Character : public Entity
 {
+protected :
+    float XPNeededForLvl2;
+    float currentXP;
+    float XPNeeded;
+
+    float finalHP;
+    float finalAD;
+    float finalAP;
+    float finalArmor;
+    float finalPR;
+    float finalXPNeeded;
+
 public:
-    Character() = default;
+    Character();
 
-    virtual void checkAbilites() = 0;
-
-    void firstAbility() override;
-    void secondAbility() override;
-    void thirdAbility() override;
-    void fourthAbility() override;
+    virtual void checkAbilities() = 0;
+    void levelUp();
 };
