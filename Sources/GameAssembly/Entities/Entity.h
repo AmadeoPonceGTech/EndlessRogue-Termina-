@@ -64,7 +64,8 @@ protected:
     float currentPowerResist;
     float maxPowerResist;
 
-    float speed;
+    float baseSpeed;
+    float currentSpeed;
 
     int CD1;
     int CD2;

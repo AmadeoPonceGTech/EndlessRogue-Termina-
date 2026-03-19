@@ -5,6 +5,7 @@ Rat::Rat(int floor) {
     name = "Rat";
     entityClass = EClass::ASSASSIN;
     description = "The rat is a discreet animal, very close to humans.";
+    biome = Biome::FOREST;
 
     level = floor;
     landing = floor / 5;
@@ -32,7 +33,8 @@ Rat::Rat(int floor) {
     maxPowerResist = basePowerResist * pow(1.1f, landing);
     currentPowerResist = maxPowerResist;
 
-    speed = 65.0f;
+    baseSpeed = 65.0f;
+    currentSpeed = baseSpeed;
 
     baseExpDrop = 25.0f;
     maxExpDrop = 1000.0f;
@@ -55,7 +57,7 @@ void Rat::dropArtefacts() {
 
 }
 
-float Rat::firstAbility(Character& target) {
+void Rat::firstAbility(Character& target) {
     static std::random_device rd;   // seed unique
     static std::mt19937 rng(rd());  // moteur aléatoire
     std::uniform_int_distribution<int> dist(1, 10); // 1 à 10
@@ -65,26 +67,24 @@ float Rat::firstAbility(Character& target) {
     }
 
     float dmgDealt = currentAttackDamage * (1.0f - target.getCurrentArmor() / 100.0f);
-    return dmgDealt;
+    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
 }
 
 void Rat::secondAbility(Character& target) {
     target.setIsPoisoned(true);
 }
 
-float Rat::thirdAbility(Character& target) {
+void Rat::thirdAbility(Character& target) {
     float percent = target.getPoison();
     float dmgDealt = target.getMaxHealth() * percent / 100.0f;
-    return dmgDealt;
+    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
 }
 
-std::vector<float> Rat::fourthAbility(const std::vector<Character*>& targets) {
-    std::vector<float> dmgsDealt;
+void Rat::fourthAbility(const std::vector<Character*>& targets) {
     for (Character* target : targets) {
         if (!target) continue;
         target->setIsPoisoned(true);
         float dmgDealt = currentAttackDamage * (1.0f - target->getCurrentArmor() / 100.0f);
-        dmgsDealt.push_back(dmgDealt);
+        target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
     }
-    return dmgsDealt;
 }
