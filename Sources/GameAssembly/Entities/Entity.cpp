@@ -9,6 +9,7 @@ Entity::Entity()
     CD4 = 0;
 }
 
+std::string Entity::getName() const { return name; }
 float Entity::getCurrentHealth() { return currentHealth; }
 float Entity::getShield() { return shield; }
 float Entity::getCurrentAttackDamage() { return currentAttackDamage; }

@@ -5,6 +5,10 @@
 #include "ImGui/ImGuizmo.h"
 #include "ImGui/imgui_internal.h"
 
+#pragma region Gameplayincludes
+#include  "Main/Gameplay.h"
+#pragma endregion Gameplayincludes
+
 using namespace TerminaScript;
 
 enum GameState {
@@ -17,6 +21,7 @@ enum GameState {
 class Game : public TerminaScript::ScriptableComponent
 {
 public:
+    std::unique_ptr<Gameplay> gameplay;
     GameState gameState = GameCharacterStats;
 
     Game() = default;

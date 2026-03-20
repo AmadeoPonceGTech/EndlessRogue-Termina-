@@ -12,8 +12,6 @@ class Enemy : public Entity
 public:
     Enemy();
 
-    virtual void startTurn() = 0;
-    virtual void endTurn() = 0;
 
     float baseExpDrop;
     float currentExpDrop;

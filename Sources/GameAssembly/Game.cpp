@@ -6,7 +6,9 @@
 
 void Game::Start()
 {
-
+    if (!gameplay) {
+        gameplay = std::make_unique<Gameplay>();
+    }
 }
 
 void Game::Update(float deltaTime)
@@ -22,13 +24,13 @@ void Game::Update(float deltaTime)
     switch (gameState) {
 
         case GameRun :
-            std::cout << "GamePlay" << std::endl;
+            gameplay->EndFight();
             break;
         case GameMenu :
-            std::cout << "Game Menu" << std::endl;
+            gameplay->StartFight();
             break;
         case GameCharacterStats :
-            //std::cout << "Game Character Stats" << std::endl;
+            gameplay->StartTurn();
             break;
 
         default:
