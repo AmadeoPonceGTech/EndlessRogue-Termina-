@@ -66,6 +66,11 @@ protected:
     int CD3;
     int CD4;
 
+    int poisonCD;
+    int burnCD;
+    int tauntCD;
+    int stunCD;
+
     bool firstAbilityUp;
     bool secondAbilityUp;
     bool thirdAbilityUp;
@@ -74,6 +79,7 @@ protected:
     bool isPoisoned;
     bool isBurned;
     bool isTaunt;
+    bool isStun;
 
     Poison poison;
     Burn burn;
@@ -105,6 +111,11 @@ public:
     int getCD3();
     int getCD4();
 
+    int getPoisonCD();
+    int getBurnCD();
+    int getTauntCD();
+    int getStunCD();
+
     bool getFirstAbilityUp();
     bool getSecondAbilityUp();
     bool getThirdAbilityUp();
@@ -113,6 +124,7 @@ public:
     bool getIsPoisoned();
     bool getIsBurned();
     bool getIsTaunt();
+    bool getIsStun();
 
     float getPoison();
     float getBurn();
@@ -136,6 +148,7 @@ public:
     void setIsPoisoned(bool newIsPoisoned);
     void setIsBurned(bool newIsBurned);
     void setIsTaunt(bool newIsTaunt);
+    void setIsStun(bool newIsStun);
 
 #pragma endregion
 
