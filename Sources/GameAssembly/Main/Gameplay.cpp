@@ -52,6 +52,7 @@ void Gameplay::EndRun() {
 
 void Gameplay::StartFight() {
     /// Add all Enemy in fight to the EnemyVector
+    /// foreach (entity in EnemyVector{ StartTurn(entity)}
 }
 
 void Gameplay::EndFight() {
@@ -59,9 +60,11 @@ void Gameplay::EndFight() {
 }
 
 
-void Gameplay::StartTurn() {
+void Gameplay::StartTurn(Entity& entity)
+{
+
 }
 
-void Gameplay::EndTurn() {
+void Gameplay::EndTurn(Entity& entity) {
 
 }

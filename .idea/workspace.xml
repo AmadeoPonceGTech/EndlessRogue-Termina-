@@ -30,6 +30,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="added penelope and claire need to finish claire">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +131,7 @@
       <updated>1773912224860</updated>
       <workItem from="1773912226663" duration="476000" />
       <workItem from="1773992385118" duration="847000" />
+      <workItem from="1774006385829" duration="5264000" />
     </task>
     <task id="LOCAL-00001" summary="added all abilities to Rat">
       <option name="closed" value="true" />
