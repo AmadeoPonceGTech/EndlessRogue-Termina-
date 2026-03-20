@@ -79,9 +79,7 @@ public:
     virtual void endTurn() = 0;
 
     void manageStatusEffect();
-
-    virtual void startFight() = 0;
-    virtual void endFight() = 0;
+    void resetState();
 
 #pragma region Getters
 
@@ -96,6 +94,7 @@ public:
     float getMaxAttackPower() const;
     float getMaxArmor() const;
     float getMaxPowerResist() const;
+    float getCurrentSpeed() const;
 
     int getCD1() const;
     int getCD2() const;
@@ -126,6 +125,7 @@ public:
     void setCurrentAttackPower(float newPower);
     void setCurrentArmor(float newArmor);
     void setCurrentPowerResist(float newPowerResist);
+    void setCurrentSpeed(float newSpeed);
 
     void setCD1(int newCD1);
     void setCD2(int newCD2);
