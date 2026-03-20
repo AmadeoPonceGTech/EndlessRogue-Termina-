@@ -62,7 +62,7 @@ void Wolf::firstAbility(Character& target) { // powerAbilityOne=0.9f
     target.setCurrentHealth(std::max(0.0f, target.getCurrentHealth() - dmgDealt * powerAbilityOne));
 }
 
-void Wolf::secondAbility(Character& target) { // powerAbilityOne=1.1f
+void Wolf::secondAbility(Character& target) { // powerAbilityTwo=1.1f
     float dmgDealt = currentAttackDamage * (1.0f - target.getCurrentArmor() / 100.0f);
     target.setCurrentHealth(std::max(0.0f, target.getCurrentHealth() - dmgDealt * powerAbilityTwo));
 }

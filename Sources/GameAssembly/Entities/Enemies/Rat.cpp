@@ -60,6 +60,17 @@ void Rat::endTurn() {
     if (CD2 > 0) { CD2--; }
     if (CD3 > 0) { CD3--; }
     if (CD4 > 0) { CD4--; }
+
+    if (isPoisoned) {
+        poison = Poison::FIRST_TURN;
+        isPoisoned = false;
+    }
+
+    if (isBurned) {
+        burn = Burn::FIRST_TURN;
+        isBurned = false;
+    }
+
 }
 
 void Rat::dropArtefacts() {
