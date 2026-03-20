@@ -93,14 +93,14 @@ void Hawk::firstAbility(Character& target) {
             target.setCurrentPowerResist(std::max(0.0f, target.getCurrentPowerResist() - debuff));
         }
         else if (choice == 5) {
-            target.setCurrentSpeed(std::max(0.0f, target.getCurrentSpeed() - debuff));
+            target.setCurrentSpeed(std::max(0.0f, target.getCurrentSpeed() + debuff));
         }
     }
 }
 
 void Hawk::secondAbility(Enemy& target) {
     target.setCurrentAttackDamage(target.getCurrentAttackDamage() + target.getCurrentAttackDamage() * 0.10f);
-    target.setCurrentSpeed(target.getCurrentSpeed() + target.getCurrentSpeed() * 0.10f);
+    target.setCurrentSpeed(target.getCurrentSpeed() - target.getCurrentSpeed() * 0.10f);
     CD2 = 4;
 }
 
@@ -109,7 +109,7 @@ void Hawk::thirdAbility(Enemy& target) {
 }
 
 void Hawk::fourthAbility(Enemy& target1, Enemy& target2) {
-    target1.setCurrentSpeed(target1.getCurrentSpeed() + target1.getCurrentSpeed() * 0.10f);
-    target2.setCurrentSpeed(target2.getCurrentSpeed() + target2.getCurrentSpeed() * 0.10f);
+    target1.setCurrentSpeed(target1.getCurrentSpeed() - target1.getCurrentSpeed() * 0.10f);
+    target2.setCurrentSpeed(target2.getCurrentSpeed() - target2.getCurrentSpeed() * 0.10f);
     CD4 = 5;
 }

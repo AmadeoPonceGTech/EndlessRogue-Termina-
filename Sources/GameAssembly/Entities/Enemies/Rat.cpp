@@ -93,7 +93,7 @@ void Rat::firstAbility(Character& target) {
             target.setCurrentPowerResist(std::max(0.0f, target.getCurrentPowerResist() - debuff));
         }
         else if (choice == 5) {
-            target.setCurrentSpeed(std::max(0.0f, target.getCurrentSpeed() - debuff));
+            target.setCurrentSpeed(std::max(0.0f, target.getCurrentSpeed() + debuff));
         }
     }
 
