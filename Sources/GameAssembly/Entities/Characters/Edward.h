@@ -24,6 +24,6 @@ public :
 
     void firstAbility(Enemy &target);
     void secondAbility(Enemy &target);
-    void thirdAbility(Character &target);
-    void fourthAbility(Character &target, Character &target2, Character &target3);
+    void thirdAbility(Enemy &target);
+    void fourthAbility(Enemy &target);
 };
