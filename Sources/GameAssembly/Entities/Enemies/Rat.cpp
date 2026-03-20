@@ -49,9 +49,13 @@ void Rat::Start() {}
 
 void Rat::Update(float deltaTime) {}
 
-void Rat::startTurn() {}
+void Rat::startTurn() {
 
-void Rat::endTurn() {}
+}
+
+void Rat::endTurn() {
+
+}
 
 void Rat::dropArtefacts() {
 
