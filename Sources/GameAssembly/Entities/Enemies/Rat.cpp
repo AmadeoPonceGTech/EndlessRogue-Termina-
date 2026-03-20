@@ -92,12 +92,16 @@ void Rat::firstAbility(Character& target) {
 
 void Rat::secondAbility(Character& target) {
     target.setIsPoisoned(true);
+
+    CD2 = 2;
 }
 
 void Rat::thirdAbility(Character& target) {
     float percent = target.getPoison();
     float dmgDealt = target.getMaxHealth() * percent / 100.0f;
     target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
+
+    CD3 = 0;
 }
 
 void Rat::fourthAbility(const std::vector<Character*>& targets) {
@@ -107,4 +111,6 @@ void Rat::fourthAbility(const std::vector<Character*>& targets) {
         float dmgDealt = currentAttackDamage * (1.0f - target->getCurrentArmor() / 100.0f);
         target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
     }
+
+    CD4 = 4;
 }
