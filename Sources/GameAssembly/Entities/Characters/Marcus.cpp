@@ -62,18 +62,15 @@ void Marcus::secondAbility(Character &target, Character &target2, Character &tar
 
 void Marcus::thirdAbility(Character &target)
 {
-    if (target.getIsPoisoned() or getIsBurnt()) //TODO -> make a debuff bool
-    {
-        target.setIsBurnt(false);
-        target.setBurnCD(0);
-        target.setIsPoisoned(false);
-        target.setPoisonCD(0);
-        target.setIsStun(false);
-        target.setCurrentAttackPower(target.getMaxAttackPower());
-        target.setCurrentAttackDamage(target.getMaxAttackDamage());
-        target.setCurrentArmor(target.getMaxArmor());
-        target.setCurrentPowerResist(target.getMaxPowerResist());
-    }
+    target.setIsBurnt(false);
+    target.setBurnCD(0);
+    target.setIsPoisoned(false);
+    target.setPoisonCD(0);
+    target.setIsStun(false);
+    target.setCurrentAttackPower(target.getMaxAttackPower());
+    target.setCurrentAttackDamage(target.getMaxAttackDamage());
+    target.setCurrentArmor(target.getMaxArmor());
+    target.setCurrentPowerResist(target.getMaxPowerResist());
 
     CD3 = 3;
 }
