@@ -8,6 +8,7 @@
 #include "Entities/Characters/Diane.h"
 #include "Entities/Characters/Alex.h"
 #include "Entities/Characters/Marcus.h"
+#include "Entities/Characters/Edward.h"
 
 #include "Entities/Enemies/Rat.h"
 #include "Entities/Enemies/Wolf.h"
@@ -21,6 +22,7 @@ COMPONENT_MODULE_BEGIN()
     REGISTER_COMPONENT(Diane, "Diane")
     REGISTER_COMPONENT(Alex, "Alex")
     REGISTER_COMPONENT(Marcus, "Marcus")
+    REGISTER_COMPONENT(Edward, "Edward")
 
     //Enemies
     REGISTER_COMPONENT(Rat, "Rat")

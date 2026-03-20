@@ -88,6 +88,11 @@ void Entity::setCD2(int newCD2) { CD2 = newCD2; }
 void Entity::setCD3(int newCD3) { CD3 = newCD3; }
 void Entity::setCD4(int newCD4) { CD4 = newCD4; }
 
+void Entity::setPoisonCD(int newPoisonCD) { poisonCD = newPoisonCD; }
+void Entity::setBurnCD(int newBurnCD) { burnCD = newBurnCD; }
+void Entity::setTauntCD(int newTauntCD) { tauntCD = newTauntCD; }
+void Entity::setStunCD(int newStunCD) { stunCD = newStunCD; }
+
 void Entity::setIsPoisoned(bool newIsPoisoned) { isPoisoned = newIsPoisoned; }
 void Entity::setIsBurned(bool newIsBurned) { isBurned = newIsBurned; }
 void Entity::setIsTaunt(bool newIsTaunt) { isTaunt = newIsTaunt; }

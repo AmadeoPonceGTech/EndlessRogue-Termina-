@@ -45,12 +45,13 @@ void Edward::secondAbility(Enemy &target)
     float dmgDealt = currentAttackPower * 2 - currentAttackPower * (target.getCurrentPowerResist() / 100);
     target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
     target.setIsBurned(true);
+    target.setBurnCD(3);
 }
 
-void Edward::thirdAbility(Character &target)
+void Edward::thirdAbility(Enemy &target)
 {
-    shield += currentAttackPower;
-    target.setShield(target.getShield() + currentAttackPower);
+    target.setIsStun(true);
+    target.setStunCD(2);
 }
 
 void Edward::fourthAbility(Character &target, Character &target2, Character &target3)

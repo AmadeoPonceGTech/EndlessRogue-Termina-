@@ -151,6 +151,11 @@ public:
     void setCD3(int newCD3);
     void setCD4(int newCD4);
 
+    void setPoisonCD(int newPoisonCD);
+    void setBurnCD(int newBurnCD);
+    void setTauntCD(int newTauntCD);
+    void setStunCD(int newStunCD);
+
     void setIsPoisoned(bool newIsPoisoned);
     void setIsBurned(bool newIsBurned);
     void setIsTaunt(bool newIsTaunt);
