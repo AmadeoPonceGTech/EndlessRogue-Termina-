@@ -23,9 +23,9 @@ public :
     void Start() override;
     void Update(float deltaTime) override;
 
-    void firstAbility(Enemy &target);
+    void firstAbility(std::shared_ptr<Enemy>target);
     void secondAbility();
-    void thirdAbility(Enemy &target);
+    void thirdAbility(std::shared_ptr<Enemy>target);
     void fourthAbility();
 
     bool getIsParring();

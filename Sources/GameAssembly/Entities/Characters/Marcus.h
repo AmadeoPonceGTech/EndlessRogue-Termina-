@@ -17,8 +17,8 @@ public :
     void Start() override;
     void Update(float deltaTime) override;
 
-    void firstAbility(Character &target);
-    void secondAbility(Character &target, Character &target2, Character &target3);
-    void thirdAbility(Character &target);
-    void fourthAbility(Character &target);
+    void firstAbility(std::shared_ptr<Character>target);
+    void secondAbility(std::shared_ptr<Character>target, std::shared_ptr<Character>target2, std::shared_ptr<Character>target3);
+    void thirdAbility(std::shared_ptr<Character>target);
+    void fourthAbility(std::shared_ptr<Character>target);
 };

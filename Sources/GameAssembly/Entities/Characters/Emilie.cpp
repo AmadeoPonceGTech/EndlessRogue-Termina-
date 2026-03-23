@@ -37,47 +37,47 @@ Emilie::Emilie()
     baseSpeed = 95;
 }
 
-void Emilie::firstAbility(Enemy &target, Enemy &target2, Enemy &target3, Enemy &target4)
+void Emilie::firstAbility(std::shared_ptr<Enemy>target, std::shared_ptr<Enemy>target2, std::shared_ptr<Enemy>target3, std::shared_ptr<Enemy>target4)
 {
-    float dmgDealt = currentAttackDamage - currentAttackDamage * (target.getCurrentArmor() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt / 3);
+    float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt / 3);
 
-    float dmgDealt2 = currentAttackDamage - currentAttackDamage * (target2.getCurrentArmor() / 100);
-    target2.setCurrentHealth(target2.getCurrentHealth() - dmgDealt2 / 3);
+    float dmgDealt2 = currentAttackDamage - currentAttackDamage * (target2->getCurrentArmor() / 100);
+    target2->setCurrentHealth(target2->getCurrentHealth() - dmgDealt2 / 3);
 
-    float dmgDealt3 = currentAttackDamage - currentAttackDamage * (target3.getCurrentArmor() / 100);
-    target3.setCurrentHealth(target3.getCurrentHealth() - dmgDealt3 / 3);
+    float dmgDealt3 = currentAttackDamage - currentAttackDamage * (target3->getCurrentArmor() / 100);
+    target3->setCurrentHealth(target3->getCurrentHealth() - dmgDealt3 / 3);
 
-    float dmgDealt4 = currentAttackDamage - currentAttackDamage * (target4.getCurrentArmor() / 100);
-    target4.setCurrentHealth(target4.getCurrentHealth() - dmgDealt4 / 3);
+    float dmgDealt4 = currentAttackDamage - currentAttackDamage * (target4->getCurrentArmor() / 100);
+    target4->setCurrentHealth(target4->getCurrentHealth() - dmgDealt4 / 3);
 
     CD1 = 1;
 }
 
-void Emilie::secondAbility(Character &target)
+void Emilie::secondAbility(std::shared_ptr<Character> target)
 {
-    target.setCurrentPowerResist(target.getCurrentPowerResist() + maxPowerResist / 2);
+    target->setCurrentPowerResist(target->getCurrentPowerResist() + maxPowerResist / 2);
 
     CD2 = 5;
 }
 
-void Emilie::thirdAbility(Enemy &target, Enemy &target2, Enemy &target3, Enemy &target4)
+void Emilie::thirdAbility(std::shared_ptr<Enemy>target, std::shared_ptr<Enemy>target2, std::shared_ptr<Enemy>target3, std::shared_ptr<Enemy>target4)
 {
-    float dmgDealt = currentAttackDamage - currentAttackDamage * (target.getCurrentArmor() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt / 4);
-    target.setIsStun(true);
+    float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt / 4);
+    target->setIsStun(true);
 
-    float dmgDealt2 = currentAttackDamage - currentAttackDamage * (target2.getCurrentArmor() / 100);
-    target2.setCurrentHealth(target2.getCurrentHealth() - dmgDealt2 / 4);
-    target.setIsStun(true);
+    float dmgDealt2 = currentAttackDamage - currentAttackDamage * (target2->getCurrentArmor() / 100);
+    target2->setCurrentHealth(target2->getCurrentHealth() - dmgDealt2 / 4);
+    target->setIsStun(true);
 
-    float dmgDealt3 = currentAttackDamage - currentAttackDamage * (target3.getCurrentArmor() / 100);
-    target3.setCurrentHealth(target3.getCurrentHealth() - dmgDealt3 / 4);
-    target.setIsStun(true);
+    float dmgDealt3 = currentAttackDamage - currentAttackDamage * (target3->getCurrentArmor() / 100);
+    target3->setCurrentHealth(target3->getCurrentHealth() - dmgDealt3 / 4);
+    target->setIsStun(true);
 
-    float dmgDealt4 = currentAttackDamage - currentAttackDamage * (target4.getCurrentArmor() / 100);
-    target4.setCurrentHealth(target4.getCurrentHealth() - dmgDealt4 / 4);
-    target.setIsStun(true);
+    float dmgDealt4 = currentAttackDamage - currentAttackDamage * (target4->getCurrentArmor() / 100);
+    target4->setCurrentHealth(target4->getCurrentHealth() - dmgDealt4 / 4);
+    target->setIsStun(true);
 
     CD3 = 5;
 }

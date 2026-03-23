@@ -36,10 +36,10 @@ Alex::Alex()
     isParring = false;
 }
 
-void Alex::firstAbility(Enemy &target)
+void Alex::firstAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackDamage - currentAttackDamage * (target.getCurrentArmor() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
+    float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
 
     CD1 = 1;
 }
@@ -51,10 +51,10 @@ void Alex::secondAbility()
     CD2 = 3;
 }
 
-void Alex::thirdAbility(Enemy &target)
+void Alex::thirdAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target.getCurrentArmor() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
+    float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
 
     CD3 = 3;
 }

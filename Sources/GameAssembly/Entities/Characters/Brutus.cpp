@@ -34,18 +34,18 @@ Brutus::Brutus()
     baseSpeed = 80;
 }
 
-void Brutus::firstAbility(Enemy &target)
+void Brutus::firstAbility(std::shared_ptr<Enemy>target)
 {
     for (int i = 0; i < 3; i++)
     {
-        float dmgDealt = currentAttackDamage - currentAttackDamage * (target.getCurrentArmor() / 100);
-        target.setCurrentHealth(target.getCurrentHealth() - dmgDealt / 3);
+        float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+        target->setCurrentHealth(target->getCurrentHealth() - dmgDealt / 3);
     }
 
     CD1 = 1;
 }
 
-void Brutus::secondAbility(Enemy &target)
+void Brutus::secondAbility(std::shared_ptr<Enemy>target)
 {
     static std::random_device rd;
     static std::mt19937 rng(rd());
@@ -55,26 +55,26 @@ void Brutus::secondAbility(Enemy &target)
 
     for (int i = 0; i < arrowToShoot; i++)
     {
-        float dmgDealt = currentAttackDamage - currentAttackDamage * (target.getCurrentArmor() / 100);
-        target.setCurrentHealth(target.getCurrentHealth() - dmgDealt / 3);
+        float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+        target->setCurrentHealth(target->getCurrentHealth() - dmgDealt / 3);
     }
 
     CD2 = 5;
 }
 
-void Brutus::thirdAbility(Enemy &target)
+void Brutus::thirdAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackDamage - currentAttackDamage * (target.getCurrentArmor() * 0.2 / 100 );
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
+    float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() * 0.2 / 100 );
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
 
     CD3 = 6;
 }
 
-void Brutus::fourthAbility(Enemy &target)
+void Brutus::fourthAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgAPDealt = currentAttackPower * 4 - currentAttackPower * (target.getCurrentPowerResist() / 100);
-    float dmgADDealt = currentAttackDamage * 4 - currentAttackDamage * (target.getCurrentArmor() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - (dmgADDealt + dmgAPDealt) / 2);
+    float dmgAPDealt = currentAttackPower * 4 - currentAttackPower * (target->getCurrentPowerResist() / 100);
+    float dmgADDealt = currentAttackDamage * 4 - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - (dmgADDealt + dmgAPDealt) / 2);
 
     CD4 = 11;
 }

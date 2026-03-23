@@ -34,50 +34,50 @@ Marcus::Marcus()
     baseSpeed = 85;
 }
 
-void Marcus::firstAbility(Character &target)
+void Marcus::firstAbility(std::shared_ptr<Character>target)
 {
     float HPHealed = currentHealth / 2;
 
-    target.setCurrentHealth(target.getCurrentHealth() + HPHealed);
-    if (target.getCurrentHealth() > target.getMaxHealth()) { target.setCurrentHealth(target.getMaxHealth()); }
+    target->setCurrentHealth(target->getCurrentHealth() + HPHealed);
+    if (target->getCurrentHealth() > target->getMaxHealth()) { target->setCurrentHealth(target->getMaxHealth()); }
 
     CD1 = 1;
 }
 
-void Marcus::secondAbility(Character &target, Character &target2, Character &target3)
+void Marcus::secondAbility(std::shared_ptr<Character>target, std::shared_ptr<Character>target2, std::shared_ptr<Character>target3)
 {
     float HPHealed = currentAttackPower / 4;
 
     currentHealth += HPHealed;
-    if (currentHealth > target.getMaxHealth()) { currentHealth = target.getMaxHealth(); }
-    target.setCurrentHealth(target.getCurrentHealth() + HPHealed);
-    if (target.getCurrentHealth() > target.getMaxHealth()) { target.setCurrentHealth(target.getMaxHealth()); }
-    target2.setCurrentHealth(target2.getCurrentHealth() + HPHealed);
-    if (target2.getCurrentHealth() > target2.getMaxHealth()) { target2.setCurrentHealth(target2.getMaxHealth()); }
-    target3.setCurrentHealth(target3.getCurrentHealth() + HPHealed);
-    if (target3.getCurrentHealth() > target3.getMaxHealth()) { target3.setCurrentHealth(target3.getMaxHealth()); }
+    if (currentHealth > target->getMaxHealth()) { currentHealth = target->getMaxHealth(); }
+    target->setCurrentHealth(target->getCurrentHealth() + HPHealed);
+    if (target->getCurrentHealth() > target->getMaxHealth()) { target->setCurrentHealth(target->getMaxHealth()); }
+    target2->setCurrentHealth(target2->getCurrentHealth() + HPHealed);
+    if (target2->getCurrentHealth() > target2->getMaxHealth()) { target2->setCurrentHealth(target2->getMaxHealth()); }
+    target3->setCurrentHealth(target3->getCurrentHealth() + HPHealed);
+    if (target3->getCurrentHealth() > target3->getMaxHealth()) { target3->setCurrentHealth(target3->getMaxHealth()); }
 
     CD2 = 4;
 }
 
-void Marcus::thirdAbility(Character &target)
+void Marcus::thirdAbility(std::shared_ptr<Character>target)
 {
-    target.setIsBurnt(false);
-    target.setBurnCD(0);
-    target.setIsPoisoned(false);
-    target.setPoisonCD(0);
-    target.setIsStun(false);
-    target.setCurrentAttackPower(target.getMaxAttackPower());
-    target.setCurrentAttackDamage(target.getMaxAttackDamage());
-    target.setCurrentArmor(target.getMaxArmor());
-    target.setCurrentPowerResist(target.getMaxPowerResist());
+    target->setIsBurnt(false);
+    target->setBurnCD(0);
+    target->setIsPoisoned(false);
+    target->setPoisonCD(0);
+    target->setIsStun(false);
+    target->setCurrentAttackPower(target->getMaxAttackPower());
+    target->setCurrentAttackDamage(target->getMaxAttackDamage());
+    target->setCurrentArmor(target->getMaxArmor());
+    target->setCurrentPowerResist(target->getMaxPowerResist());
 
     CD3 = 3;
 }
 
-void Marcus::fourthAbility(Character &target)
+void Marcus::fourthAbility(std::shared_ptr<Character>target)
 {
-    target.setCurrentHealth(target.getMaxHealth() / 2);
+    target->setCurrentHealth(target->getMaxHealth() / 2);
 
     CD4 = 9;
 }
@@ -102,7 +102,7 @@ void Marcus::endTurn()
 
 void Marcus::Start()
 {
-    // Called once when the scene starts playing.
+    // Called once when the scene starts playing->
 }
 
 void Marcus::Update(float deltaTime)
