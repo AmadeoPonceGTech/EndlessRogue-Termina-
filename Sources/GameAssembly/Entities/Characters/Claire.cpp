@@ -36,10 +36,10 @@ Claire::Claire()
     baseSpeed = 80;
 }
 
-void Claire::firstAbility(Enemy &target)
+void Claire::firstAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackDamage - currentAttackDamage * (target.getCurrentArmor() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
+    float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
 
     static std::random_device rd;
     static std::mt19937 rng(rd());
@@ -51,61 +51,49 @@ void Claire::firstAbility(Enemy &target)
         float choice = dist(rng);
 
         if (choice == 1) {
-            target.setCurrentAttackDamage(target.getCurrentAttackDamage() - target.getCurrentAttackDamage() * 0.05);
+            target->setCurrentAttackDamage(target->getCurrentAttackDamage() - target->getCurrentAttackDamage() * 0.05);
         }
         else if (choice == 2) {
-            target.setCurrentAttackPower(target.getCurrentAttackPower() - target.getCurrentAttackPower() * 0.05);
+            target->setCurrentAttackPower(target->getCurrentAttackPower() - target->getCurrentAttackPower() * 0.05);
         }
         else if (choice == 3) {
-            target.setCurrentArmor(target.getCurrentArmor() - target.getCurrentArmor() * 0.05);
+            target->setCurrentArmor(target->getCurrentArmor() - target->getCurrentArmor() * 0.05);
         }
         else if (choice == 4) {
-            target.setCurrentPowerResist(target.getCurrentPowerResist() - target.getCurrentPowerResist() * 0.05);
+            target->setCurrentPowerResist(target->getCurrentPowerResist() - target->getCurrentPowerResist() * 0.05);
         }
         else if (choice == 5) {
-            target.setCurrentSpeed(target.getCurrentSpeed() - currentAttackPower);
+            target->setCurrentSpeed(target->getCurrentSpeed() + currentAttackPower);
         }
     }
 
     CD1 = 1;
 }
 
-void Claire::secondAbility(Character &target, Character &target2, Character &target3)
+void Claire::secondAbility(std::shared_ptr<Character>target)
 {
-    float HPHealed = currentAttackPower / 4;
-
-    currentHealth += HPHealed;
-    if (currentHealth > target.getMaxHealth()) { currentHealth = target.getMaxHealth(); }
-    target.setCurrentHealth(target.getCurrentHealth() + HPHealed);
-    if (target.getCurrentHealth() > target.getMaxHealth()) { target.setCurrentHealth(target.getMaxHealth()); }
-    target2.setCurrentHealth(target2.getCurrentHealth() + HPHealed);
-    if (target2.getCurrentHealth() > target2.getMaxHealth()) { target2.setCurrentHealth(target2.getMaxHealth()); }
-    target3.setCurrentHealth(target3.getCurrentHealth() + HPHealed);
-    if (target3.getCurrentHealth() > target3.getMaxHealth()) { target3.setCurrentHealth(target3.getMaxHealth()); }
+    target->setCurrentArmor(target->getCurrentArmor() * 1.05);
+    target->setCurrentPowerResist(target->getCurrentPowerResist() * 1.05);
 
     CD2 = 4;
 }
 
-void Claire::thirdAbility(Character &target)
+void Claire::thirdAbility(std::shared_ptr<Enemy>target)
 {
-    target.setIsBurnt(false);
-    target.setBurnCD(0);
-    target.setIsPoisoned(false);
-    target.setPoisonCD(0);
-    target.setIsStun(false);
-    target.setCurrentAttackPower(target.getMaxAttackPower());
-    target.setCurrentAttackDamage(target.getMaxAttackDamage());
-    target.setCurrentArmor(target.getMaxArmor());
-    target.setCurrentPowerResist(target.getMaxPowerResist());
+    target->setCurrentSpeed(target->getCurrentSpeed() + currentAttackPower);
 
-    CD3 = 3;
+    CD3 = 6;
 }
 
-void Claire::fourthAbility(Character &target)
+void Claire::fourthAbility(std::shared_ptr<Character>target)
 {
-    target.setCurrentHealth(target.getMaxHealth() / 2);
+    target->setCurrentAttackPower(target->getCurrentAttackPower() * 1.1);
+    target->setCurrentAttackDamage(target->getCurrentAttackDamage() * 1.1);
+    target->setCurrentArmor(target->getCurrentArmor() * 1.1);
+    target->setCurrentPowerResist(target->getCurrentPowerResist() * 1.1);
+    target->setCurrentSpeed(target->getCurrentSpeed() - currentAttackPower);
 
-    CD4 = 9;
+    CD4 = 11;
 }
 
 void Claire::startTurn()

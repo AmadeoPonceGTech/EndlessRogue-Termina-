@@ -36,26 +36,26 @@ Penelope::Penelope()
     fourthAbilityActive = false;
 }
 
-void Penelope::firstAbility(Enemy &target)
+void Penelope::firstAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackDamage - currentAttackDamage * (target.getCurrentArmor() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
+    float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
 
     CD1 = 1;
 }
 
-void Penelope::secondAbility(Enemy &target)
+void Penelope::secondAbility(std::shared_ptr<Enemy>target)
 {
-    target.setIsPoisoned(true);
-    target.setPoisonCD(5);
+    target->setIsPoisoned(true);
+    target->setPoisonCD(5);
 
     CD2 = 3;
 }
 
-void Penelope::thirdAbility(Enemy &target)
+void Penelope::thirdAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target.getCurrentArmor() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
+    float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
     currentHealth += dmgDealt * (80 / 100);
 
     CD3 = 4;

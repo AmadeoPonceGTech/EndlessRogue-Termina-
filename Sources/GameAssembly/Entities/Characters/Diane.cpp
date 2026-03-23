@@ -34,42 +34,42 @@ Diane::Diane()
     baseSpeed = 100;
 }
 
-void Diane::firstAbility(Enemy &target)
+void Diane::firstAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackDamage - currentAttackDamage * (target.getCurrentArmor() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
+    float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
 
     CD1 = 1;
 }
 
-void Diane::secondAbility(Enemy &target,  Enemy &target2)
+void Diane::secondAbility(std::shared_ptr<Enemy>target,  std::shared_ptr<Enemy>target2)
 {
-    target.setIsTaunt(true);
-    target2.setIsTaunt(true);
+    target->setIsTaunt(true);
+    target2->setIsTaunt(true);
 
-    target.setTauntCD(3);
-    target2.setTauntCD(3);
+    target->setTauntCD(3);
+    target2->setTauntCD(3);
 
     CD2 = 6;
 }
 
-void Diane::thirdAbility(Character &target)
+void Diane::thirdAbility(std::shared_ptr<Character>target)
 {
     shield += currentAttackPower;
-    target.setShield(target.getShield() + currentAttackPower);
+    target->setShield(target->getShield() + currentAttackPower);
 
     CD3 = 4;
 }
 
-void Diane::fourthAbility(Character &target, Character &target2, Character &target3)
+void Diane::fourthAbility(std::shared_ptr<Character>target, std::shared_ptr<Character>target2, std::shared_ptr<Character>target3)
 {
     currentArmor = currentArmor * 1.3;
-    target.setCurrentArmor(target.getCurrentArmor() * 1.2);
-    target2.setCurrentArmor(target.getCurrentArmor() * 1.2);
-    target3.setCurrentArmor(target.getCurrentArmor() * 1.2);
+    target->setCurrentArmor(target->getCurrentArmor() * 1.2);
+    target2->setCurrentArmor(target->getCurrentArmor() * 1.2);
+    target3->setCurrentArmor(target->getCurrentArmor() * 1.2);
 }
 
-void Diane::startRun(Character &target, Character &target2, Character &target3)
+void Diane::startRun(std::shared_ptr<Character>target, std::shared_ptr<Character>target2, std::shared_ptr<Character>target3)
 {
     if (level >= 40) fourthAbility(target, target2, target3);
 }

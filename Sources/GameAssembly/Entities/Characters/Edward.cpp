@@ -34,37 +34,37 @@ Edward::Edward()
     baseSpeed = 75;
 }
 
-void Edward::firstAbility(Enemy &target)
+void Edward::firstAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackPower - currentAttackPower * (target.getCurrentPowerResist() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
+    float dmgDealt = currentAttackPower - currentAttackPower * (target->getCurrentPowerResist() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
 
     CD1 = 1;
 }
 
-void Edward::secondAbility(Enemy &target)
+void Edward::secondAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackPower * 2 - currentAttackPower * (target.getCurrentPowerResist() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
-    target.setIsBurnt(true);
-    target.setBurnCD(3);
+    float dmgDealt = currentAttackPower * 2 - currentAttackPower * (target->getCurrentPowerResist() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+    target->setIsBurnt(true);
+    target->setBurnCD(3);
 
     CD2 = 3;
 }
 
-void Edward::thirdAbility(Enemy &target)
+void Edward::thirdAbility(std::shared_ptr<Enemy>target)
 {
-    target.setIsStun(true);
+    target->setIsStun(true);
 
     CD3 = 5;
 }
 
-void Edward::fourthAbility(Enemy &target)
+void Edward::fourthAbility(std::shared_ptr<Enemy>target)
 {
-    float dmgDealt = currentAttackPower * 4 - currentAttackPower * (target.getCurrentPowerResist() / 100);
-    target.setCurrentHealth(target.getCurrentHealth() - dmgDealt);
-    target.setIsBurnt(true);
-    target.setBurnCD(3);
+    float dmgDealt = currentAttackPower * 4 - currentAttackPower * (target->getCurrentPowerResist() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+    target->setIsBurnt(true);
+    target->setBurnCD(3);
 
     CD4 = 7;
 }

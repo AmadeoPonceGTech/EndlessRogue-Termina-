@@ -6,11 +6,13 @@
 
 using namespace TerminaScript;
 
-class Claire : public Character, public TerminaScript::ScriptableComponent
+class Enemy;
+
+class Brutus : public Character, public TerminaScript::ScriptableComponent
 {
 public :
-    Claire();
-    Claire(Termina::Actor* owner) : TerminaScript::ScriptableComponent(owner) {}
+    Brutus();
+    Brutus(Termina::Actor* owner) : TerminaScript::ScriptableComponent(owner) {}
 
     void startTurn() override;
     void endTurn() override;
@@ -19,7 +21,7 @@ public :
     void Update(float deltaTime) override;
 
     void firstAbility(std::shared_ptr<Enemy>target);
-    void secondAbility(std::shared_ptr<Character>target);
+    void secondAbility(std::shared_ptr<Enemy>target);
     void thirdAbility(std::shared_ptr<Enemy>target);
-    void fourthAbility(std::shared_ptr<Character>target);
+    void fourthAbility(std::shared_ptr<Enemy>target);
 };
