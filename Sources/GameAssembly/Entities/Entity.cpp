@@ -72,23 +72,13 @@ void Entity::manageStatusEffect()
     }
 }
 
-void Entity::resetState() {
+void Entity::resetStats() {
     currentHealth = maxHealth;
     currentAttackPower = maxAttackPower;
     currentAttackDamage = maxAttackDamage;
     currentArmor = maxArmor;
     currentPowerResist = maxPowerResist;
     currentSpeed = baseSpeed;
-
-    isPoisoned = false;
-    isBurnt = false;
-    isTaunt = false;
-    isStun = false;
-
-    CD1 = 0;
-    CD2 = 0;
-    CD3 = 0;
-    CD4 = 0;
 }
 
 #pragma region Getters

@@ -18,6 +18,7 @@
 #include "Entities/Enemies/Rat.h"
 #include "Entities/Enemies/Wolf.h"
 #include "Entities/Enemies/Bear.h"
+#include "Entities/Enemies/Hawk.h"
 
 COMPONENT_MODULE_BEGIN()
     REGISTER_COMPONENT(FlyCamComponent, "Fly Cam Component")
@@ -38,5 +39,6 @@ COMPONENT_MODULE_BEGIN()
     REGISTER_COMPONENT(Rat, "Rat")
     REGISTER_COMPONENT(Wolf, "Wolf")
     REGISTER_COMPONENT(Bear, "Bear")
+    REGISTER_COMPONENT(Hawk, "Hawk")
 
 COMPONENT_MODULE_END()

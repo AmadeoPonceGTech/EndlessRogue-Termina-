@@ -78,8 +78,10 @@ public:
     virtual void startTurn() = 0;
     virtual void endTurn() = 0;
 
+    virtual bool entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies) = 0;
+
     void manageStatusEffect();
-    void resetState();
+    void resetStats();
 
 #pragma region Getters
 

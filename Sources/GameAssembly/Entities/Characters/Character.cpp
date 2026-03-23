@@ -2,6 +2,8 @@
 
 Character::Character()
 {
+    abilitySelected = 0;
+
     level = 1;
     maxLevel = 50;
 
