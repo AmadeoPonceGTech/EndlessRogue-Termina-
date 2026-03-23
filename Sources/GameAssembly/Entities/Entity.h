@@ -83,6 +83,7 @@ public:
 
 #pragma region Getters
 
+    std::string getName() const;
     float getCurrentHealth() const;
     float getShield() const;
     float getCurrentAttackDamage() const;

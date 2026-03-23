@@ -93,6 +93,7 @@ void Entity::resetState() {
 
 #pragma region Getters
 
+std::string Entity::getName() const { return name; }
 float Entity::getCurrentHealth() const { return currentHealth; }
 float Entity::getShield() const { return shield; }
 float Entity::getCurrentAttackDamage() const { return currentAttackDamage; }

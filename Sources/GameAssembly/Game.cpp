@@ -4,11 +4,20 @@
 #include <iostream>
 #include <ostream>
 
+#include "../Termina/Renderer/Components/CameraComponent.hpp"
+#include "../Termina/Renderer/Components/MeshComponent.hpp"
+
 void Game::Start()
 {
     if (!gameplay) {
         gameplay = std::make_unique<Gameplay>();
     }
+
+    for (auto& child : GetChildren())
+    {
+        std::cout << child->GetName() << std::endl;
+    }
+
 }
 
 void Game::Update(float deltaTime)
@@ -24,13 +33,20 @@ void Game::Update(float deltaTime)
     switch (gameState) {
 
         case GameRun :
-            gameplay->EndFight();
+        for (auto& child : GetChildren())
+        {
+            if (child->HasComponent<Termina::CameraComponent>() && child->GetName() == "first")
+            {
+                child->GetComponent<Termina::CameraComponent>().SetPrimary(true);
+            }
+            else
+                child->GetComponent<Termina::CameraComponent>().SetPrimary(false);
+        }
+
             break;
         case GameMenu :
-            gameplay->StartFight();
             break;
         case GameCharacterStats :
-            gameplay->StartTurn();
             break;
 
         default:

@@ -1,11 +1,11 @@
-#include "Gameplay.h"
+#include "../Gameplay/Gameplay.h"
 
 /////// Include pour Alpha Sprint 1 ///////
 #include <algorithm>
 
-#include "../Entities/Characters/Alex.h"
-#include "../Entities/Characters/Diane.h"
-#include "../Entities/Characters/Marcus.h"
+#include "../../Entities/Characters/Alex.h"
+#include "../../Entities/Characters/Diane.h"
+#include "../../Entities/Characters/Marcus.h"
 //////////////////////////////////////////
 
 
@@ -38,10 +38,24 @@ Gameplay::Gameplay() {
 
     sort (speedVector.begin(), speedVector.end());
     ///////////////////////////////////////////////////
+
+    StartRun();
+    gameLoop();
+}
+
+void Gameplay::gameLoop()
+{
+    while (isRunning)
+    {
+        StartFight();
+        /// manage speed
+        EndFight();
+    }
 }
 
 void Gameplay::StartRun() {
     //// Start the run and start all passif
+    //// Chek if Diane is active
 }
 
 
@@ -51,20 +65,11 @@ void Gameplay::EndRun() {
 }
 
 void Gameplay::StartFight() {
+    /// create enemy in fight
     /// Add all Enemy in fight to the EnemyVector
-    /// foreach (entity in EnemyVector{ StartTurn(entity)}
+    /// Check if Emilie is there
 }
 
 void Gameplay::EndFight() {
-    //enemyManager->clearEnemies();
-}
-
-
-void Gameplay::StartTurn(Entity& entity)
-{
-
-}
-
-void Gameplay::EndTurn(Entity& entity) {
-
+    /// Emilie
 }

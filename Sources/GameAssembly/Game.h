@@ -6,7 +6,7 @@
 #include "ImGui/imgui_internal.h"
 
 #pragma region Gameplayincludes
-#include  "Main/Gameplay.h"
+#include "Main/Gameplay/Gameplay.h"
 #pragma endregion Gameplayincludes
 
 using namespace TerminaScript;
