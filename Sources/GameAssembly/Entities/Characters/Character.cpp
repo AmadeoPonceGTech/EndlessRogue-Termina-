@@ -2,6 +2,8 @@
 
 Character::Character()
 {
+    abilitySelected = 0;
+
     level = 1;
     maxLevel = 50;
 
@@ -9,6 +11,17 @@ Character::Character()
     finalXPNeeded = 100000;
     currentXP = 0;
     XPNeeded = XPNeededForLvl2 + (finalXPNeeded - XPNeededForLvl2) * ((level - 1) / (maxLevel - 1));
+}
+
+bool Character::manageXP()
+{
+    if (currentXP >= XPNeeded)
+    {
+        currentXP -= XPNeeded;
+        XPNeeded = XPNeededForLvl2 + (finalXPNeeded - XPNeededForLvl2) * ((level - 1) / (maxLevel - 1));
+        return true;
+    }
+    return false;
 }
 
 void Character::levelUp()
@@ -24,7 +37,11 @@ void Character::levelUp()
     currentArmor = maxArmor;
     maxPowerResist = basePowerResist + (finalPR - basePowerResist) * ((level - 1) / (maxLevel - 1));
     currentPowerResist = maxPowerResist;
+}
 
-    currentXP -= XPNeeded;
-    XPNeeded = XPNeededForLvl2 + (finalXPNeeded - XPNeededForLvl2) * ((level - 1) / (maxLevel - 1));
+void Character::endRun() {
+    while (manageXP())
+    {
+        levelUp();
+    }
 }

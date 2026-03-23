@@ -1,6 +1,6 @@
 #pragma once
-#include "Character.h"
-#include "../Enemies/Enemy.h"
+#include "../Character.h"
+#include "../../Enemies/Enemy.h"
 
 #include <Termina/Scripting/API/ScriptingAPI.hpp>
 
@@ -12,6 +12,7 @@ class Alex : public Character, public TerminaScript::ScriptableComponent
 {
 private :
     bool isParring;
+    std::shared_ptr<Enemy> selectedTarget = nullptr;
 
 public :
     Alex();
@@ -19,17 +20,15 @@ public :
 
     void startTurn() override;
     void endTurn() override;
+    bool entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies) override;
 
     void Start() override;
     void Update(float deltaTime) override;
 
-    void checkAbilities() override;
-
-    void firstAbility(Enemy &target);
+    void firstAbility(std::shared_ptr<Enemy>target);
     void secondAbility();
-    void thirdAbility(Enemy &target);
+    void thirdAbility(std::shared_ptr<Enemy>target);
     void fourthAbility();
 
     bool getIsParring();
-    void setIsParring(bool value);
 };
