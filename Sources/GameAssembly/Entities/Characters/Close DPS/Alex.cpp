@@ -1,0 +1,262 @@
+#include "Alex.h"
+
+Alex::Alex()
+{
+    name = "Alex";
+    entityClass = EClass::CLOSEDDPS;
+    description = "Alex is a man";
+
+    baseHealth = 50;
+    finalHP = 600;
+    maxHealth = baseHealth + (finalHP - baseHealth) * ((level - 1) / (maxLevel - 1));
+    currentHealth = maxHealth;
+
+    baseAttackDamage = 10.f;
+    finalAD = 400;
+    maxAttackDamage = baseAttackDamage + (finalAD - baseAttackDamage) * ((level - 1) / (maxLevel - 1));
+    currentAttackDamage = baseAttackDamage;
+
+    baseAttackPower = 0;
+    finalAP = 0;
+    maxAttackPower = 0;
+    currentAttackPower = 0;
+
+    baseArmor = 3;
+    finalArmor = 30;
+    maxArmor = baseArmor + (finalArmor - baseArmor) * ((level - 1) / (maxLevel - 1));
+    currentArmor = baseArmor;
+
+    basePowerResist = 0.5f;
+    finalPR = 10;
+    maxPowerResist = basePowerResist + (finalPR - basePowerResist) * ((level - 1) / (maxLevel - 1));
+    currentPowerResist = basePowerResist;
+
+    baseSpeed = 90;
+
+    isParring = false;
+}
+
+void Alex::firstAbility(std::shared_ptr<Enemy>target)
+{
+    float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+
+    if (target->getCurrentHealth() <= 0) {currentXP += target->currentExpDrop;}
+
+    CD1 = 1;
+}
+
+void Alex::secondAbility()
+{
+    isParring = true;
+
+    CD2 = 3;
+}
+
+void Alex::thirdAbility(std::shared_ptr<Enemy>target)
+{
+    float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target->getCurrentArmor() / 100);
+    target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+
+    if (target->getCurrentHealth() <= 0) {currentXP += target->currentExpDrop;}
+
+    CD3 = 3;
+}
+
+void Alex::fourthAbility()
+{
+    float healthPercent = currentHealth / maxHealth * 100;
+    if (healthPercent > 90)
+    {
+        currentAttackDamage = maxAttackDamage * 1;
+        currentArmor = maxArmor * 1;
+        currentPowerResist = maxPowerResist * 1;
+        baseSpeed = 90;
+    }
+    else if (healthPercent > 80)
+    {
+        currentAttackDamage = maxAttackDamage * 1.1;
+        currentArmor = maxArmor * 1.1;
+        currentPowerResist = maxPowerResist * 1.1;
+        baseSpeed = 88;
+    }
+    else if (healthPercent > 70)
+    {
+        currentAttackDamage = maxAttackDamage * 1.2;
+        currentArmor = maxArmor * 1.2;
+        currentPowerResist = maxPowerResist * 1.2;
+        baseSpeed = 86;
+    }
+    else if (healthPercent > 60)
+    {
+        currentAttackDamage = maxAttackDamage * 1.3;
+        currentArmor = maxArmor * 1.3;
+        currentPowerResist = maxPowerResist * 1.3;
+        baseSpeed = 84;
+    }
+    else if (healthPercent > 50)
+    {
+        currentAttackDamage = maxAttackDamage * 1.4;
+        currentArmor = maxArmor * 1.4;
+        currentPowerResist = maxPowerResist * 1.4;
+        baseSpeed = 82;
+    }
+    else if (healthPercent > 40)
+    {
+        currentAttackDamage = maxAttackDamage * 1.5;
+        currentArmor = maxArmor * 1.5;
+        currentPowerResist = maxPowerResist * 1.5;
+        baseSpeed = 80;
+    }
+    else if (healthPercent > 30)
+    {
+        currentAttackDamage = maxAttackDamage * 1.6;
+        currentArmor = maxArmor * 1.6;
+        currentPowerResist = maxPowerResist * 1.6;
+        baseSpeed = 78;
+    }
+    else if (healthPercent > 20)
+    {
+        currentAttackDamage = maxAttackDamage * 1.7;
+        currentArmor = maxArmor * 1.7;
+        currentPowerResist = maxPowerResist * 1.7;
+        baseSpeed = 76;
+    }
+    else if (healthPercent > 10)
+    {
+        currentAttackDamage = maxAttackDamage * 1.8;
+        currentArmor = maxArmor * 1.8;
+        currentPowerResist = maxPowerResist * 1.8;
+        baseSpeed = 74;
+    }
+    else if (healthPercent > 0)
+    {
+        currentAttackDamage = maxAttackDamage * 2;
+        currentArmor = maxArmor * 2;
+        currentPowerResist = maxPowerResist * 2;
+        baseSpeed = 70;
+    }
+}
+
+void Alex::startTurn()
+{
+    if (isParring) { isParring = false; }
+
+    if (CD1 == 0) { firstAbilityUp = true; } else { firstAbilityUp = false; }
+    if (CD2 == 0 && level >= 5) { secondAbilityUp = true; } else { secondAbilityUp = false; }
+    if (CD3 == 0 && level >= 15) { thirdAbilityUp = true; } else { thirdAbilityUp = false; }
+    if (level >= 30) fourthAbility();
+}
+
+void Alex::endTurn()
+{
+    if (CD1 > 0) { CD1--; }
+    if (CD2 > 0) { CD2--; }
+    if (CD3 > 0) { CD3--; }
+
+    manageStatusEffect();
+
+    selectedTarget = nullptr;
+}
+
+bool Alex::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies)
+{
+    switch (currentState) {
+        case PlayerState::StartTurn : {
+            startTurn();
+            currentState = PlayerState::ChoosingAbility;
+            break;
+        }
+
+        case PlayerState::ChoosingAbility : {
+            ImGui::Begin("Choose Ability");
+
+            ImGui::BeginDisabled(!firstAbilityUp);
+            if (ImGui::Button("Sword Slash"))
+            {
+                abilitySelected = 1;
+                currentState = PlayerState::ChoosingTarget;
+            }
+            ImGui::EndDisabled();
+
+
+            ImGui::BeginDisabled(!secondAbilityUp);
+            if (ImGui::Button("Parade"))
+            {
+                abilitySelected = 2;
+                currentState = PlayerState::Acting;
+            }
+            ImGui::EndDisabled();
+
+
+            ImGui::BeginDisabled(!thirdAbilityUp);
+            if (ImGui::Button("Heavy Sword Slash"))
+            {
+                abilitySelected = 3;
+                currentState = PlayerState::ChoosingTarget;
+            }
+            ImGui::EndDisabled();
+
+            ImGui::End();
+            break;
+        }
+
+        case PlayerState::ChoosingTarget :
+        {
+            ImGui::Begin("Choose enemy target");
+            for (int i = 0; i < enemies.size(); i++)
+            {
+                std::string label = enemies[i]->getName() + "##" + std::to_string(i);
+
+                if (ImGui::Button(label.c_str())) {
+                    selectedTarget = std::static_pointer_cast<Enemy>(enemies[i]);
+                    currentState = PlayerState::Acting;
+                }
+            }
+
+            if (ImGui::Button("Return")) {
+                currentState = PlayerState::ChoosingAbility;
+            }
+
+            ImGui::End();
+            break;
+        }
+
+        case PlayerState::Acting :
+        {
+            switch (abilitySelected) {
+                case 1 : {
+                    firstAbility(selectedTarget);
+                    break;
+                }
+                case 2 : {
+                    secondAbility();
+                    break;
+                }
+                case 3 : {
+                    thirdAbility(selectedTarget);
+                    break;
+                }
+                default : {
+                    currentState = PlayerState::ChoosingAbility;
+                }
+
+            }
+            currentState = PlayerState::EndTurn;
+            break;
+        }
+
+        case PlayerState::EndTurn : {
+            endTurn();
+            currentState = PlayerState::StartTurn;
+            return true;
+        }
+    }
+    return false;
+}
+
+void Alex::Start() {}
+
+void Alex::Update(float deltaTime) {}
+
+bool Alex::getIsParring() { return isParring; }
