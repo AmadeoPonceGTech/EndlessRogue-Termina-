@@ -3,9 +3,9 @@
 /////// Include pour Alpha Sprint 1 ///////
 #include <algorithm>
 
-#include "../../Entities/Characters/Alex.h"
-#include "../../Entities/Characters/Diane.h"
-#include "../../Entities/Characters/Marcus.h"
+#include "../../Entities/Characters/Close DPS/Alex.h"
+#include "../../Entities/Characters/Tank/Diane.h"
+#include "../../Entities/Characters/Support/Marcus.h"
 //////////////////////////////////////////
 
 
@@ -26,17 +26,17 @@ Gameplay::Gameplay() {
 
     for (auto& character : activeCharacters) {
         if (character) {
-            speedVector.push_back(character);
+            entityGameVector.push_back(character);
         }
     }
 
     for (auto& ennemi : enemyManager->getEnemies()) {
         if (ennemi) {
-            speedVector.push_back(ennemi);
+            entityGameVector.push_back(ennemi);
         }
     }
 
-    sort (speedVector.begin(), speedVector.end());
+    sort (entityGameVector.begin(), entityGameVector.end());
     ///////////////////////////////////////////////////
 
     StartRun();
@@ -47,8 +47,10 @@ void Gameplay::gameLoop()
 {
     while (isRunning)
     {
-        StartFight();
-        /// manage speed
+        for (auto& entity : entityGameVector)
+        {
+            entity->entityTurn(activeCharacters, enemyManager->getEnemies());
+        }
         EndFight();
     }
 }

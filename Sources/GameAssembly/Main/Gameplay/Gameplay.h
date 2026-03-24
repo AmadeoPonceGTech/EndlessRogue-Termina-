@@ -16,7 +16,7 @@ class Gameplay {
 private:
     std::shared_ptr<EnemyManager> enemyManager;
     std::vector<std::shared_ptr<Entity>> activeCharacters;
-    std::vector<std::shared_ptr<Entity>> speedVector;
+    std::vector<std::shared_ptr<Entity>> entityGameVector;
 
     bool isRunning = true;
 
