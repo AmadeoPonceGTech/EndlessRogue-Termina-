@@ -29,11 +29,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="added dark knight">
-      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Enemies/Close DPS/Skeleton.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Enemies/Close DPS/Skeleton.h" afterDir="false" />
+    <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="added skeleton">
+      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Enemies/Support/Kelpie.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Enemies/Support/Kelpie.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Enemies/Tank/DarkKnight.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Enemies/Tank/DarkKnight.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/GameAssembly.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/GameAssembly.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,7 +150,7 @@
       <workItem from="1773912226663" duration="476000" />
       <workItem from="1773992385118" duration="847000" />
       <workItem from="1774288965862" duration="10000" />
-      <workItem from="1774816683017" duration="1228000" />
+      <workItem from="1774816683017" duration="2478000" />
     </task>
     <task id="LOCAL-00001" summary="added all abilities to Rat">
       <option name="closed" value="true" />
@@ -297,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774791867438</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="added skeleton">
+      <option name="closed" value="true" />
+      <created>1774818097562</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1774818097562</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,6 +351,7 @@
     <MESSAGE value="fix" />
     <MESSAGE value="added Ghost" />
     <MESSAGE value="added dark knight" />
-    <option name="LAST_COMMIT_MESSAGE" value="added dark knight" />
+    <MESSAGE value="added skeleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="added skeleton" />
   </component>
 </project>

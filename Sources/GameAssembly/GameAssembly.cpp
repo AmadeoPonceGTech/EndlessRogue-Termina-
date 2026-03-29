@@ -22,6 +22,7 @@
 #include "Entities/Enemies/Range DPS/AdeptOfTheChaos.h"
 #include "Entities/Enemies/Tank/DarkKnight.h"
 #include "Entities/Enemies/Close DPS/Skeleton.h"
+#include "Entities/Enemies/Support/Kelpie.h"
 
 COMPONENT_MODULE_BEGIN()
     REGISTER_COMPONENT(FlyCamComponent, "Fly Cam Component")
@@ -47,5 +48,7 @@ COMPONENT_MODULE_BEGIN()
     REGISTER_COMPONENT(AdeptOfTheChaos, "AdeptOfTheChaos")
     REGISTER_COMPONENT(DarkKnight, "DarkKnight")
     REGISTER_COMPONENT(Skeleton, "Skeleton")
+    REGISTER_COMPONENT(Kelpie, "Kelpie")
+
 
 COMPONENT_MODULE_END()
