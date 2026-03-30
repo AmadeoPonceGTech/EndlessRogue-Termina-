@@ -1,0 +1,33 @@
+#pragma once
+#include <iostream>
+#include <ctime>
+#include <cmath>
+#include <vector>
+#include <random>
+#include <memory>
+#include "../Entities/Characters/Character.h"
+
+class Artefact
+{
+protected:
+    std::string name;
+    std::string description;
+public:
+    virtual ~Artefact() = default;
+    Artefact();
+
+    virtual void ActingArtefact(Entity& target) = 0;
+    virtual void onDamageTaken(Entity& target) = 0;
+
+#pragma region Getters
+
+    virtual std::string getName();
+    virtual std::string getDescription();
+
+#pragma endregion
+
+#pragma region Setters
+
+#pragma endregion
+
+};

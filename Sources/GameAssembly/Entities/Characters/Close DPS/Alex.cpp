@@ -1,5 +1,7 @@
 #include "Alex.h"
 
+#include "../../../Artefacts/Common/SmokeBomb.h"
+
 Alex::Alex()
 {
     name = "Alex";
@@ -34,6 +36,9 @@ Alex::Alex()
     baseSpeed = 90;
 
     isParring = false;
+    //-----------exemple aec smokebomb à la mano--------- (mais à faire dans le gamestate à terme)----
+    auto artefact = std::make_shared<SmokeBomb>();
+    this->setArtefact(artefact);
 }
 
 void Alex::firstAbility(std::shared_ptr<Enemy>target)
@@ -57,6 +62,7 @@ void Alex::thirdAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+    artefact->onDamageTaken(*target);
 
     if (target->getCurrentHealth() <= 0) {currentXP += target->currentExpDrop;}
 

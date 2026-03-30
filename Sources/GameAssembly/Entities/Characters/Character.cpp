@@ -1,4 +1,5 @@
 #include "Character.h"
+#include "../../Artefacts/Artefact.h"
 
 Character::Character()
 {
@@ -45,3 +46,15 @@ void Character::endRun() {
         levelUp();
     }
 }
+
+void Character::takeDamageEvent(Entity& target) {
+    if (artefact) {
+        artefact->onDamageTaken(target);
+    }
+}
+
+bool Character::getArtefactAlreadyUsed() { return artefactAlreadyUsed; }
+void Character::setArtefactAlreadyUsed(bool value) { artefactAlreadyUsed = value; }
+
+std::shared_ptr<Artefact> Character::getArtefact() const { return artefact; }
+void Character::setArtefact(std::shared_ptr<Artefact> newArtefact) { artefact = newArtefact; }

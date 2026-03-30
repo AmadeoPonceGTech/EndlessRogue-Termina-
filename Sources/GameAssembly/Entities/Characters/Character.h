@@ -11,10 +11,14 @@ enum class PlayerState {
     EndTurn
 };
 
+class Artefact;
+
 class Character : public Entity
 {
 protected :
     PlayerState currentState;
+
+    std::shared_ptr<Artefact> artefact;
 
     float XPNeededForLvl2;
     float currentXP;
@@ -29,10 +33,20 @@ protected :
 
     int abilitySelected;
 
+    bool artefactAlreadyUsed;
+
 public:
     Character();
 
     void levelUp();
     bool manageXP();
     void endRun();
+
+    bool getArtefactAlreadyUsed();
+    void setArtefactAlreadyUsed(bool value);
+
+    void takeDamageEvent(Entity& target);
+
+    std::shared_ptr<Artefact> getArtefact() const;
+    void setArtefact(std::shared_ptr<Artefact> newArtefact);
 };
