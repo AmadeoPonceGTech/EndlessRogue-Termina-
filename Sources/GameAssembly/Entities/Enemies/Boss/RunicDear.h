@@ -21,8 +21,8 @@ public :
     void dropArtefacts() override;
 
     void firstAbility(Character& target);
-    void secondAbility(Character& target);
-    void thirdAbility(Character& target);
+    void secondAbility(Character& target, Enemy& enemyTarget);
+    void thirdAbility();
 
     void fourthAbility(const std::vector<Character*>& targets);
 
