@@ -29,15 +29,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="added red dragon boss">
-      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Artefact.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Artefact.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/SmokeBomb.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/SmokeBomb.h" afterDir="false" />
+    <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="added artefact's logic">
+      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/BearSFoot.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/BearSFoot.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/KnightSBadge.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/KnightSBadge.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Artefact.h" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Artefact.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/SmokeBomb.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/SmokeBomb.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/SmokeBomb.h" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Artefacts/Common/SmokeBomb.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Character.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Character.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Character.h" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Character.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Close DPS/Alex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Close DPS/Alex.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Entity.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Entity.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Entity.h" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Entity.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,7 +363,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774856290874</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="added artefact's logic">
+      <option name="closed" value="true" />
+      <created>1774861849385</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1774861849385</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +401,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added all abilities to Rat" />
     <MESSAGE value="update Rat -&gt; added start and end, remove checkAbilities()" />
     <MESSAGE value="added EnemyManager" />
     <MESSAGE value="added destroyEnemy to EnemyManager" />
@@ -414,7 +425,8 @@
     <MESSAGE value="update hit calcul for enemies" />
     <MESSAGE value="added runicDear" />
     <MESSAGE value="added red dragon boss" />
-    <option name="LAST_COMMIT_MESSAGE" value="added red dragon boss" />
+    <MESSAGE value="added artefact's logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="added artefact's logic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

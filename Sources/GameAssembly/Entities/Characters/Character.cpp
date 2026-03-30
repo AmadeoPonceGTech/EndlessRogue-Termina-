@@ -49,7 +49,7 @@ void Character::endRun() {
 
 void Character::takeDamageEvent(Entity& target) {
     if (artefact) {
-        artefact->onDamageTaken(target);
+        artefact->onInflictedDamage(target);
     }
 }
 

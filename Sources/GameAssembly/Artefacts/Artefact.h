@@ -17,7 +17,7 @@ public:
     Artefact();
 
     virtual void ActingArtefact(Entity& target) = 0;
-    virtual void onDamageTaken(Entity& target) = 0;
+    virtual void onInflictedDamage(Entity& target) = 0;
 
 #pragma region Getters
 

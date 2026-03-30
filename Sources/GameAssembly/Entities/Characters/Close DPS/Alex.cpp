@@ -45,6 +45,7 @@ void Alex::firstAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+    artefact->onInflictedDamage(*this);
 
     if (target->getCurrentHealth() <= 0) {currentXP += target->currentExpDrop;}
 
@@ -62,7 +63,7 @@ void Alex::thirdAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
-    artefact->onDamageTaken(*target);
+    artefact->onInflictedDamage(*this);
 
     if (target->getCurrentHealth() <= 0) {currentXP += target->currentExpDrop;}
 

@@ -71,6 +71,8 @@ protected:
     bool isTaunt;
     bool isStun;
 
+    float generatedShield = 0.5f;
+
 public:
     virtual ~Entity() = default;
 
@@ -121,6 +123,8 @@ public:
 
     EClass getClass() const;
 
+    float getGeneratedShield() const;
+
 #pragma endregion
 
 #pragma region Setters
@@ -146,6 +150,8 @@ public:
     void setIsBurnt(bool newIsBurnt);
     void setIsTaunt(bool newIsTaunt);
     void setIsStun(bool newIsStun);
+
+    void setGeneratedShield(float newShield);
 
 #pragma endregion
 

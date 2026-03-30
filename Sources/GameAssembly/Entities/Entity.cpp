@@ -119,6 +119,8 @@ bool Entity::getIsStun() const { return isStun; }
 
 EClass Entity::getClass() const { return entityClass; }
 
+float Entity::getGeneratedShield() const { return generatedShield; }
+
 #pragma endregion
 
 #pragma region Setters
@@ -144,5 +146,7 @@ void Entity::setIsPoisoned(bool const newIsPoisoned) { isPoisoned = newIsPoisone
 void Entity::setIsBurnt(bool const newIsBurnt) { isBurnt = newIsBurnt; }
 void Entity::setIsTaunt(bool const newIsTaunt) { isTaunt = newIsTaunt; }
 void Entity::setIsStun(bool const newIsStun) { isStun = newIsStun; }
+
+void Entity::setGeneratedShield(float newShield) { generatedShield = newShield; }
 
 #pragma endregion
