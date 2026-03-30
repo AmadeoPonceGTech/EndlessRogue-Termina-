@@ -7,6 +7,14 @@
 #include <memory>
 #include "../Entities/Characters/Character.h"
 
+enum class Quality {
+    COMMON,
+    RARE,
+    EPIC,
+    LEGENDARY,
+    UNIQUE
+};
+
 class Artefact
 {
 protected:
@@ -17,6 +25,7 @@ protected:
 public:
     virtual ~Artefact() = default;
     Artefact();
+    Quality quality;
 
     virtual void ActingArtefact(Entity& target) = 0;
     virtual void onInflictedDamage(Entity& target) = 0;

@@ -3,6 +3,7 @@
 Tail::Tail() {
     name = "Tail";
     description = "Heal 1% / artefact's level of max HP every turn.";
+    quality = Quality::COMMON;
 }
 
 void Tail::ActingArtefact(Entity& target) {

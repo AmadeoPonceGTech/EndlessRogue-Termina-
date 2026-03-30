@@ -3,6 +3,7 @@
 EelSEye::EelSEye() {
     name = "Eel's eye";
     description = "Increase resources drop (+1 / artefact's level).";
+    quality = Quality::COMMON;
 }
 
 void EelSEye::ActingArtefact(Entity& target) {
