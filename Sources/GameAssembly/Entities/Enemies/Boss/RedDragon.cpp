@@ -1,27 +1,27 @@
-#include "RunicDear.h"
+#include "RedDragon.h"
 #include "../../Characters/Character.h"
 
-RunicDear::RunicDear(int floor) {
-    name = "RunicDear";
+RedDragon::RedDragon(int floor) {
+    name = "RedDragon";
     entityClass = EClass::BOSS;
-    description = "RunicDear's description.";
+    description = "RedDragon's description.";
     biome = Biome::FOREST;
 
     level = floor;
     landing = floor / 5;
 
-    finalArmor = 40.0f;
-    finalPR = 70.0f;
+    finalArmor = 70.0f;
+    finalPR = 40.0f;
 
     baseHealth = 100.0f;
     maxHealth = baseHealth * pow(1.1f, landing);
     currentHealth = maxHealth;
 
-    baseAttackDamage = 0.0f;
+    baseAttackDamage = 40.0f;
     maxAttackDamage = baseAttackDamage * pow(1.1f, landing);
     currentAttackDamage = maxAttackDamage;
 
-    baseAttackPower = 40.0f;
+    baseAttackPower = 20.0f;
     maxAttackPower = baseAttackPower * pow(1.1f, landing);
     currentAttackPower = maxAttackPower;
 
@@ -33,7 +33,7 @@ RunicDear::RunicDear(int floor) {
     maxPowerResist = basePowerResist * pow(1.1f, landing);
     currentPowerResist = maxPowerResist;
 
-    baseSpeed = 75.0f;
+    baseSpeed = 50.0f;
     currentSpeed = baseSpeed;
 
     baseExpDrop = 50.0f;
@@ -47,32 +47,32 @@ RunicDear::RunicDear(int floor) {
     isStun = false;
 }
 
-void RunicDear::Start() {}
+void RedDragon::Start() {}
 
-void RunicDear::Update(float deltaTime) {}
+void RedDragon::Update(float deltaTime) {}
 
-void RunicDear::startTurn() {
+void RedDragon::startTurn() {
     firstAbilityUp = true;
     if (CD2 == 0) { secondAbilityUp = true; } else { secondAbilityUp = false; }
     thirdAbilityUp = true;
     if (CD4 == 0 && level > 50) { fourthAbilityUp = true; } else { fourthAbilityUp = false; }
 }
 
-void RunicDear::endTurn() {
+void RedDragon::endTurn() {
     if (CD2 > 0) { CD2--; }
     if (CD4 > 0) { CD4--; }
 
     manageStatusEffect();
 }
 
-bool RunicDear::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies)
+bool RedDragon::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies)
 {
     switch (enemyState)
     {
     case EnemyState::STARTTURN:
         startTurn();
-        thirdAbility();
-        enemyState = EnemyState::ACTING;
+            thirdAbility();
+            enemyState = EnemyState::ACTING;
         break;
 
     case EnemyState::ACTING:
@@ -84,9 +84,7 @@ bool RunicDear::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std:
 
             std::uniform_int_distribution<int> distTarget(0, characters.size() - 1);
             Character* target = dynamic_cast<Character*>(characters[distTarget(rng)].get());
-            Enemy* targetEnemy = dynamic_cast<Enemy*>(enemies[distTarget(rng)].get());
             if (!target) return false;
-            if (!targetEnemy) return false;
 
             std::vector<int> availableChoices;
 
@@ -105,7 +103,7 @@ bool RunicDear::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std:
                 firstAbility(*target);
                 break;
             case 2:
-                secondAbility(*target, *targetEnemy);
+                secondAbility(*target);
                 break;
             case 3:
                 {
@@ -135,32 +133,38 @@ bool RunicDear::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std:
     return false;
 }
 
-void RunicDear::dropArtefacts() {
+void RedDragon::dropArtefacts() {
 
 }
 
-void RunicDear::firstAbility(Character& target) {
-    float dmgDealt = currentAttackPower * (1.0f - target.getCurrentPowerResist() / 100.0f);
+void RedDragon::firstAbility(Character& target) {
+    float dmgDealt = currentAttackDamage * (1.0f - target.getCurrentArmor() / 100.0f);
     target.setCurrentHealth(std::max(0.0f, target.getCurrentHealth() - dmgDealt));
+
+    target.setCurrentSpeed(target.getCurrentSpeed() + (target.getCurrentSpeed() * 15.0f / 100.0f));
 }
 
-void RunicDear::secondAbility(Character& target, Enemy& enemyTarget) {
-    float dmgDealt = currentAttackPower * (1.0f - target.getCurrentPowerResist() / 100.0f);
-    target.setCurrentHealth(std::max(0.0f, target.getCurrentHealth() - dmgDealt));
+void RedDragon::secondAbility(Character& target) {
+    float multiplier = 1.0f;
+    if (target.getIsBurnt() | target.getIsStun() | target.getIsPoisoned() | target.getIsTaunt()) multiplier = 1.5f; else multiplier = 1.0f;
+    float dmgDealt = currentAttackDamage * (1.0f - target.getCurrentArmor() / 100.0f);
+    target.setCurrentHealth(std::max(0.0f, target.getCurrentHealth() - dmgDealt * multiplier));
 
-    enemyTarget.setCurrentSpeed(enemyTarget.getCurrentSpeed() + (target.getCurrentSpeed() * 15.0f / 100.0f));
     CD2 = 3;
 }
 
-void RunicDear::thirdAbility() {
-    currentArmor = currentArmor + (currentArmor * 5.0f / 100.0f);
-    currentPowerResist = currentPowerResist + (currentPowerResist * 5.0f / 100.0f);
+void RedDragon::thirdAbility() {
+    currentAttackPower = currentAttackPower + (currentAttackPower * 5.0f / 100.0f);
+    currentAttackDamage = currentAttackDamage + (currentAttackDamage * 5.0f / 100.0f);
 }
 
-void RunicDear::fourthAbility(const std::vector<Character*>& targets) {
+void RedDragon::fourthAbility(const std::vector<Character*>& targets) {
     for (auto character : targets) {
-        float dmgDealt = currentAttackPower * (1.0f - character->getCurrentPowerResist() / 100.0f);
+        float dmgDealt = currentAttackDamage * (1.0f - character->getCurrentArmor() / 100.0f);
         character->setCurrentHealth(std::max(0.0f, character->getCurrentHealth() - dmgDealt));
+
+        character->setCurrentAttackDamage(character->getCurrentAttackDamage() - character->getCurrentAttackDamage() * 15.0f / 100.0f);
+        character->setCurrentAttackPower(character->getCurrentAttackPower() - character->getCurrentAttackPower() * 15.0f / 100.0f);
     }
 
     CD4 = 7;

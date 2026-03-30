@@ -27,6 +27,9 @@
 #include "Entities/Enemies/Support/Mermaid.h"
 #include "Entities/Enemies/Close DPS/Eel.h"
 
+#include "Entities/Enemies/Boss/RunicDear.h"
+#include "Entities/Enemies/Boss/RedDragon.h"
+
 COMPONENT_MODULE_BEGIN()
     REGISTER_COMPONENT(FlyCamComponent, "Fly Cam Component")
     REGISTER_COMPONENT(ParticleSystemComponent, "Particle System")
@@ -55,6 +58,10 @@ COMPONENT_MODULE_BEGIN()
     REGISTER_COMPONENT(Dunkleosteus, "Dunkleosteus")
     REGISTER_COMPONENT(Mermaid, "Mermaid")
     REGISTER_COMPONENT(Eel, "Eel")
+
+    //Boss
+    REGISTER_COMPONENT(RunicDear, "RunicDear")
+    REGISTER_COMPONENT(RedDragon, "RedDragon")
 
 
 COMPONENT_MODULE_END()
