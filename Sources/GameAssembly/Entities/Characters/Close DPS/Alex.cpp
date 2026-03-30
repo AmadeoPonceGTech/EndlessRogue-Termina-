@@ -32,6 +32,7 @@ Alex::Alex()
     currentPowerResist = basePowerResist;
 
     currentSpeed = 90;
+    currentSpeed = baseSpeed;
 
     isParring = false;
 }

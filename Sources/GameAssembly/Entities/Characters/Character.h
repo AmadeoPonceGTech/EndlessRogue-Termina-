@@ -35,4 +35,7 @@ public:
     void levelUp();
     bool manageXP();
     void endRun();
+
+    float getCurrentXP() const;
+    float getXPNeeded() const;
 };

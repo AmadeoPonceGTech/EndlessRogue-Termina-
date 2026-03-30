@@ -45,3 +45,6 @@ void Character::endRun() {
         levelUp();
     }
 }
+
+float Character::getCurrentXP() const {return currentXP;}
+float Character::getXPNeeded() const { return XPNeeded; }

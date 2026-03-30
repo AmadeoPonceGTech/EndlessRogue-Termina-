@@ -17,7 +17,7 @@ public :
     Diane();
     Diane(Termina::Actor* owner) : TerminaScript::ScriptableComponent(owner) {}
 
-    void startRun(std::shared_ptr<Character>target, std::shared_ptr<Character>target2, std::shared_ptr<Character>target3);
+    void startRun(std::vector<std::shared_ptr<Entity>> &targets);
     void startTurn() override;
     void endTurn() override;
     bool entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies) override;
@@ -28,5 +28,6 @@ public :
     void firstAbility(std::shared_ptr<Enemy>target);
     void secondAbility(std::shared_ptr<Enemy>target);
     void thirdAbility(std::shared_ptr<Character>target);
-    void fourthAbility(std::shared_ptr<Character>target, std::shared_ptr<Character>target2, std::shared_ptr<Character>target3);
+    void fourthAbility(std::vector<std::shared_ptr<Entity>> &targets);
+
 };

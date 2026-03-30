@@ -84,6 +84,26 @@ void Entity::resetStats() {
 #pragma region Getters
 
 std::string Entity::getName() const { return name; }
+std::string Entity::getClass() const {
+    switch (entityClass) {
+        case EClass::ASSASSIN :
+            return "Assassin";
+        case EClass::CLOSEDDPS :
+            return "Close DPS";
+        case EClass::RANGEDDPS :
+            return "Range DPS";
+        case EClass::TANK :
+            return "Tank";
+        case EClass::SUPPORT :
+            return "Support";
+        default :
+            return "Unknown";
+    }
+}
+std::string Entity::getDescriptions() const { return description; }
+
+int Entity::getLevel() const { return level; }
+
 float Entity::getCurrentHealth() const { return currentHealth; }
 float Entity::getShield() const { return shield; }
 float Entity::getCurrentAttackDamage() const { return currentAttackDamage; }

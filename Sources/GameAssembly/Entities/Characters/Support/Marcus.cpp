@@ -32,6 +32,7 @@ Marcus::Marcus()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 85;
+    currentSpeed = baseSpeed;
 }
 
 void Marcus::firstAbility(std::shared_ptr<Character>target)

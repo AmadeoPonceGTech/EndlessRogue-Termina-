@@ -12,41 +12,124 @@ void Game::Start()
     if (!gameplay) {
         gameplay = std::make_unique<Gameplay>();
     }
+    gameState = EGameState::Title;
 
-
+    allCharacters.emplace_back(std::make_shared<Diane>());
+    allCharacters.emplace_back(std::make_shared<Emilie>());
+    allCharacters.emplace_back(std::make_shared<Claire>());
+    allCharacters.emplace_back(std::make_shared<Marcus>());
+    allCharacters.emplace_back(std::make_shared<Brutus>());
+    allCharacters.emplace_back(std::make_shared<Edward>());
+    allCharacters.emplace_back(std::make_shared<Alex>());
+    allCharacters.emplace_back(std::make_shared<Penelope>());
 
 }
 
 void Game::Update(float deltaTime)
 {
-    bool show = true;
-    ImGui::SetNextWindowSize(ImVec2(500, 500));
-    ImGui::Begin("ImGui Menu", &show);
-    ImGui::RadioButton("radio a",(int*)&gameState, GameRun); ImGui::SameLine();
-    ImGui::RadioButton("radio b", (int*)&gameState, GameMenu); ImGui::SameLine();
-    ImGui::RadioButton("radio c", (int*)&gameState, GameCharacterStats);
-    ImGui::End();
 
-    switch (gameState) {
+    switch (gameState)
+    {
 
-        case GameRun :
-        for (auto& child : GetChildren())
+        case EGameState::Title :
+            ImGui::SetNextWindowSize(ImVec2(800, 800));
+            ImGui::Begin("MainWindow");
+            ImGui::Text("ENDLESS ROGUE");
+
+            if (ImGui::Button("Play")) { gameState = EGameState::Menu; }
+
+            ImGui::End();
+            break;
+
+        case EGameState::Menu :
         {
-            if (child->HasComponent<Termina::CameraComponent>() && child->GetName() == "first")
-            {
-                // child->GetComponent<Termina::CameraComponent>().SetPrimary(true);
-                std::cout << child->GetName() << std::endl;
 
+            ImGui::SetNextWindowSize(ImVec2(800, 800));
+            ImGui::Begin("MainWindow");
+
+            ImGui::Text("Select your characters");
+            ImGui::SameLine();
+            ImGui::BeginDisabled(!gameplay->TeamIsComplete());
+            if (ImGui::Button("Launch Run")) {
+                gameState = EGameState::Run;
+            };
+            ImGui::EndDisabled();
+
+            // ===== LAYOUT SIMPLE =====
+            ImGui::Columns(2, nullptr, true);
+            // ===== LEFT: LIST =====
+            ImGui::BeginChild("CharacterList", ImVec2(0, 0), true);
+            for (int i = 0; i < allCharacters.size(); i++) {
+                if (ImGui::Selectable(allCharacters[i]->getName().c_str(), selectedCharacter == i)) {
+                    selectedCharacter = i;
+                }
             }
-            else
-                std::cout << child->GetName() << std::endl;
-                // child->GetComponent<Termina::CameraComponent>().SetPrimary(false);
-        }
 
+            ImGui::EndChild();
+            ImGui::NextColumn();
+
+            // ===== RIGHT: DETAILS =====
+            ImGui::BeginChild("CharacterDetails", ImVec2(0, 0), true);
+
+            if (selectedCharacter != -1) {
+                auto& character = allCharacters[selectedCharacter];
+
+                ImGui::Text("Character: %s", character->getName().c_str());
+                ImGui::Dummy(ImVec2(0,10));
+                ImGui::Text("Level : %i", character->getLevel());
+                ImGui::Dummy(ImVec2(0,5));
+                ImGui::Text("XP : %i       XPNeeded : %i       %.1f %%", character->getCurrentXP(), character->getXPNeeded(), character->getCurrentXP() * 100 / character->getXPNeeded());
+                ImGui::Dummy(ImVec2(0,10));
+
+                ImGui::Text("Class : %s", character->getClass().c_str());
+                ImGui::Dummy(ImVec2(0,20));
+                ImGui::Text("Description : %s", character->getDescriptions().c_str());
+                ImGui::Dummy(ImVec2(0,20));
+
+                ImGui::Text("Statistics");
+                ImVec2 p_min = ImGui::GetItemRectMin();
+                ImVec2 p_max = ImGui::GetItemRectMax();
+                ImGui::GetWindowDrawList()->AddLine(ImVec2(p_min.x, p_max.y - 1),ImVec2(p_max.x, p_max.y - 1),IM_COL32(255, 255, 255, 255),1.0f );
+
+                ImGui::Dummy(ImVec2(0,10));
+                ImGui::Text("Health Point : %.0f", character->getMaxHealth());
+                ImGui::Dummy(ImVec2(0,5));
+                ImGui::Text("Attack Damage : %.0f", character->getMaxAttackDamage());
+                ImGui::Dummy(ImVec2(0,5));
+                ImGui::Text("Magic Damage : %.0f", character->getMaxAttackPower());
+                ImGui::Dummy(ImVec2(0,5));
+                ImGui::Text("Armor : %.2f", character->getMaxArmor());
+                ImGui::Dummy(ImVec2(0,5));
+                ImGui::Text("Magic Resistance : %.2f", character->getMaxPowerResist());
+                ImGui::Dummy(ImVec2(0,5));
+                ImGui::Text("Speed : %.1f", character->getCurrentSpeed());
+                ImGui::Dummy(ImVec2(0,20));
+
+                ImGui::BeginDisabled(gameplay->IsInTeam(character));
+                if (ImGui::Button("Select")) {
+                    gameplay->AddToTeam(character);
+                }
+               ImGui::EndDisabled();
+
+                ImGui::BeginDisabled(!gameplay->IsInTeam(character));
+                if (ImGui::Button("UnSelect")) {
+                    gameplay->RemoveFromTeam(character);
+                }
+                ImGui::EndDisabled();
+            }
+            else {
+                ImGui::Text("Select a character...");
+            }
+
+            ImGui::EndChild();
+            ImGui::Columns(1);
+            ImGui::End();
             break;
-        case GameMenu :
+        }
+        case EGameState::Run :
             break;
-        case GameCharacterStats :
+
+        case EGameState::End :
             break;
 
         default:

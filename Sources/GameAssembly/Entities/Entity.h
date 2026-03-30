@@ -87,18 +87,25 @@ public:
 #pragma region Getters
 
     std::string getName() const;
-    float getCurrentHealth() const;
-    float getShield() const;
-    float getCurrentAttackDamage() const;
-    float getCurrentAttackPower() const;
-    float getCurrentArmor() const;
-    float getCurrentPowerResist() const;
+    std::string getClass() const;
+    std::string getDescriptions() const;
+
+    int getLevel() const;
+
     float getMaxHealth() const;
     float getMaxAttackDamage() const;
     float getMaxAttackPower() const;
     float getMaxArmor() const;
     float getMaxPowerResist() const;
     float getCurrentSpeed() const;
+
+    float getCurrentHealth() const;
+    float getCurrentAttackDamage() const;
+    float getCurrentAttackPower() const;
+    float getCurrentArmor() const;
+    float getCurrentPowerResist() const;
+
+    float getShield() const;
 
     int getCD1() const;
     int getCD2() const;

@@ -32,6 +32,7 @@ Edward::Edward()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 75;
+    currentSpeed = baseSpeed;
 }
 
 void Edward::firstAbility(std::shared_ptr<Enemy>target)

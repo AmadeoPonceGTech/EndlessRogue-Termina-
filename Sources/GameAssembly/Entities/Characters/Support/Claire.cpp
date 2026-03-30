@@ -34,6 +34,7 @@ Claire::Claire()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 80;
+    currentSpeed = baseSpeed;
 }
 
 void Claire::firstAbility(std::shared_ptr<Enemy>target)

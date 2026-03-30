@@ -35,6 +35,7 @@ Emilie::Emilie()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 95;
+    currentSpeed = baseSpeed;
 }
 
 void Emilie::firstAbility(std::shared_ptr<Enemy>target, std::shared_ptr<Enemy>target2, std::shared_ptr<Enemy>target3, std::shared_ptr<Enemy>target4)
