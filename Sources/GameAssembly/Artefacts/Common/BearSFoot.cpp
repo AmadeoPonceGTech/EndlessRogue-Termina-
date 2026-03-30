@@ -9,5 +9,5 @@ void BearSFoot::ActingArtefact(Entity& target) {
 }
 
 void BearSFoot::onInflictedDamage(Entity& target) {
-    target.setCurrentHealth(target.getCurrentHealth() + target.getMaxHealth() * 2.0f / 100.0f);
+    target.setCurrentHealth(target.getCurrentHealth() + target.getMaxHealth() * (2.0f * level) / 100.0f);
 }

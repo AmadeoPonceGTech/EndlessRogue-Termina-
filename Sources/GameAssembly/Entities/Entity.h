@@ -86,6 +86,8 @@ public:
     void manageStatusEffect();
     void resetStats();
 
+    int ressourcesWon = 1;
+
 #pragma region Getters
 
     std::string getName() const;

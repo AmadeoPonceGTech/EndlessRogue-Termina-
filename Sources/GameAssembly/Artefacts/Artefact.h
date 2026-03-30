@@ -12,6 +12,8 @@ class Artefact
 protected:
     std::string name;
     std::string description;
+    int level = 1;
+
 public:
     virtual ~Artefact() = default;
     Artefact();

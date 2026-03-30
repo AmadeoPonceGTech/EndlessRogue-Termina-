@@ -171,6 +171,12 @@ bool Alex::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vect
     switch (currentState) {
         case PlayerState::StartTurn : {
             startTurn();
+            //-----------------------------à rajouter ici partout plz-------------------
+            if (!artefactAlreadyUsed) {
+                artefact->ActingArtefact(*this);
+                artefactAlreadyUsed = true;
+            }
+            //--------------------------------------------------------------------------
             currentState = PlayerState::ChoosingAbility;
             break;
         }

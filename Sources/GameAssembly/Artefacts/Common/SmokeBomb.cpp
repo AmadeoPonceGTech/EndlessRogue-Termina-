@@ -6,7 +6,7 @@ SmokeBomb::SmokeBomb() {
 }
 
 void SmokeBomb::ActingArtefact(Entity& target) {
-    target.setCurrentSpeed(target.getCurrentSpeed() + target.getCurrentSpeed() * 2.0f / 100.0f);
+    target.setCurrentSpeed(target.getCurrentSpeed() + target.getCurrentSpeed() * (2.0f * level) / 100.0f);
 }
 
 void SmokeBomb::onInflictedDamage(Entity& target) {
