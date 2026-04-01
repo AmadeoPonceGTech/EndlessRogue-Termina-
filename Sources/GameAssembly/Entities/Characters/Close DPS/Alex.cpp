@@ -6,7 +6,7 @@ Alex::Alex()
 {
     name = "Alex";
     entityClass = EClass::CLOSEDDPS;
-    description = "Alex is a man";
+    description = "Alex, the proud and generous white knight, that charges and slashes with “their” shield and big sword, defeating the evil.";
 
     baseHealth = 50;
     finalHP = 600;
@@ -69,7 +69,9 @@ void Alex::thirdAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
-    artefact->onInflictedDamage(*this);
+    if (artefact) {
+        artefact->onInflictedDamage(*this);
+    }
 
     if (target->getCurrentHealth() <= 0) {currentXP += target->currentExpDrop;}
 

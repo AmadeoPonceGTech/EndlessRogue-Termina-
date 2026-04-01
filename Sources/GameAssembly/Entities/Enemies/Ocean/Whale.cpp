@@ -4,7 +4,7 @@
 Whale::Whale(int floor) {
     name = "Whale";
     entityClass = EClass::BOSS;
-    description = "";
+    description = "Since its birth, this Whale has been raised in a bathtub, fusing with it. Its sometimes difficult to know if it does or not part of its body.";
     biome = Biome::OCEAN;
 
     level = floor;

@@ -4,7 +4,7 @@
 Gargoyle::Gargoyle(int floor) {
     name = "Gargoyle";
     entityClass = EClass::BOSS;
-    description = "";
+    description = "Gargoyle, this monster of stone, inspiring fear, jumps on his enemies.";
     biome = Biome::GRAVEYARD;
 
     level = floor;
