@@ -11,7 +11,8 @@ enum class EClass {
     CLOSEDDPS,
     RANGEDDPS,
     TANK,
-    SUPPORT
+    SUPPORT,
+    BOSS
 };
 
 class Entity
@@ -71,6 +72,8 @@ protected:
     bool isStun;
     bool isDead = false;
 
+    float generatedShield = 0.5f;
+
 public:
     virtual ~Entity() = default;
 
@@ -83,6 +86,9 @@ public:
 
     void manageStatusEffect();
     void resetStats();
+
+    int ressourcesWon = 1;
+    bool artefactAlreadyUsed;
 
 #pragma region Getters
 
@@ -127,6 +133,10 @@ public:
     bool getIsStun() const;
     bool getIsDead() const;
 
+    EClass getClass() const;
+
+    float getGeneratedShield() const;
+
 #pragma endregion
 
 #pragma region Setters
@@ -153,6 +163,8 @@ public:
     void setIsTaunt(bool newIsTaunt);
     void setIsStun(bool newIsStun);
     void setIsDead(bool newIsDead);
+
+    void setGeneratedShield(float newShield);
 
 #pragma endregion
 

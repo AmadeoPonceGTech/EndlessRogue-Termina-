@@ -79,6 +79,7 @@ void Entity::resetStats() {
     currentArmor = maxArmor;
     currentPowerResist = maxPowerResist;
     currentSpeed = baseSpeed;
+    artefactAlreadyUsed = false;
 }
 
 #pragma region Getters
@@ -138,6 +139,10 @@ bool Entity::getIsTaunt() const { return isTaunt; }
 bool Entity::getIsStun() const { return isStun; }
 bool Entity::getIsDead() const { return isDead; }
 
+EClass Entity::getClass() const { return entityClass; }
+
+float Entity::getGeneratedShield() const { return generatedShield; }
+
 #pragma endregion
 
 #pragma region Setters
@@ -164,5 +169,7 @@ void Entity::setIsBurnt(bool const newIsBurnt) { isBurnt = newIsBurnt; }
 void Entity::setIsTaunt(bool const newIsTaunt) { isTaunt = newIsTaunt; }
 void Entity::setIsStun(bool const newIsStun) { isStun = newIsStun; }
 void Entity::setIsDead(bool const newIsDead) { isDead = newIsDead; }
+
+void Entity::setGeneratedShield(float newShield) { generatedShield = newShield; }
 
 #pragma endregion

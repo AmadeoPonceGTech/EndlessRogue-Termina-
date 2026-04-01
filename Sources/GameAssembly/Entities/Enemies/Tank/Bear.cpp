@@ -1,5 +1,5 @@
 #include "Bear.h"
-#include "../Characters/Character.h"
+#include "../../Characters/Character.h"
 
 Bear::Bear(int floor) {
     name = "Bear";
@@ -65,7 +65,83 @@ void Bear::endTurn() {
     manageStatusEffect();
 }
 
-bool Bear::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies) { return true;}
+bool Bear::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies)
+{
+    switch (enemyState)
+    {
+    case EnemyState::STARTTURN:
+        startTurn();
+        enemyState = EnemyState::ACTING;
+        break;
+
+    case EnemyState::ACTING:
+        {
+            if (characters.empty()) return false;
+
+            static std::random_device rd;
+            static std::mt19937 rng(rd());
+
+            Character* target = nullptr;
+
+            for (auto& c : characters)
+            {
+                Character* t = dynamic_cast<Character*>(c.get());
+                if (t && t->getClass() == EClass::TANK)
+                {
+                    target = t;
+                    break;
+                }
+            }
+
+            if (!target)
+            {
+                std::uniform_int_distribution<int> distTarget(0, characters.size() - 1);
+                target = dynamic_cast<Character*>(characters[distTarget(rng)].get());
+            }
+
+            if (!target) return false;
+
+            std::vector<int> availableChoices;
+
+            if (firstAbilityUp)  availableChoices.push_back(1);
+            if (secondAbilityUp) availableChoices.push_back(2);
+            if (fourthAbilityUp) availableChoices.push_back(3);
+
+            if (availableChoices.empty()) return false;
+
+            std::uniform_int_distribution<int> distChoice(0, availableChoices.size() - 1);
+            int choice = availableChoices[distChoice(rng)];
+
+
+            switch (choice)
+            {
+            case 1:
+                firstAbility(*target);
+                break;
+            case 2:
+                secondAbility();
+                break;
+            case 3:
+                {
+                    fourthAbility(*target);
+                    break;
+                }
+            default:
+                break;
+            }
+
+            enemyState = EnemyState::ENDTURN;
+            break;
+        }
+
+    case EnemyState::ENDTURN:
+        endTurn();
+        enemyState = EnemyState::STARTTURN;
+        return true;
+    }
+
+    return false;
+}
 
 void Bear::dropArtefacts() {
 
@@ -83,7 +159,7 @@ void Bear::secondAbility() {
 }
 
 void Bear::thirdAbility() {
-    // let's go Amadéo
+    // done in entityTurn
 }
 
 void Bear::fourthAbility(Character& target) {

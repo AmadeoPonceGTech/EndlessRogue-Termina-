@@ -16,10 +16,21 @@
 #include "Entities/Characters/Range DPS/Brutus.h"
 #include "Entities/Characters/Tank/Emilie.h"
 
-#include "Entities/Enemies/Rat.h"
-#include "Entities/Enemies/Wolf.h"
-#include "Entities/Enemies/Bear.h"
-#include "Entities/Enemies/Hawk.h"
+#include "Entities/Enemies/Close DPS/Rat.h"
+#include "Entities/Enemies/Close DPS/Wolf.h"
+#include "Entities/Enemies/Tank/Bear.h"
+#include "Entities/Enemies/Support/Hawk.h"
+#include "Entities/Enemies/Support/Ghost.h"
+#include "Entities/Enemies/Range DPS/AdeptOfTheChaos.h"
+#include "Entities/Enemies/Tank/DarkKnight.h"
+#include "Entities/Enemies/Close DPS/Skeleton.h"
+#include "Entities/Enemies/Support/Kelpie.h"
+#include "Entities/Enemies/Tank/Dunkleosteus.h"
+#include "Entities/Enemies/Support/Mermaid.h"
+#include "Entities/Enemies/Close DPS/Eel.h"
+
+#include "Entities/Enemies/Boss/RunicDear.h"
+#include "Entities/Enemies/Boss/RedDragon.h"
 
 COMPONENT_MODULE_BEGIN()
     REGISTER_COMPONENT(FlyCamComponent, "Fly Cam Component")
@@ -41,6 +52,19 @@ COMPONENT_MODULE_BEGIN()
     REGISTER_COMPONENT(Wolf, "Wolf")
     REGISTER_COMPONENT(Bear, "Bear")
     REGISTER_COMPONENT(Hawk, "Hawk")
+    REGISTER_COMPONENT(Ghost, "Ghost")
+    REGISTER_COMPONENT(AdeptOfTheChaos, "AdeptOfTheChaos")
+    REGISTER_COMPONENT(DarkKnight, "DarkKnight")
+    REGISTER_COMPONENT(Skeleton, "Skeleton")
+    REGISTER_COMPONENT(Kelpie, "Kelpie")
+    REGISTER_COMPONENT(Dunkleosteus, "Dunkleosteus")
+    REGISTER_COMPONENT(Mermaid, "Mermaid")
+    REGISTER_COMPONENT(Eel, "Eel")
+
+    //Boss
+    REGISTER_COMPONENT(RunicDear, "RunicDear")
+    REGISTER_COMPONENT(RedDragon, "RedDragon")
+
 
 COMPONENT_MODULE_END()
 

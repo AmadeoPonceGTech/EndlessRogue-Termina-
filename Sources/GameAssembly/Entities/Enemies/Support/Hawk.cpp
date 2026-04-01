@@ -1,5 +1,5 @@
 #include "Hawk.h"
-#include "../Characters/Character.h"
+#include "../../Characters/Character.h"
 
 Hawk::Hawk(int floor) {
     name = "Hawk";
@@ -65,7 +65,83 @@ void Hawk::endTurn() {
     manageStatusEffect();
 }
 
-bool Hawk::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies) { return true;}
+bool Hawk::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies)
+{
+    switch (enemyState)
+    {
+    case EnemyState::STARTTURN:
+        startTurn();
+        enemyState = EnemyState::ACTING;
+        break;
+
+    case EnemyState::ACTING:
+        {
+            if (characters.empty()) return false;
+
+            static std::random_device rd;
+            static std::mt19937 rng(rd());
+
+            std::uniform_int_distribution<int> distTarget(0, characters.size() - 1);
+            Character* target = dynamic_cast<Character*>(characters[distTarget(rng)].get());
+            if (!target) return false;
+
+            if (enemies.empty()) return false;
+
+            std::uniform_int_distribution<int> distEnemy(0, enemies.size() - 1);
+
+            Enemy* enemy1 = dynamic_cast<Enemy*>(enemies[distEnemy(rng)].get());
+            Enemy* enemy2 = dynamic_cast<Enemy*>(enemies[distEnemy(rng)].get());
+
+            if (!enemy1) return false;
+
+            std::vector<int> availableChoices;
+
+            if (firstAbilityUp)  availableChoices.push_back(1);
+            if (secondAbilityUp) availableChoices.push_back(2);
+            if (fourthAbilityUp) availableChoices.push_back(3);
+
+            if (availableChoices.empty()) return false;
+
+            std::uniform_int_distribution<int> distChoice(0, availableChoices.size() - 1);
+            int choice = availableChoices[distChoice(rng)];
+
+            switch (choice)
+            {
+            case 1:
+                firstAbility(*target);
+                thirdAbility(*enemy1);
+                break;
+            case 2:
+                secondAbility(*enemy1);
+                thirdAbility(*enemy1);
+                break;
+            case 3:
+                {
+                    while (enemy2 == enemy1 && enemies.size() > 1)
+                    {
+                        enemy2 = dynamic_cast<Enemy*>(enemies[distEnemy(rng)].get());
+                    }
+                    fourthAbility(*enemy1, *enemy2); //target de enemy random
+                    thirdAbility(*enemy1);
+                    break;
+                }
+            default:
+                break;
+            }
+
+            enemyState = EnemyState::ENDTURN;
+            break;
+        }
+
+    case EnemyState::ENDTURN:
+        endTurn();
+        enemyState = EnemyState::STARTTURN;
+        return true;
+    }
+
+    return false;
+}
+
 
 void Hawk::dropArtefacts() {
 
@@ -95,14 +171,14 @@ void Hawk::firstAbility(Character& target) {
             target.setCurrentPowerResist(std::max(0.0f, target.getCurrentPowerResist() - debuff));
         }
         else if (choice == 5) {
-            target.setCurrentSpeed(std::max(0.0f, target.getCurrentSpeed() - debuff));
+            target.setCurrentSpeed(std::max(0.0f, target.getCurrentSpeed() + debuff));
         }
     }
 }
 
 void Hawk::secondAbility(Enemy& target) {
     target.setCurrentAttackDamage(target.getCurrentAttackDamage() + target.getCurrentAttackDamage() * 0.10f);
-    target.setCurrentSpeed(target.getCurrentSpeed() + target.getCurrentSpeed() * 0.10f);
+    target.setCurrentSpeed(target.getCurrentSpeed() - target.getCurrentSpeed() * 0.10f);
     CD2 = 4;
 }
 
@@ -111,7 +187,7 @@ void Hawk::thirdAbility(Enemy& target) {
 }
 
 void Hawk::fourthAbility(Enemy& target1, Enemy& target2) {
-    target1.setCurrentSpeed(target1.getCurrentSpeed() + target1.getCurrentSpeed() * 0.10f);
-    target2.setCurrentSpeed(target2.getCurrentSpeed() + target2.getCurrentSpeed() * 0.10f);
+    target1.setCurrentSpeed(target1.getCurrentSpeed() - target1.getCurrentSpeed() * 0.10f);
+    target2.setCurrentSpeed(target2.getCurrentSpeed() - target2.getCurrentSpeed() * 0.10f);
     CD4 = 5;
 }
