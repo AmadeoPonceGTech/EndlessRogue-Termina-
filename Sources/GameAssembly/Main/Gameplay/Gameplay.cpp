@@ -1,6 +1,23 @@
 #include "../Gameplay/Gameplay.h"
 
+#include <algorithm>
+
 #include "../../Entities/Characters/Tank/Diane.h"
+
+#include "../../Entities/Enemies/Boss/RedDragon.h"
+#include "../../Entities/Enemies/Boss/RunicDear.h"
+#include "../../Entities/Enemies/Close DPS/Eel.h"
+#include "../../Entities/Enemies/Close DPS/Rat.h"
+#include "../../Entities/Enemies/Close DPS/Skeleton.h"
+#include "../../Entities/Enemies/Close DPS/Wolf.h"
+#include "../../Entities/Enemies/Range DPS/AdeptOfTheChaos.h"
+#include "../../Entities/Enemies/Support/Ghost.h"
+#include "../../Entities/Enemies/Support/Hawk.h"
+#include "../../Entities/Enemies/Support/Kelpie.h"
+#include "../../Entities/Enemies/Support/Mermaid.h"
+#include "../../Entities/Enemies/Tank/Bear.h"
+#include "../../Entities/Enemies/Tank/DarkKnight.h"
+#include "../../Entities/Enemies/Tank/Dunkleosteus.h"
 
 Gameplay::Gameplay() {
     if (!enemyManager) {
@@ -20,74 +37,149 @@ void Gameplay::StartRun() {
         std::shared_ptr<Diane> diane = std::dynamic_pointer_cast<Diane>(*it);
         diane->startRun(activeCharacters);
     }
+    for (auto chara: activeCharacters) {
+        speedManagerVec.push_back(chara);
+    }
+    currentLevel = 1;
 }
 
 void Gameplay::StartFight() {
+    static std::mt19937 rng(rd());
+    std::uniform_int_distribution<int> enemyIndex(1, 4);
+    std::uniform_int_distribution<int> bossIndex(1, 2);
     switch (currentBiome) {
         case EBiome::FOREST :
+            if (!spawnBoss)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    int enemyToSpawn = enemyIndex(rng);
+                    if (enemyToSpawn == 1) { enemyManager->createEnemy<Rat>(currentLevel); }
+                    else if (enemyToSpawn == 2) { enemyManager->createEnemy<Wolf>(currentLevel); }
+                    else if (enemyToSpawn == 3) { enemyManager->createEnemy<Bear>(currentLevel); }
+                    else if (enemyToSpawn == 4) { enemyManager->createEnemy<Hawk>(currentLevel); }
+                }
+            }
+            else {
 
+                int bossToSpawn = bossIndex(rng);
+                if (bossToSpawn == 1) { enemyManager->createEnemy<RunicDear>(currentLevel); }
+                else { enemyManager->createEnemy<RedDragon>(currentLevel); }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    int enemyToSpawn = enemyIndex(rng);
+                    if (enemyToSpawn == 1) { enemyManager->createEnemy<Rat>(currentLevel); }
+                    else if (enemyToSpawn == 2) { enemyManager->createEnemy<Wolf>(currentLevel); }
+                    else if (enemyToSpawn == 3) { enemyManager->createEnemy<Bear>(currentLevel); }
+                    else if (enemyToSpawn == 4) { enemyManager->createEnemy<Hawk>(currentLevel); }
+                }
+            }
             break;
 
         case EBiome::OCEAN :
+            if (!spawnBoss)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    int enemyToSpawn = enemyIndex(rng);
+                    if (enemyToSpawn == 1) { enemyManager->createEnemy<Kelpie>(currentLevel); }
+                    else if (enemyToSpawn == 2) { enemyManager->createEnemy<Dunkleosteus>(currentLevel); }
+                    else if (enemyToSpawn == 3) { enemyManager->createEnemy<Mermaid>(currentLevel); }
+                    else if (enemyToSpawn == 4) { enemyManager->createEnemy<Eel>(currentLevel); }
+                }
+            }
+            else {
 
+                int bossToSpawn = bossIndex(rng);
+                if (bossToSpawn == 1) { enemyManager->createEnemy<RunicDear>(currentLevel); }
+                else { enemyManager->createEnemy<RedDragon>(currentLevel); }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    int enemyToSpawn = enemyIndex(rng);
+                    if (enemyToSpawn == 1) { enemyManager->createEnemy<Kelpie>(currentLevel); }
+                    else if (enemyToSpawn == 2) { enemyManager->createEnemy<Dunkleosteus>(currentLevel); }
+                    else if (enemyToSpawn == 3) { enemyManager->createEnemy<Mermaid>(currentLevel); }
+                    else if (enemyToSpawn == 4) { enemyManager->createEnemy<Eel>(currentLevel); }
+                }
+            }
             break;
 
         case EBiome::GRAVEYARD :
+            if (!spawnBoss)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    int enemyToSpawn = enemyIndex(rng);
+                    if (enemyToSpawn == 1) { enemyManager->createEnemy<AdeptOfTheChaos>(currentLevel); }
+                    else if (enemyToSpawn == 2) { enemyManager->createEnemy<Ghost>(currentLevel); }
+                    else if (enemyToSpawn == 3) { enemyManager->createEnemy<DarkKnight>(currentLevel); }
+                    else if (enemyToSpawn == 4) { enemyManager->createEnemy<Skeleton>(currentLevel); }
+                }
+            }
+            else {
 
+                int bossToSpawn = bossIndex(rng);
+                if (bossToSpawn == 1) { enemyManager->createEnemy<RunicDear>(currentLevel); }
+                else { enemyManager->createEnemy<RedDragon>(currentLevel); }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    int enemyToSpawn = enemyIndex(rng);
+                    if (enemyToSpawn == 1) { enemyManager->createEnemy<AdeptOfTheChaos>(currentLevel); }
+                    else if (enemyToSpawn == 2) { enemyManager->createEnemy<Ghost>(currentLevel); }
+                    else if (enemyToSpawn == 3) { enemyManager->createEnemy<DarkKnight>(currentLevel); }
+                    else if (enemyToSpawn == 4) { enemyManager->createEnemy<Skeleton>(currentLevel); }
+                }
+            }
             break;
 
         default:
             break;
     }
+
+    for (auto enemy : enemyManager->getEnemies()) { speedManagerVec.push_back(enemy); }
 }
 
-void Gameplay::UpdateTurn()
-{
-    // while (isInFight)
-    // {
-    //     for (auto& entity : turnOrderVector)
-    //     {
-    //         if (!entity || entity->getIsDead())
-    //             continue;
-    //
-    //         entity->entityTurn(activeCharacters, enemyManager->getEnemies());
-    //     }
-    //
-    //     bool allPlayersDead = std::all_of( activeCharacters.begin(),activeCharacters.end(),[](const std::shared_ptr<Entity>& e){return !e || e->getIsDead();});
-    //     bool allEnemiesDead = std::all_of(enemyManager->getEnemies().begin(),enemyManager->getEnemies().end(),[](const std::shared_ptr<Entity>& e){return !e || e->getIsDead(); });
-    //
-    //     if (allPlayersDead)
-    //     {
-    //         isInFight = false;
-    //         isRunning = false;
-    //     }
-    //
-    //     if (allEnemiesDead)
-    //     {
-    //         isInFight = false;
-    //     }
-    //
-    // }
+void Gameplay::UpdateFight() {
+    std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
+    for (auto& entity : speedManagerVec) {
+        while (!entity->entityTurn(activeCharacters, enemyManager->getEnemies())) {};
+        std::erase_if(speedManagerVec, [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; });
+    }
+    std::erase_if(enemyManager->getEnemies(), [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; });
+
+    if (enemyManager->getEnemies().size() == 0) {
+        runState = EGameRunState::EndFight;
+    }
+
+    for (auto& chara : activeCharacters) {
+        if (chara->getCurrentHealth() <= 0) {
+            charaDeathCount++;
+        }
+    }
+
+    if (charaDeathCount == 4) {
+        runState = EGameRunState::EndRun;
+    }
 }
 
 void Gameplay::EndFight() {
-    // turnOrderVector.clear();
-    //
-    // for (auto& character : activeCharacters)
-    // {
-    //     if (character)
-    //         turnOrderVector.push_back(character);
-    // }
-    // enemyManager->clearEnemies();
-    // isInFight = false;
+    enemyManager->clearEnemies();
+    currentLevel++;
+    if (currentLevel % 10 == 0) {
+        spawnBoss = true;
+    }
     /// Emilie
-    /// Clean du vector enemy
 }
 
 void Gameplay::EndRun() {
-    //isRunning = false;
-    ///// End the run (lose), reset and disable passif and give reward
-    ///Apply XP
+    for (auto& c : activeCharacters) {
+        std::shared_ptr<Character> chara = std::dynamic_pointer_cast<Character>(c);
+        chara->setArtefact(nullptr);
+        chara->endRun();
+    }
 }
 
 void Gameplay::Gameloop()
@@ -99,10 +191,10 @@ void Gameplay::Gameloop()
             break;
         case EGameRunState::StartFight :
             StartFight();
-            runState = EGameRunState::UpdateTurn;
+            runState = EGameRunState::UpdateFight;
             break;
-        case EGameRunState::UpdateTurn :
-            UpdateTurn();
+        case EGameRunState::UpdateFight :
+            UpdateFight();
             break;
         case EGameRunState::EndFight :
             EndFight();

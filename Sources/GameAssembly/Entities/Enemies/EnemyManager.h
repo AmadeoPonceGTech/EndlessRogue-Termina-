@@ -17,7 +17,7 @@ public:
 
     void clearEnemies();
     void deleteEnemy(Enemy& enemy);
-    const std::vector<std::shared_ptr<Entity>>& getEnemies() const;
+    std::vector<std::shared_ptr<Entity>>& getEnemies();
 
 private:
     std::vector<std::shared_ptr<Entity>> enemies;

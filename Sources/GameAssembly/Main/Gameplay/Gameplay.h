@@ -3,7 +3,6 @@
 #include <vector>
 #include <memory>
 #include <random>
-#include <algorithm>
 #include "../../Entities/Enemies/EnemyManager.h"
 #include "../../Entities/Characters/Character.h"
 
@@ -17,7 +16,7 @@ enum class EGameRunState
 {
     StartRun,
     StartFight,
-    UpdateTurn,
+    UpdateFight,
     EndFight,
     EndRun
 };
@@ -26,9 +25,16 @@ class Gameplay {
 private:
     std::shared_ptr<EnemyManager> enemyManager;
     std::vector<std::shared_ptr<Entity>> activeCharacters;
+    std::vector<std::shared_ptr<Entity>> speedManagerVec;
 
     EGameRunState runState;
     EBiome currentBiome;
+
+    bool spawnBoss = false;
+    std::random_device rd;
+
+    int currentLevel = 1;
+    int charaDeathCount = 0;
 
 public:
 
@@ -40,7 +46,7 @@ public:
     void EndFight();
 
     void Gameloop();
-    void UpdateTurn();
+    void UpdateFight();
 
     bool HasSameType(const Entity& entity) const;
     void AddToTeam(const std::shared_ptr<Entity>& entity);

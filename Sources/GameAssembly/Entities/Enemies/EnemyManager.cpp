@@ -23,4 +23,4 @@ void EnemyManager::deleteEnemy(Enemy& enemy) {
     );
 }
 
-const std::vector<std::shared_ptr<Entity>>& EnemyManager::getEnemies() const { return enemies; }
+std::vector<std::shared_ptr<Entity>>& EnemyManager::getEnemies() { return enemies; }
