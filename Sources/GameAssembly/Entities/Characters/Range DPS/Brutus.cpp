@@ -32,6 +32,7 @@ Brutus::Brutus()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 80;
+    currentSpeed = baseSpeed;
 }
 
 void Brutus::firstAbility(std::shared_ptr<Enemy>target)

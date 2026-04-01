@@ -32,6 +32,7 @@ Penelope::Penelope()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 62.5;
+    currentSpeed = baseSpeed;
 
     fourthAbilityActive = false;
 }

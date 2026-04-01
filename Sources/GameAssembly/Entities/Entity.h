@@ -70,6 +70,7 @@ protected:
     bool isBurnt;
     bool isTaunt;
     bool isStun;
+    bool isDead = false;
 
     float generatedShield = 0.5f;
 
@@ -92,18 +93,25 @@ public:
 #pragma region Getters
 
     std::string getName() const;
-    float getCurrentHealth() const;
-    float getShield() const;
-    float getCurrentAttackDamage() const;
-    float getCurrentAttackPower() const;
-    float getCurrentArmor() const;
-    float getCurrentPowerResist() const;
+    std::string getStringClass() const;
+    std::string getDescriptions() const;
+
+    int getLevel() const;
+
     float getMaxHealth() const;
     float getMaxAttackDamage() const;
     float getMaxAttackPower() const;
     float getMaxArmor() const;
     float getMaxPowerResist() const;
     float getCurrentSpeed() const;
+
+    float getCurrentHealth() const;
+    float getCurrentAttackDamage() const;
+    float getCurrentAttackPower() const;
+    float getCurrentArmor() const;
+    float getCurrentPowerResist() const;
+
+    float getShield() const;
 
     int getCD1() const;
     int getCD2() const;
@@ -123,6 +131,7 @@ public:
     bool getIsBurnt() const;
     bool getIsTaunt() const;
     bool getIsStun() const;
+    bool getIsDead() const;
 
     EClass getClass() const;
 
@@ -153,6 +162,7 @@ public:
     void setIsBurnt(bool newIsBurnt);
     void setIsTaunt(bool newIsTaunt);
     void setIsStun(bool newIsStun);
+    void setIsDead(bool newIsDead);
 
     void setGeneratedShield(float newShield);
 

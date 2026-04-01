@@ -47,6 +47,9 @@ void Character::endRun() {
     }
 }
 
+float Character::getCurrentXP() const {return currentXP;}
+float Character::getXPNeeded() const { return XPNeeded; }
+
 void Character::takeDamageEvent(Entity& target) {
     if (artefact) {
         artefact->onInflictedDamage(target);

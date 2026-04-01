@@ -85,6 +85,26 @@ void Entity::resetStats() {
 #pragma region Getters
 
 std::string Entity::getName() const { return name; }
+std::string Entity::getStringClass() const {
+    switch (entityClass) {
+        case EClass::ASSASSIN :
+            return "Assassin";
+        case EClass::CLOSEDDPS :
+            return "Close DPS";
+        case EClass::RANGEDDPS :
+            return "Range DPS";
+        case EClass::TANK :
+            return "Tank";
+        case EClass::SUPPORT :
+            return "Support";
+        default :
+            return "Unknown";
+    }
+}
+std::string Entity::getDescriptions() const { return description; }
+
+int Entity::getLevel() const { return level; }
+
 float Entity::getCurrentHealth() const { return currentHealth; }
 float Entity::getShield() const { return shield; }
 float Entity::getCurrentAttackDamage() const { return currentAttackDamage; }
@@ -117,6 +137,7 @@ bool Entity::getIsPoisoned() const { return isPoisoned; }
 bool Entity::getIsBurnt() const { return isBurnt; }
 bool Entity::getIsTaunt() const { return isTaunt; }
 bool Entity::getIsStun() const { return isStun; }
+bool Entity::getIsDead() const { return isDead; }
 
 EClass Entity::getClass() const { return entityClass; }
 
@@ -147,6 +168,7 @@ void Entity::setIsPoisoned(bool const newIsPoisoned) { isPoisoned = newIsPoisone
 void Entity::setIsBurnt(bool const newIsBurnt) { isBurnt = newIsBurnt; }
 void Entity::setIsTaunt(bool const newIsTaunt) { isTaunt = newIsTaunt; }
 void Entity::setIsStun(bool const newIsStun) { isStun = newIsStun; }
+void Entity::setIsDead(bool const newIsDead) { isDead = newIsDead; }
 
 void Entity::setGeneratedShield(float newShield) { generatedShield = newShield; }
 

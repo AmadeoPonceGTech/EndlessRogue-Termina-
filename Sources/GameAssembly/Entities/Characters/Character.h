@@ -40,6 +40,9 @@ public:
     bool manageXP();
     void endRun();
 
+    float getCurrentXP() const;
+    float getXPNeeded() const;
+
     bool getArtefactAlreadyUsed();
     void setArtefactAlreadyUsed(bool value);
 

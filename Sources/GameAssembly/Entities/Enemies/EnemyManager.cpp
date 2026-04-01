@@ -15,7 +15,7 @@ void EnemyManager::deleteEnemy(Enemy& enemy) {
         std::remove_if(
             enemies.begin(),
             enemies.end(),
-            [&enemy](const std::unique_ptr<Enemy>& e) {
+            [&enemy](const std::shared_ptr<Entity>& e) {
                 return e.get() == &enemy;
             }
         ),
@@ -23,4 +23,4 @@ void EnemyManager::deleteEnemy(Enemy& enemy) {
     );
 }
 
-const std::vector<std::unique_ptr<Enemy>>& EnemyManager::getEnemies() const { return enemies; }
+std::vector<std::shared_ptr<Entity>>& EnemyManager::getEnemies() { return enemies; }

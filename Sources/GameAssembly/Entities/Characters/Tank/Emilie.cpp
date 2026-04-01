@@ -35,6 +35,7 @@ Emilie::Emilie()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 95;
+    currentSpeed = baseSpeed;
 }
 
 void Emilie::firstAbility(std::shared_ptr<Enemy>target, std::shared_ptr<Enemy>target2, std::shared_ptr<Enemy>target3, std::shared_ptr<Enemy>target4)
@@ -92,7 +93,7 @@ void Emilie::thirdAbility(std::shared_ptr<Enemy>target, std::shared_ptr<Enemy>ta
 
 bool Emilie::canBeAttacked(std::shared_ptr<Enemy> target)
 {
-    if (std::find(currentEnemies.begin(), currentEnemies.end(), target) != currentEnemies.end())
+    if (std::find(currentEnemies.begin(), currentEnemies.end(), target) != currentEnemies.end() and level >= 45)
     {
         currentEnemies.erase(std::find(currentEnemies.begin(), currentEnemies.end(), target));
         return false;
