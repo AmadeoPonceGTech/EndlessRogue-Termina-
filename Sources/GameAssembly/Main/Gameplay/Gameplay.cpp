@@ -153,17 +153,29 @@ void Gameplay::StartFight() {
         std::shared_ptr<Emilie> emilie = std::dynamic_pointer_cast<Emilie>(*it);
         emilie->startFight(enemyManager->getEnemies());
     }
+
+    std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
 }
 
 void Gameplay::UpdateFight() {
-    std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
-    for (auto it = speedManagerVec.begin(); it != speedManagerVec.end(); ) {
-        auto entity = *it;
-        //std::cout << entity->getName() << std::endl;
-        if (entity->entityTurn(activeCharacters, enemyManager->getEnemies())) {
-            it++;
-        };
-        std::erase_if(speedManagerVec, [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; });
+
+    if (!speedManagerVec.empty())
+    {
+        auto& entity = speedManagerVec[currentEntityIndex];
+
+        bool finished = entity->entityTurn(activeCharacters, enemyManager->getEnemies());
+
+        if (finished)
+        {
+            std::cout << entity->getName() << " finished turn " << std::endl;
+            currentEntityIndex++;
+
+            if (currentEntityIndex >= speedManagerVec.size())
+                currentEntityIndex = 0;
+        }
+        if (std::erase_if(speedManagerVec, [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; })) {
+            std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
+        }
     }
     std::erase_if(enemyManager->getEnemies(), [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; });
 
@@ -171,6 +183,7 @@ void Gameplay::UpdateFight() {
         runState = EGameRunState::EndFight;
     }
 
+    //Modify loose condition
     for (auto& chara : activeCharacters) {
         if (chara->getCurrentHealth() <= 0) {
             charaDeathCount++;
@@ -218,7 +231,78 @@ void Gameplay::EndRun() {
         chara->setArtefact(nullptr);
         chara->endRun();
     }
-    runEnded = true;
+    ImGui::Begin("YOU LOOSE");
+
+    if (ImGui::Button("Main Menu")) {
+        runEnded = true;
+    }
+
+    ImGui::End();
+}
+
+void Gameplay::showEnemiesStats() {
+
+    ImGui::Begin("Enemies Stats");
+
+    ImGui::Columns(4, nullptr, true);
+
+    auto& enemies = enemyManager->getEnemies();
+
+    for (int i = 0; i < enemies.size(); i++)
+    {
+        auto& enemy = enemies[i];
+
+        ImGui::BeginChild(("Enemy" + std::to_string(i)).c_str(), ImVec2(-1, 70), true);
+
+        ImGui::Text("Character: %s,                    HP : %.0f", enemy->getName().c_str(), enemy->getCurrentHealth());
+        ImGui::Dummy(ImVec2(0,5));
+        ImGui::Text("Class : %s", enemy->getStringClass().c_str());
+
+        ImGui::EndChild();
+
+        if ((i + 1) % 4 != 0)
+            ImGui::NextColumn();
+    }
+
+    ImGui::Columns(1);
+    ImGui::End();
+}
+void Gameplay::showAlliesStats() {
+
+    ImGui::Begin("Characters Stats");
+
+    ImGui::Columns(4, nullptr, true);
+
+    auto& characters = activeCharacters;
+
+    for (int i = 0; i < characters.size(); i++)
+    {
+        auto& chara = characters[i];
+
+        ImGui::BeginChild(("Character" + std::to_string(i)).c_str(), ImVec2(-1, 200), true);
+
+        ImGui::Text("Character: %s,                    HP : %.0f", chara->getName().c_str(), chara->getCurrentHealth());
+        ImGui::Dummy(ImVec2(0,5));
+        ImGui::Text("Statistics");
+        ImVec2 p_min = ImGui::GetItemRectMin();
+        ImVec2 p_max = ImGui::GetItemRectMax();
+        ImGui::GetWindowDrawList()->AddLine(ImVec2(p_min.x, p_max.y - 1),ImVec2(p_max.x, p_max.y - 1),IM_COL32(255, 255, 255, 255),1.0f );
+
+        ImGui::Dummy(ImVec2(0,10));
+        ImGui::Text("Attack Damage : %.0f", chara->getCurrentAttackDamage());
+        ImGui::Text("Magic Damage : %.0f", chara->getCurrentAttackPower());
+        ImGui::Text("Armor : %.2f", chara->getCurrentArmor());
+        ImGui::Text("Magic Resistance : %.2f", chara->getCurrentPowerResist());
+        ImGui::Text("Speed : %.1f", chara->getCurrentSpeed());
+
+        ImGui::EndChild();
+
+        if ((i + 1) % 4 != 0)
+            ImGui::NextColumn();
+    }
+
+    ImGui::Columns(1);
+    ImGui::End();
 }
 
 void Gameplay::Gameloop()
@@ -236,6 +320,8 @@ void Gameplay::Gameloop()
             break;
         case EGameRunState::UpdateFight :
             UpdateFight();
+            showEnemiesStats();
+            showAlliesStats();
             break;
         case EGameRunState::EndFight :
             EndFight();

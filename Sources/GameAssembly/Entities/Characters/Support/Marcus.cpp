@@ -6,7 +6,7 @@ Marcus::Marcus()
     entityClass = EClass::SUPPORT;
     description = "Marcus, born among the priests of the local church, he became himself a monk capable of the most incredibles spells. Expelled from his home because of the fear of those who taught him, he now travels to where his destiny calls him according to him.";
 
-    baseHealth = 30;
+    baseHealth = 1;
     finalHP = 300;
     maxHealth = baseHealth + (finalHP - baseHealth) * ((level - 1) / (maxLevel - 1));
     currentHealth = baseHealth;
@@ -37,7 +37,7 @@ Marcus::Marcus()
 
 void Marcus::firstAbility(std::shared_ptr<Character>target)
 {
-    float HPHealed = currentHealth / 2;
+    float HPHealed = currentAttackPower / 2;
 
     target->setCurrentHealth(target->getCurrentHealth() + HPHealed);
     if (target->getCurrentHealth() > target->getMaxHealth()) { target->setCurrentHealth(target->getMaxHealth()); }
@@ -113,6 +113,8 @@ bool Marcus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
         }
 
         case PlayerState::ChoosingAbility : {
+            // ===== LEFT: LIST =====
+
             ImGui::Begin("Choose Ability");
 
             ImGui::BeginDisabled(!firstAbilityUp);
@@ -157,7 +159,7 @@ bool Marcus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
         {
             if (abilitySelected != 4)
             {
-                ImGui::Begin("Choose ally target");
+                ImGui::Begin("Choose Ally target");
                 for (int i = 0; i < characters.size(); i++)
                 {
                     std::string label = characters[i]->getName() + "##" + std::to_string(i);
@@ -242,6 +244,7 @@ bool Marcus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
             return true;
         }
     }
+
     return false;
 }
 

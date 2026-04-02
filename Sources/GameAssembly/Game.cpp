@@ -144,6 +144,8 @@ void Game::Update(float deltaTime)
             gameplay->Gameloop();
             if (gameplay->getRunEnded()) {
                 gameState = EGameState::Menu;
+                gameplay->setRunEnded(false);
+                runStarted = false;
             }
             break;
 

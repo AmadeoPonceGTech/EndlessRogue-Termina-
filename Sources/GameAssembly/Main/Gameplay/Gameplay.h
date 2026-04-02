@@ -3,6 +3,11 @@
 #include <vector>
 #include <memory>
 #include <random>
+
+#include "../../../ThirdParty/ImGui/imgui.h"
+#include "../../../ThirdParty/ImGui/ImGuizmo.h"
+#include "../../../ThirdParty/ImGui/imgui_internal.h"
+
 #include "../../Entities/Enemies/EnemyManager.h"
 #include "../../Entities/Characters/Character.h"
 
@@ -39,6 +44,8 @@ private:
 
     bool runEnded = false;
 
+    int currentEntityIndex = 0;
+
 public:
 
     Gameplay();
@@ -50,6 +57,9 @@ public:
 
     void Gameloop();
     void UpdateFight();
+
+    void showEnemiesStats();
+    void showAlliesStats();
 
     bool HasSameType(const Entity& entity) const;
     void AddToTeam(const std::shared_ptr<Entity>& entity);
