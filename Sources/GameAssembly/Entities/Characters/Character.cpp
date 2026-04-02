@@ -12,6 +12,8 @@ Character::Character()
     finalXPNeeded = 100000;
     currentXP = 0;
     XPNeeded = XPNeededForLvl2 + (finalXPNeeded - XPNeededForLvl2) * ((level - 1) / (maxLevel - 1));
+
+    currentState = PlayerState::StartTurn;
 }
 
 bool Character::manageXP()

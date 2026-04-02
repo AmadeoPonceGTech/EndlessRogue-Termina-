@@ -143,7 +143,7 @@ void Gameplay::StartFight() {
             break;
     }
 
-    for (auto enemy : enemyManager->getEnemies()) { speedManagerVec.push_back(enemy); }
+    for (auto enemy : enemyManager->getEnemies()) { speedManagerVec.push_back(enemy); std::cout << enemy->getName() << std::endl; }
 
     auto it = std::find_if(activeCharacters.begin(), activeCharacters.end(),[](const std::shared_ptr<Entity>& e){
             return std::dynamic_pointer_cast<Emilie>(e) != nullptr;
@@ -159,7 +159,7 @@ void Gameplay::UpdateFight() {
     std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
     for (auto it = speedManagerVec.begin(); it != speedManagerVec.end(); ) {
         auto entity = *it;
-        std::cout << entity->getName() << std::endl;
+        //std::cout << entity->getName() << std::endl;
         if (entity->entityTurn(activeCharacters, enemyManager->getEnemies())) {
             it++;
         };
