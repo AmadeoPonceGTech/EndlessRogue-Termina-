@@ -25,3 +25,20 @@ void Inventory::removeItem(const std::string& name, int amount) {
         }
     }
 }
+
+void Inventory::addArtefact(std::shared_ptr<Artefact> artefact)
+{
+    if (!artefact) return;
+
+    artefactsInventory.push_back(artefact);
+}
+
+std::vector<std::shared_ptr<Artefact>> Inventory::getArtefactsInventory() const
+{
+    return artefactsInventory;
+}
+
+void Inventory::removeArtefactInventory(std::shared_ptr<Artefact> artefact)
+{
+    std::erase(artefactsInventory, artefact);
+}
