@@ -167,6 +167,7 @@ void Game::Update(float deltaTime)
 
                         auto entityActor = Instantiate(it->second);
                         entityActor->SetName(character->getName().c_str());
+
                         gameEntity.push_back(entityActor);
                     }
                 }
