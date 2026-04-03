@@ -14,6 +14,8 @@ public:
     std::vector<std::shared_ptr<Artefact>> getArtefactsInventory() const;
     void removeArtefactInventory(std::shared_ptr<Artefact> artefact);
 
+    void checkArtefactsInventory();
+
 private:
     std::unordered_map<std::string, int> items;
     std::vector<std::shared_ptr<Artefact>> artefactsInventory;
