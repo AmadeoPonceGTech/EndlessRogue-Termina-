@@ -1,4 +1,4 @@
-#include "../Gameplay/Gameplay.h"
+#include "Gameplay.h"
 
 #include <algorithm>
 
@@ -28,6 +28,10 @@ Gameplay::Gameplay() {
         enemyManager = std::make_shared<EnemyManager>();
     }
     currentBiome = EBiome::FOREST;
+
+    if (!inventory) {
+        inventory = std::make_shared<Inventory>();
+    }
 }
 
 void Gameplay::StartRun() {
@@ -188,7 +192,14 @@ void Gameplay::UpdateFight() {
             {
                 if (enemy->getCurrentHealth() <= 0) {
                     std::shared_ptr<Enemy> e = std::dynamic_pointer_cast<Enemy>(enemy);
+
+                    auto drop = e->createDrop();
+                    if (drop != nullptr) {
+                        inventory->addArtefact(drop);
+                    }
+
                     float xpToAdd = e->getCurrentExpDrop() / 4;
+
                     for (auto& chara : aliveCharaVec) {
                         std::shared_ptr<Character> c = std::dynamic_pointer_cast<Character>(chara);
                         c->addCurrentXP(xpToAdd);
@@ -259,7 +270,9 @@ void Gameplay::EndRun() {
     ImGui::End();
 }
 
-void Gameplay::showEnemiesStats() {
+void Gameplay::drawImGui() {
+
+    // ENEMY
 
     ImGui::Begin("Enemies Stats");
 
@@ -273,7 +286,7 @@ void Gameplay::showEnemiesStats() {
 
         ImGui::BeginChild(("Enemy" + std::to_string(i)).c_str(), ImVec2(-1, 70), true);
 
-        ImGui::Text("Character: %s,                    HP : %.0f", enemy->getName().c_str(), enemy->getCurrentHealth());
+        ImGui::Text("Character: %s                    HP : %.0f", enemy->getName().c_str(), enemy->getCurrentHealth());
         ImGui::Dummy(ImVec2(0,5));
         ImGui::Text("Class : %s", enemy->getStringClass().c_str());
 
@@ -285,8 +298,8 @@ void Gameplay::showEnemiesStats() {
 
     ImGui::Columns(1);
     ImGui::End();
-}
-void Gameplay::showAlliesStats() {
+
+    // CHARA
 
     ImGui::Begin("Characters Stats");
 
@@ -322,6 +335,20 @@ void Gameplay::showAlliesStats() {
 
     ImGui::Columns(1);
     ImGui::End();
+
+    // Vector Speed
+
+    ImGui::Begin("Entity Turn Order");
+
+    for (const auto& e : speedManagerVec) {
+        ImGui::Text("%s", e->getName().c_str());
+    }
+
+    ImGui::End();
+
+    // Inventory
+
+    if (!aliveCharaVec.empty()) { inventory->drawArtefactsInventory(aliveCharaVec); }
 }
 
 void Gameplay::Gameloop()
@@ -329,18 +356,15 @@ void Gameplay::Gameloop()
     switch (runState) {
         case EGameRunState::StartRun :
             StartRun();
-            std::cout << "Run started" << std::endl;
             runState = EGameRunState::StartFight;
             break;
         case EGameRunState::StartFight :
             StartFight();
-            std::cout << "Fight started" << std::endl;
             runState = EGameRunState::UpdateFight;
             break;
         case EGameRunState::UpdateFight :
             UpdateFight();
-            showEnemiesStats();
-            showAlliesStats();
+            drawImGui();
             break;
         case EGameRunState::EndFight :
             EndFight();
@@ -396,7 +420,6 @@ void Gameplay::RemoveFromTeam(const std::shared_ptr<Entity>& entity)
     activeCharacters.erase(it);
     std::cout << entity->getName() << " remove from team" << std::endl;
 }
-
 
 ////////// Check if Team is Complete or If the character is already in team
 bool Gameplay::TeamIsComplete() {

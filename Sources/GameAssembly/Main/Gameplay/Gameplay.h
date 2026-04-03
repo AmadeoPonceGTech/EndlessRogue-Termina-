@@ -38,6 +38,7 @@ private:
     EGameRunState runState;
     EBiome currentBiome;
 
+
     bool spawnBoss = false;
     std::random_device rd;
 
@@ -60,8 +61,7 @@ public:
     void Gameloop();
     void UpdateFight();
 
-    void showEnemiesStats();
-    void showAlliesStats();
+    void drawImGui();
 
     bool HasSameType(const Entity& entity) const;
     void AddToTeam(const std::shared_ptr<Entity>& entity);
