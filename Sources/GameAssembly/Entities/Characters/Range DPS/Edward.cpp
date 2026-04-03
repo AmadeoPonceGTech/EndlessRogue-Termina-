@@ -4,7 +4,7 @@ Edward::Edward()
 {
     name = "Edward";
     entityClass = EClass::RANGEDDPS;
-    description = "Edward is a man";
+    description = "Edward, cast powerful spells among the enemies to inflict them terrible magic induced injuries.";
 
     baseHealth = 20;
     finalHP = 250;
@@ -32,6 +32,7 @@ Edward::Edward()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 75;
+    currentSpeed = baseSpeed;
 }
 
 void Edward::firstAbility(std::shared_ptr<Enemy>target)

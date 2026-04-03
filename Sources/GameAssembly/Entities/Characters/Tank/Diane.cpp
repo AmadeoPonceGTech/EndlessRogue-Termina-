@@ -4,7 +4,7 @@ Diane::Diane()
 {
     name = "Diane";
     entityClass = EClass::TANK;
-    description = "Diane is a women";
+    description = "Diane, a fearless fighter, that doesn't hesitate any instant to protect her fellow companions.";
 
     baseHealth = 100;
     finalHP = 1000;
@@ -32,6 +32,7 @@ Diane::Diane()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 100;
+    currentSpeed = baseSpeed;
 }
 
 void Diane::firstAbility(std::shared_ptr<Enemy>target)
@@ -58,17 +59,22 @@ void Diane::thirdAbility(std::shared_ptr<Character>target)
     CD3 = 4;
 }
 
-void Diane::fourthAbility(std::shared_ptr<Character>target, std::shared_ptr<Character>target2, std::shared_ptr<Character>target3)
+void Diane::fourthAbility(std::vector<std::shared_ptr<Entity>> &targets)
 {
-    currentArmor = currentArmor * 1.3;
-    target->setCurrentArmor(target->getCurrentArmor() * 1.2);
-    target2->setCurrentArmor(target->getCurrentArmor() * 1.2);
-    target3->setCurrentArmor(target->getCurrentArmor() * 1.2);
+    for (auto character : targets) {
+        if (character->getName() == getName()) {
+            currentArmor = currentArmor * 1.3;
+        }
+        else {
+            character->setCurrentArmor(character->getCurrentArmor() * 1.2);
+        }
+    }
+
 }
 
-void Diane::startRun(std::shared_ptr<Character>target, std::shared_ptr<Character>target2, std::shared_ptr<Character>target3)
+void Diane::startRun(std::vector<std::shared_ptr<Entity>> &targets)
 {
-    if (level >= 40) fourthAbility(target, target2, target3);
+    if (level >= 40){ fourthAbility(targets); }
 }
 
 void Diane::startTurn()

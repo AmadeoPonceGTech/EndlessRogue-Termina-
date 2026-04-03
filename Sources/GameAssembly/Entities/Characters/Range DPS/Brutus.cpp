@@ -4,7 +4,7 @@ Brutus::Brutus()
 {
     name = "Brutus";
     entityClass = EClass::RANGEDDPS;
-    description = "Brutus is a man";
+    description = "Brutus, the solitary archer, he is used to stay alone but knows how to be useful in a group in the battlefield. He often invents new arrows to content his best friend; his bow.";
 
     baseHealth = 40;
     finalHP = 500;
@@ -32,6 +32,7 @@ Brutus::Brutus()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 80;
+    currentSpeed = baseSpeed;
 }
 
 void Brutus::firstAbility(std::shared_ptr<Enemy>target)
@@ -205,6 +206,7 @@ bool Brutus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
             return true;
         }
     }
+
     return false;
 }
 

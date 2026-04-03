@@ -4,7 +4,7 @@ Marcus::Marcus()
 {
     name = "Marcus";
     entityClass = EClass::SUPPORT;
-    description = "Marcus is a man";
+    description = "Marcus, born among the priests of the local church, he became himself a monk capable of the most incredibles spells. Expelled from his home because of the fear of those who taught him, he now travels to where his destiny calls him according to him.";
 
     baseHealth = 30;
     finalHP = 300;
@@ -32,11 +32,12 @@ Marcus::Marcus()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 85;
+    currentSpeed = baseSpeed;
 }
 
 void Marcus::firstAbility(std::shared_ptr<Character>target)
 {
-    float HPHealed = currentHealth / 2;
+    float HPHealed = currentAttackPower / 2;
 
     target->setCurrentHealth(target->getCurrentHealth() + HPHealed);
     if (target->getCurrentHealth() > target->getMaxHealth()) { target->setCurrentHealth(target->getMaxHealth()); }
@@ -44,18 +45,14 @@ void Marcus::firstAbility(std::shared_ptr<Character>target)
     CD1 = 1;
 }
 
-void Marcus::secondAbility(std::shared_ptr<Character>target, std::shared_ptr<Character>target2, std::shared_ptr<Character>target3, std::shared_ptr<Character>target4)
+void Marcus::secondAbility(std::vector<std::shared_ptr<Entity>>& characters)
 {
     float HPHealed = currentAttackPower / 4;
 
-    target->setCurrentHealth(target->getCurrentHealth() + HPHealed);
-    if (target->getCurrentHealth() > target->getMaxHealth()) { target->setCurrentHealth(target->getMaxHealth()); }
-    target2->setCurrentHealth(target2->getCurrentHealth() + HPHealed);
-    if (target2->getCurrentHealth() > target2->getMaxHealth()) { target2->setCurrentHealth(target2->getMaxHealth()); }
-    target3->setCurrentHealth(target3->getCurrentHealth() + HPHealed);
-    if (target3->getCurrentHealth() > target3->getMaxHealth()) { target3->setCurrentHealth(target3->getMaxHealth()); }
-    target4->setCurrentHealth(target4->getCurrentHealth() + HPHealed);
-    if (target4->getCurrentHealth() > target4->getMaxHealth()) { target4->setCurrentHealth(target4->getMaxHealth()); }
+    for (auto& target : characters) {
+        target->setCurrentHealth(target->getCurrentHealth() + HPHealed);
+        if (target->getCurrentHealth() > target->getMaxHealth()) { target->setCurrentHealth(target->getMaxHealth()); }
+    }
 
     CD2 = 4;
 }
@@ -112,6 +109,8 @@ bool Marcus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
         }
 
         case PlayerState::ChoosingAbility : {
+            // ===== LEFT: LIST =====
+
             ImGui::Begin("Choose Ability");
 
             ImGui::BeginDisabled(!firstAbilityUp);
@@ -156,7 +155,7 @@ bool Marcus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
         {
             if (abilitySelected != 4)
             {
-                ImGui::Begin("Choose ally target");
+                ImGui::Begin("Choose Ally target");
                 for (int i = 0; i < characters.size(); i++)
                 {
                     std::string label = characters[i]->getName() + "##" + std::to_string(i);
@@ -206,16 +205,7 @@ bool Marcus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
                     break;
                 }
                 case 2 : {
-                    std::shared_ptr<Character> target;
-                    target = std::static_pointer_cast<Character>(characters[0]);
-                    std::shared_ptr<Character> target2;
-                    target2 = std::static_pointer_cast<Character>(characters[1]);
-                    std::shared_ptr<Character> target3;
-                    target3 = std::static_pointer_cast<Character>(characters[2]);
-                    std::shared_ptr<Character> target4;
-                    target4 = std::static_pointer_cast<Character>(characters[3]);
-
-                    secondAbility(target, target2, target3, target4);
+                    secondAbility(characters);
                     break;
                 }
                 case 3 : {
@@ -241,6 +231,7 @@ bool Marcus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
             return true;
         }
     }
+
     return false;
 }
 

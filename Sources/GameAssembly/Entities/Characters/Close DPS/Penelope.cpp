@@ -4,7 +4,7 @@ Penelope::Penelope()
 {
     name = "Penelope";
     entityClass = EClass::ASSASSIN;
-    description = "Penelope is a woman";
+    description = "Penelope, hidden in the shadows, she secretly eliminates all that appears in her way with her sharp teeth and her poisonous blades.";
 
     baseHealth = 25;
     finalHP = 300;
@@ -32,6 +32,7 @@ Penelope::Penelope()
     currentPowerResist = basePowerResist;
 
     baseSpeed = 62.5;
+    currentSpeed = baseSpeed;
 
     fourthAbilityActive = false;
 }

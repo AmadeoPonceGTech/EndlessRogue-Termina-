@@ -1,10 +1,12 @@
 #include "Alex.h"
 
+#include "../../../Artefacts/Common/SmokeBomb.h"
+
 Alex::Alex()
 {
     name = "Alex";
     entityClass = EClass::CLOSEDDPS;
-    description = "Alex is a man";
+    description = "Alex, the proud and generous white knight, that charges and slashes with “their” shield and big sword, defeating the evil.";
 
     baseHealth = 50;
     finalHP = 600;
@@ -31,17 +33,25 @@ Alex::Alex()
     maxPowerResist = basePowerResist + (finalPR - basePowerResist) * ((level - 1) / (maxLevel - 1));
     currentPowerResist = basePowerResist;
 
-    baseSpeed = 90;
+    currentSpeed = 90;
+    baseSpeed = currentSpeed;
 
     isParring = false;
+    //-----------exemple aec smokebomb à la mano--------- (mais à faire dans le gamestate à terme)----
+    auto artefact = std::make_shared<SmokeBomb>();
+    this->setArtefact(artefact);
+    //-------------------------------------------------------------------------
 }
 
 void Alex::firstAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
-
-    if (target->getCurrentHealth() <= 0) {currentXP += target->currentExpDrop;}
+    //---------mettre à chaque fois que tu tapes----------------------
+    if (artefact) {
+        artefact->onInflictedDamage(*this);
+    }
+    //----------------------------------------------------------------
 
     CD1 = 1;
 }
@@ -57,8 +67,9 @@ void Alex::thirdAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
-
-    if (target->getCurrentHealth() <= 0) {currentXP += target->currentExpDrop;}
+    if (artefact) {
+        artefact->onInflictedDamage(*this);
+    }
 
     CD3 = 3;
 }
@@ -71,70 +82,70 @@ void Alex::fourthAbility()
         currentAttackDamage = maxAttackDamage * 1;
         currentArmor = maxArmor * 1;
         currentPowerResist = maxPowerResist * 1;
-        baseSpeed = 90;
+        currentSpeed = 90;
     }
     else if (healthPercent > 80)
     {
         currentAttackDamage = maxAttackDamage * 1.1;
         currentArmor = maxArmor * 1.1;
         currentPowerResist = maxPowerResist * 1.1;
-        baseSpeed = 88;
+        currentSpeed = 88;
     }
     else if (healthPercent > 70)
     {
         currentAttackDamage = maxAttackDamage * 1.2;
         currentArmor = maxArmor * 1.2;
         currentPowerResist = maxPowerResist * 1.2;
-        baseSpeed = 86;
+        currentSpeed = 86;
     }
     else if (healthPercent > 60)
     {
         currentAttackDamage = maxAttackDamage * 1.3;
         currentArmor = maxArmor * 1.3;
         currentPowerResist = maxPowerResist * 1.3;
-        baseSpeed = 84;
+        currentSpeed = 84;
     }
     else if (healthPercent > 50)
     {
         currentAttackDamage = maxAttackDamage * 1.4;
         currentArmor = maxArmor * 1.4;
         currentPowerResist = maxPowerResist * 1.4;
-        baseSpeed = 82;
+        currentSpeed = 82;
     }
     else if (healthPercent > 40)
     {
         currentAttackDamage = maxAttackDamage * 1.5;
         currentArmor = maxArmor * 1.5;
         currentPowerResist = maxPowerResist * 1.5;
-        baseSpeed = 80;
+        currentSpeed = 80;
     }
     else if (healthPercent > 30)
     {
         currentAttackDamage = maxAttackDamage * 1.6;
         currentArmor = maxArmor * 1.6;
         currentPowerResist = maxPowerResist * 1.6;
-        baseSpeed = 78;
+        currentSpeed = 78;
     }
     else if (healthPercent > 20)
     {
         currentAttackDamage = maxAttackDamage * 1.7;
         currentArmor = maxArmor * 1.7;
         currentPowerResist = maxPowerResist * 1.7;
-        baseSpeed = 76;
+        currentSpeed = 76;
     }
     else if (healthPercent > 10)
     {
         currentAttackDamage = maxAttackDamage * 1.8;
         currentArmor = maxArmor * 1.8;
         currentPowerResist = maxPowerResist * 1.8;
-        baseSpeed = 74;
+        currentSpeed = 74;
     }
     else if (healthPercent > 0)
     {
         currentAttackDamage = maxAttackDamage * 2;
         currentArmor = maxArmor * 2;
         currentPowerResist = maxPowerResist * 2;
-        baseSpeed = 70;
+        currentSpeed = 70;
     }
 }
 
@@ -164,6 +175,12 @@ bool Alex::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vect
     switch (currentState) {
         case PlayerState::StartTurn : {
             startTurn();
+            //-----------------------------à rajouter ici partout plz-------------------
+            if (artefact && !artefactAlreadyUsed) {
+                artefact->ActingArtefact(*this);
+                artefactAlreadyUsed = true;
+            }
+            //--------------------------------------------------------------------------
             currentState = PlayerState::ChoosingAbility;
             break;
         }
@@ -248,6 +265,11 @@ bool Alex::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vect
 
         case PlayerState::EndTurn : {
             endTurn();
+            //-------------------------à ajouter aussi ici partout-------------
+            if (artefact) {
+                artefact->ActingArtefactEveryTurns(*this);
+            }
+            //-----------------------------------------------------------------
             currentState = PlayerState::StartTurn;
             return true;
         }
