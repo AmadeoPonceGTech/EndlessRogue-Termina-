@@ -10,6 +10,7 @@
 
 #include "../../Entities/Enemies/EnemyManager.h"
 #include "../../Entities/Characters/Character.h"
+#include "../Inventory.h"
 
 enum class EBiome {
     FOREST,
@@ -32,6 +33,7 @@ private:
     std::vector<std::shared_ptr<Entity>> activeCharacters;
     std::vector<std::shared_ptr<Entity>> speedManagerVec;
     std::vector<std::shared_ptr<Entity>> aliveCharaVec;
+    std::shared_ptr<Inventory> inventory;
 
     EGameRunState runState;
     EBiome currentBiome;
