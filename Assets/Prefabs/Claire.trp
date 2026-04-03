@@ -28,7 +28,7 @@
                 {
                     "active": true,
                     "data": {
-                        "model": "Assets\\Models\\Healer\\scene.gltf"
+                        "model": "Assets\\Models\\Claire\\scene.gltf"
                     },
                     "type": "Mesh Component"
                 },
@@ -38,7 +38,7 @@
                     "type": "Claire"
                 }
             ],
-            "id": "4434264340046222925",
+            "id": "6935877621956712727",
             "name": "Claire",
             "parentId": null
         }

@@ -7,7 +7,7 @@
                     "active": true,
                     "data": {
                         "position": [
-                            -5.807847023010254,
+                            -9.129651069641113,
                             0.9342464208602905,
                             1.7318522930145264
                         ],
@@ -28,7 +28,7 @@
                 {
                     "active": true,
                     "data": {
-                        "model": "Assets\\Models\\Knight_Three\\scene.gltf"
+                        "model": "Assets\\Models\\Diane\\scene.gltf"
                     },
                     "type": "Mesh Component"
                 },
@@ -38,7 +38,7 @@
                     "type": "Diane"
                 }
             ],
-            "id": "11840224965184407502",
+            "id": "16924899091992228099",
             "name": "Diane",
             "parentId": null
         }

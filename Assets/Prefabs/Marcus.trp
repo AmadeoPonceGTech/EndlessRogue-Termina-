@@ -28,7 +28,7 @@
                 {
                     "active": true,
                     "data": {
-                        "model": "Assets\\Models\\Monk\\scene.gltf"
+                        "model": "Assets\\Models\\Marcus\\scene.gltf"
                     },
                     "type": "Mesh Component"
                 },
@@ -38,7 +38,7 @@
                     "type": "Marcus"
                 }
             ],
-            "id": "241441702984040190",
+            "id": "5632848121094942344",
             "name": "Marcus",
             "parentId": null
         }

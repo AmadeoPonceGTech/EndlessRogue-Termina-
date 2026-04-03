@@ -28,7 +28,7 @@
                 {
                     "active": true,
                     "data": {
-                        "model": "Assets\\Models\\Knight_One\\scene.gltf"
+                        "model": "Assets\\Models\\Alex\\scene.gltf"
                     },
                     "type": "Mesh Component"
                 },
@@ -38,7 +38,7 @@
                     "type": "Alex"
                 }
             ],
-            "id": "13405879159525273796",
+            "id": "9244241928648131872",
             "name": "Alex",
             "parentId": null
         }

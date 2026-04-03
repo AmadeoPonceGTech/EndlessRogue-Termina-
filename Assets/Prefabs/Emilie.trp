@@ -7,8 +7,8 @@
                     "active": true,
                     "data": {
                         "position": [
-                            1.7766504287719727,
-                            1.4118430614471436,
+                            3.5120325088500977,
+                            0.818881630897522,
                             -0.9767509698867798
                         ],
                         "rotation": [
@@ -28,7 +28,7 @@
                 {
                     "active": true,
                     "data": {
-                        "model": "Assets\\Models\\Knight_Two\\scene.gltf"
+                        "model": "Assets\\Models\\Emilie\\scene.gltf"
                     },
                     "type": "Mesh Component"
                 },
@@ -38,7 +38,7 @@
                     "type": "Emilie"
                 }
             ],
-            "id": "449545083331491447",
+            "id": "12699596817933088953",
             "name": "Emilie",
             "parentId": null
         }

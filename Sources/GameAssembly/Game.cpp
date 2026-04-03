@@ -34,41 +34,26 @@ void Game::Start()
     allCharacters.emplace_back(std::make_shared<Penelope>());
 
 
-#pragma region MapRegistry
-    componentRegistry["Diane"] = [](Termina::Actor* a) {
-        a->AddComponent<Diane>();
-    };
+    /////// Link Names -> Prefab
+#pragma region MappingPrefab-Names
+    p_Diane = TerminaScript::Prefab("Assets/Prefabs/Diane.trp");
+    p_Emilie = TerminaScript::Prefab("Assets/Prefabs/Emilie.trp");
+    p_Claire = TerminaScript::Prefab("Assets/Prefabs/Claire.trp");
+    p_Marcus = TerminaScript::Prefab("Assets/Prefabs/Marcus.trp");
+    p_Brutus = TerminaScript::Prefab("Assets/Prefabs/Brutus.trp");
+    p_Edward = TerminaScript::Prefab("Assets/Prefabs/Edward.trp");
+    p_Alex = TerminaScript::Prefab("Assets/Prefabs/Alex.trp");
+    p_Penelope = TerminaScript::Prefab("Assets/Prefabs/Penelope.trp");
 
-    componentRegistry["Emilie"] = [](Termina::Actor* a) {
-        a->AddComponent<Emilie>();
-    };
-
-    componentRegistry["Claire"] = [](Termina::Actor* a) {
-        a->AddComponent<Claire>();
-    };
-
-    componentRegistry["Marcus"] = [](Termina::Actor* a) {
-        a->AddComponent<Marcus>();
-    };
-
-    componentRegistry["Brutus"] = [](Termina::Actor* a) {
-        a->AddComponent<Brutus>();
-    };
-
-    componentRegistry["Edward"] = [](Termina::Actor* a) {
-        a->AddComponent<Edward>();
-    };
-
-    componentRegistry["Alex"] = [](Termina::Actor* a) {
-        a->AddComponent<Alex>();
-    };
-
-    componentRegistry["Penelope"] = [](Termina::Actor* a) {
-        a->AddComponent<Penelope>();
-    };
-
+    characterPrefabMap["Diane"] = p_Diane;
+    characterPrefabMap["Emilie"] = p_Emilie;
+    characterPrefabMap["Claire"] = p_Claire;
+    characterPrefabMap["Marcus"] = p_Marcus;
+    characterPrefabMap["Brutus"] = p_Brutus;
+    characterPrefabMap["Edward"] = p_Edward;
+    characterPrefabMap["Alex"] = p_Alex;
+    characterPrefabMap["Penelope"] = p_Penelope;
 #pragma endregion
-
 }
 
 void Game::Update(float deltaTime)
@@ -177,14 +162,13 @@ void Game::Update(float deltaTime)
                 std::vector<Termina::Actor*> gameEntity;
 
                 for (auto& character : gameplay->getActiveCharacters()) {
-                    auto entityActor = TerminaScript::ScriptableComponent::Instantiate();
-                    entityActor->SetName(character->getName().c_str());
-                    auto it = componentRegistry.find(character->getName());
-                    if (it != componentRegistry.end()) {
-                        it->second(entityActor);
+                    auto it = characterPrefabMap.find(character->getName());
+                    if (it != characterPrefabMap.end()) {
+
+                        auto entityActor = Instantiate(it->second);
+                        entityActor->SetName(character->getName().c_str());
+                        gameEntity.push_back(entityActor);
                     }
-                    entityActor->AddComponent<Termina::MeshComponent>();
-                    gameEntity.push_back(entityActor);
                 }
             }
             runStarted = true;

@@ -31,16 +31,62 @@
   <component name="ChangeListManager">
     <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="added comment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Cube/Cube.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Cube/Cube.gltf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Cube/Cube_BaseColor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Cube/Cube_MetallicRoughness.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Cube/Cube_mat0.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Archery/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Archery/scene.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Archery/scene.gltf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Archery/scene_mat0.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Archery/textures/material_0_baseColor.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Archery/textures/material_0_metallicRoughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Archery/textures/material_0_normal.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Healer/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Healer/scene.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Healer/scene.gltf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Healer/scene_mat0.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Healer/textures/DefaultMaterial_baseColor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Healer/textures/DefaultMaterial_metallicRoughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Healer/textures/DefaultMaterial_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_One/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_One/scene.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_One/scene.gltf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_One/scene_mat0.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_One/textures/material_0_baseColor.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Three/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Three/scene.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Three/scene.gltf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Three/scene_mat0.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Three/textures/material_0_baseColor.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Two/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Two/scene.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Two/scene.gltf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Two/scene_mat0.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Two/textures/tripo_material_3d4d0331-dbd0-41bf-9e23-6b9a09a9ed28_baseColor.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Two/textures/tripo_material_3d4d0331-dbd0-41bf-9e23-6b9a09a9ed28_metallicRoughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Knight_Two/textures/tripo_material_3d4d0331-dbd0-41bf-9e23-6b9a09a9ed28_normal.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Monk/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Monk/scene.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Monk/scene.gltf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Monk/scene_mat0.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Monk/textures/monk_material_baseColor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Sorcerer/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Sorcerer/scene.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Sorcerer/scene.gltf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Sorcerer/scene_mat0.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Sorcerer/scene_mat1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Sorcerer/textures/body_baseColor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Sorcerer/textures/body_emissive.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Sorcerer/textures/body_metallicRoughness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Sorcerer/textures/body_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Alex.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Alex.trp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Brutus.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Brutus.trp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Claire.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Claire.trp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Diane.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Diane.trp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Edward.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Edward.trp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Emilie.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Emilie.trp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Marcus.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Marcus.trp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Penelope.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Penelope.trp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EndlessRogueMap" beforeDir="false" afterPath="$PROJECT_DIR$/EndlessRogueMap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Game.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Game.h" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Game.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/Termina/Scripting/API/ScriptableComponent.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/Termina/Scripting/API/ScriptableComponent.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,31 +157,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "RunOnceActivity.west.config.association.type.startup.service": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "branch__event__architecture",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "org.rust.first.attach.projects": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;branch__event__architecture&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\repos\EndlessRogue-Termina-\Sources\GameAssembly\Entities\Enemies\Close DPS" />
@@ -166,6 +212,8 @@
       <workItem from="1775026299111" duration="2520000" />
       <workItem from="1775112090624" duration="163000" />
       <workItem from="1775113250650" duration="12947000" />
+      <workItem from="1775200429351" duration="4450000" />
+      <workItem from="1775207712411" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="added all abilities to Rat">
       <option name="closed" value="true" />

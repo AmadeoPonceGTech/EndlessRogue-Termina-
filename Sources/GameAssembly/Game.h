@@ -11,6 +11,7 @@
 #include "ImGui/imgui_internal.h"
 
 #pragma region Gameplayincludes
+#include "../Termina/Scripting/API/ScriptableComponent.hpp"
 #include "Entities/Characters/Range DPS/Brutus.h"
 #include "Main/Gameplay/Gameplay.h"
 #pragma endregion Gameplayincludes
@@ -43,10 +44,21 @@ private :
     EGameState gameState;
 
     std::vector<std::shared_ptr<Character>> allCharacters;
-    std::unordered_map<std::string, std::function<void(Termina::Actor*)>> componentRegistry;
 
     int selectedCharacter = -1;
     bool showCharacterPanel = true;
 
     bool runStarted = false;
+
+    TerminaScript::Prefab p_Diane;
+    TerminaScript::Prefab p_Emilie;
+    TerminaScript::Prefab p_Claire;
+    TerminaScript::Prefab p_Marcus;
+    TerminaScript::Prefab p_Brutus;
+    TerminaScript::Prefab p_Edward;
+    TerminaScript::Prefab p_Alex;
+    TerminaScript::Prefab p_Penelope;
+
+    std::unordered_map<std::string, TerminaScript::Prefab> characterPrefabMap;
+
 };

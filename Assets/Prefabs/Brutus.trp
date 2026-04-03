@@ -28,7 +28,7 @@
                 {
                     "active": true,
                     "data": {
-                        "model": "Assets\\Models\\Archery\\scene.gltf"
+                        "model": "Assets\\Models\\Brutus\\scene.gltf"
                     },
                     "type": "Mesh Component"
                 },
@@ -38,7 +38,7 @@
                     "type": "Brutus"
                 }
             ],
-            "id": "2223799390291291689",
+            "id": "16585180266353707624",
             "name": "Brutus",
             "parentId": null
         }

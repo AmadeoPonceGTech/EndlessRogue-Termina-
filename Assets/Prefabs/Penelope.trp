@@ -7,9 +7,9 @@
                     "active": true,
                     "data": {
                         "position": [
-                            -4.605870723724365,
+                            -6.672713279724121,
                             0.6208868026733398,
-                            0.0
+                            5.101368427276611
                         ],
                         "rotation": [
                             1.0,
@@ -28,7 +28,7 @@
                 {
                     "active": true,
                     "data": {
-                        "model": "Assets\\Models\\jqs)p\\scene.gltf"
+                        "model": "Assets\\Models\\Penelope\\scene.gltf"
                     },
                     "type": "Mesh Component"
                 },
@@ -38,7 +38,7 @@
                     "type": "Penelope"
                 }
             ],
-            "id": "612989523520967964",
+            "id": "4101319221425505032",
             "name": "Penelope",
             "parentId": null
         }

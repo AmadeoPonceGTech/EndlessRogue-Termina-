@@ -7,9 +7,9 @@
                     "active": true,
                     "data": {
                         "position": [
-                            -1.2025560140609741,
+                            1.2956774234771729,
                             0.0,
-                            -1.6330657005310059
+                            0.858090877532959
                         ],
                         "rotation": [
                             1.0,
@@ -28,7 +28,7 @@
                 {
                     "active": true,
                     "data": {
-                        "model": "Assets\\Models\\Sorcerer\\scene.gltf"
+                        "model": "Assets\\Models\\Edward\\scene.gltf"
                     },
                     "type": "Mesh Component"
                 },
@@ -38,7 +38,7 @@
                     "type": "Edward"
                 }
             ],
-            "id": "12018551962731890555",
+            "id": "153549718943768176",
             "name": "Edward",
             "parentId": null
         }
