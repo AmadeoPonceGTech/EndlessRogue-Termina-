@@ -31,15 +31,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="added comment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Alex.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Alex.trp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Brutus.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Brutus.trp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Claire.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Claire.trp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Diane.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Diane.trp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Edward.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Edward.trp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Emilie.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Emilie.trp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Marcus.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Marcus.trp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Penelope.trp" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Penelope.trp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Game.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +158,7 @@
       <workItem from="1775112090624" duration="163000" />
       <workItem from="1775113250650" duration="12947000" />
       <workItem from="1775200429351" duration="4450000" />
-      <workItem from="1775207712411" duration="3504000" />
+      <workItem from="1775207712411" duration="4747000" />
     </task>
     <task id="LOCAL-00001" summary="added all abilities to Rat">
       <option name="closed" value="true" />

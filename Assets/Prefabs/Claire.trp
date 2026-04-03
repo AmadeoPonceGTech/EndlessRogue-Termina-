@@ -8,7 +8,7 @@
                     "data": {
                         "position": [
                             3.737581729888916,
-                            0.9024470448493958,
+                            0.011713147163391113,
                             -9.723749160766602
                         ],
                         "rotation": [
@@ -18,9 +18,9 @@
                             0.0
                         ],
                         "scale": [
-                            6.188543796539307,
-                            6.188543796539307,
-                            6.188543796539307
+                            1.0,
+                            1.0,
+                            1.0
                         ]
                     },
                     "type": "Transform"
@@ -28,7 +28,10 @@
                 {
                     "active": true,
                     "data": {
-                        "model": "Assets\\Models\\Claire\\scene.gltf"
+                        "material_overrides": {
+                            "0": "Assets\\Models\\Nouveau dossier\\scene_mat0.mat"
+                        },
+                        "model": "Assets\\Models\\Nouveau dossier\\scene.gltf"
                     },
                     "type": "Mesh Component"
                 },
@@ -38,7 +41,7 @@
                     "type": "Claire"
                 }
             ],
-            "id": "4804186178670794103",
+            "id": "1415949367245242526",
             "name": "Claire",
             "parentId": null
         }
