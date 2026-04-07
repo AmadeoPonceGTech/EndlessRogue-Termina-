@@ -193,6 +193,13 @@ void Gameplay::UpdateFight() {
             for (auto& enemy : enemyManager->getEnemies())
             {
                 if (enemy->getCurrentHealth() <= 0) {
+
+                    if (enemy->getHasARevive()) {
+                        enemy->setCurrentHealth(enemy->getMaxHealth() / 2);
+                        enemy->setHasARevive(false);
+                        LogManager::getInstance().addLog(enemy->getName() + " revive !", ImVec4(0, 0, 0, 1));
+                    }
+
                     std::shared_ptr<Enemy> e = std::dynamic_pointer_cast<Enemy>(enemy);
                     float xpToAdd = e->getCurrentExpDrop() / 4;
                     for (auto& chara : aliveCharaVec) {

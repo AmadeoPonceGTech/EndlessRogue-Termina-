@@ -82,5 +82,4 @@ public:
     virtual std::shared_ptr<Artefact> createDrop();
 
     float getCurrentExpDrop() const;
-
 };

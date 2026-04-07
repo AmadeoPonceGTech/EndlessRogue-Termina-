@@ -7,6 +7,8 @@ Entity::Entity()
     CD2 = 0;
     CD3 = 0;
     CD4 = 0;
+
+    hasARevive = false;
 }
 
 void Entity::manageStatusEffect()
@@ -34,6 +36,7 @@ void Entity::manageStatusEffect()
             poisonCD--;
             isPoisoned = false;
         }
+        LogManager::getInstance().addLog(this->getName() + "takes damages from the poison !", ImVec4(0.5f, 0.0f, 0.5f, 1.0f));
     }
 
     if (isBurnt)
@@ -51,6 +54,7 @@ void Entity::manageStatusEffect()
             isBurnt = false;
             burnCD--;
         }
+        LogManager::getInstance().addLog(this->getName() + "takes damages from its burn !", ImVec4(1.0f, 0.2f, 0.0f, 1.0f));
     }
 
     if (isTaunt)
@@ -65,10 +69,12 @@ void Entity::manageStatusEffect()
             tauntCD--;
             isTaunt = false;
         }
+        LogManager::getInstance().addLog(this->getName() + "is taunt !", ImVec4(1.0f, 0.6f, 0.0f, 1.0f));
     }
 
     if (isStun) {
         isStun = false;
+        LogManager::getInstance().addLog(this->getName() + "is stun !", ImVec4(1.0f, 1.0f, 0.0f, 1.0f));
     }
 }
 
@@ -143,6 +149,8 @@ EClass Entity::getClass() const { return entityClass; }
 
 float Entity::getGeneratedShield() const { return generatedShield; }
 
+bool Entity::getHasARevive() { return hasARevive; }
+
 #pragma endregion
 
 #pragma region Setters
@@ -171,5 +179,7 @@ void Entity::setIsStun(bool const newIsStun) { isStun = newIsStun; }
 void Entity::setIsDead(bool const newIsDead) { isDead = newIsDead; }
 
 void Entity::setGeneratedShield(float newShield) { generatedShield = newShield; }
+
+void Entity::setHasARevive(bool _hasARevive) { hasARevive = _hasARevive; }
 
 #pragma endregion
