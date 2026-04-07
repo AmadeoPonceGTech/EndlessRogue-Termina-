@@ -6,6 +6,10 @@
 #include "Entities/Characters/Character.h"
 
 class Inventory {
+    std::unordered_map<std::string, int> items;
+    std::vector<std::shared_ptr<Artefact>> artefactsInventory;
+    std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>> mapCharacterToArtefact;
+
 public:
     void addItem(const std::string& name, int amount);
     int getItemCount(const std::string& name) const;
@@ -17,16 +21,7 @@ public:
 
     void checkArtefactsInventory();
 
-    const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& getMapCharacterToArtefact() const {
-        return mapCharacterToArtefact;
-    }
+    const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& getMapCharacterToArtefact() const;
 
-    void setMapCharacterToArtefact(const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& newMap) {
-        mapCharacterToArtefact = newMap;
-    }
-
-private:
-    std::unordered_map<std::string, int> items;
-    std::vector<std::shared_ptr<Artefact>> artefactsInventory;
-    std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>> mapCharacterToArtefact;
+    void setMapCharacterToArtefact(const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& newMap);
 };

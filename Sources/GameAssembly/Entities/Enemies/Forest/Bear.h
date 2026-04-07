@@ -22,7 +22,6 @@ public :
     Bear(int floor);
     Bear(Termina::Actor* owner) : TerminaScript::ScriptableComponent(owner) {}
 
-
     bool entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vector<std::shared_ptr<Entity>> enemies) override;
 
     void Start() override;

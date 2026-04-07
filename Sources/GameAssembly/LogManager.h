@@ -14,7 +14,6 @@ struct LogEntry
 
 class LogManager
 {
-private:
     LogManager() = default;
 
     std::vector<LogEntry> logs;
