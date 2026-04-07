@@ -42,21 +42,21 @@ private:
 public:
 
     Gameplay();
-    void StartRun();
-    void EndRun();
+    void startRun();
+    void endRun();
 
-    void StartFight();
-    void EndFight();
+    void startFight();
+    void endFight();
 
-    void Gameloop();
-    void UpdateFight();
+    void gameloop();
+    void updateFight();
 
-    bool HasSameType(const Entity& entity) const;
-    void AddToTeam(const std::shared_ptr<Entity>& entity);
-    void RemoveFromTeam(const std::shared_ptr<Entity>& entity);
+    bool hasSameType(const Entity& entity) const;
+    void addToTeam(const std::shared_ptr<Entity>& entity);
+    void removeFromTeam(const std::shared_ptr<Entity>& entity);
 
-    bool TeamIsComplete();
-    bool IsInTeam(const std::shared_ptr<Entity>& entity);
+    bool teamIsComplete();
+    bool isInTeam(const std::shared_ptr<Entity>& entity);
 
     std::vector<std::shared_ptr<Entity>> getActiveCharacters();
 

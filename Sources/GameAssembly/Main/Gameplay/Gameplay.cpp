@@ -30,7 +30,7 @@ Gameplay::Gameplay() {
     currentBiome = EBiome::FOREST;
 }
 
-void Gameplay::StartRun() {
+void Gameplay::startRun() {
 
     auto it = std::find_if(activeCharacters.begin(), activeCharacters.end(),[](const std::shared_ptr<Entity>& e){
             return std::dynamic_pointer_cast<Diane>(e) != nullptr;
@@ -47,7 +47,7 @@ void Gameplay::StartRun() {
     currentLevel = 1;
 }
 
-void Gameplay::StartFight() {
+void Gameplay::startFight() {
     static std::mt19937 rng(rd());
     std::uniform_int_distribution<int> enemyIndex(1, 4);
     std::uniform_int_distribution<int> bossIndex(1, 2);
@@ -155,7 +155,7 @@ void Gameplay::StartFight() {
     }
 }
 
-void Gameplay::UpdateFight() {
+void Gameplay::updateFight() {
     std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
     for (auto it = speedManagerVec.begin(); it != speedManagerVec.end(); ) {
         auto entity = *it;
@@ -182,7 +182,7 @@ void Gameplay::UpdateFight() {
     }
 }
 
-void Gameplay::EndFight() {
+void Gameplay::endFight() {
     enemyManager->clearEnemies();
 
     auto it = std::find_if(activeCharacters.begin(), activeCharacters.end(),[](const std::shared_ptr<Entity>& e){
@@ -212,7 +212,7 @@ void Gameplay::EndFight() {
     }
 }
 
-void Gameplay::EndRun() {
+void Gameplay::endRun() {
     for (auto& c : activeCharacters) {
         std::shared_ptr<Character> chara = std::dynamic_pointer_cast<Character>(c);
         chara->setArtefact(nullptr);
@@ -221,33 +221,33 @@ void Gameplay::EndRun() {
     runEnded = true;
 }
 
-void Gameplay::Gameloop()
+void Gameplay::gameloop()
 {
     switch (runState) {
         case EGameRunState::StartRun :
-            StartRun();
+            startRun();
             std::cout << "Run started" << std::endl;
             runState = EGameRunState::StartFight;
             break;
         case EGameRunState::StartFight :
-            StartFight();
+            startFight();
             std::cout << "Fight started" << std::endl;
             runState = EGameRunState::UpdateFight;
             break;
         case EGameRunState::UpdateFight :
-            UpdateFight();
+            updateFight();
             break;
         case EGameRunState::EndFight :
-            EndFight();
+            endFight();
             runState = EGameRunState::StartFight;
             break;
         case EGameRunState::EndRun :
-            EndRun();
+            endRun();
             break;
     }
 }
 
-bool Gameplay::HasSameType(const Entity& entity) const
+bool Gameplay::hasSameType(const Entity& entity) const
 {
     return std::any_of(activeCharacters.begin(), activeCharacters.end(),
         [&entity](const std::shared_ptr<Entity>& e) {
@@ -255,7 +255,7 @@ bool Gameplay::HasSameType(const Entity& entity) const
         });
 }
 
-void Gameplay::AddToTeam(const std::shared_ptr<Entity>& entity) {
+void Gameplay::addToTeam(const std::shared_ptr<Entity>& entity) {
     if (!entity) {
         std::cout << "Invalid entity\n";
         return;
@@ -266,7 +266,7 @@ void Gameplay::AddToTeam(const std::shared_ptr<Entity>& entity) {
         return;
     }
 
-    if (HasSameType(*entity)) {
+    if (hasSameType(*entity)) {
         std::cout << entity->getName() << " is already in the team\n";
         return;
     }
@@ -274,7 +274,7 @@ void Gameplay::AddToTeam(const std::shared_ptr<Entity>& entity) {
     std::cout << entity->getName() << " added to team" << std::endl;
 }
 
-void Gameplay::RemoveFromTeam(const std::shared_ptr<Entity>& entity)
+void Gameplay::removeFromTeam(const std::shared_ptr<Entity>& entity)
 {
     if (!entity) {
         std::cout << "Invalid entity\n";
@@ -294,14 +294,14 @@ void Gameplay::RemoveFromTeam(const std::shared_ptr<Entity>& entity)
 
 
 ////////// Check if Team is Complete or If the character is already in team
-bool Gameplay::TeamIsComplete() {
+bool Gameplay::teamIsComplete() {
     if (activeCharacters.size() == 4) {
         return true;
     }
     return false;
 }
 
-bool Gameplay::IsInTeam(const std::shared_ptr<Entity> &entity) {
+bool Gameplay::isInTeam(const std::shared_ptr<Entity> &entity) {
     auto it = std::find(activeCharacters.begin(), activeCharacters.end(), entity);
     if (it != activeCharacters.end()) {
         return true;

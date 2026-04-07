@@ -80,7 +80,7 @@ void Game::Update(float deltaTime)
 
             ImGui::Text("Select your characters");
             ImGui::SameLine();
-            ImGui::BeginDisabled(!gameplay->TeamIsComplete());
+            ImGui::BeginDisabled(!gameplay->teamIsComplete());
             if (ImGui::Button("Launch Run")) {
                 gameState = EGameState::Run;
             };
@@ -136,15 +136,15 @@ void Game::Update(float deltaTime)
                 ImGui::Text("Speed : %.1f", character->getCurrentSpeed());
                 ImGui::Dummy(ImVec2(0,20));
 
-                ImGui::BeginDisabled(gameplay->IsInTeam(character) or gameplay->TeamIsComplete());
+                ImGui::BeginDisabled(gameplay->isInTeam(character) or gameplay->teamIsComplete());
                 if (ImGui::Button("Select")) {
-                    gameplay->AddToTeam(character);
+                    gameplay->addToTeam(character);
                 }
                ImGui::EndDisabled();
 
-                ImGui::BeginDisabled(!gameplay->IsInTeam(character));
+                ImGui::BeginDisabled(!gameplay->isInTeam(character));
                 if (ImGui::Button("UnSelect")) {
-                    gameplay->RemoveFromTeam(character);
+                    gameplay->removeFromTeam(character);
                 }
                 ImGui::EndDisabled();
             }
@@ -158,7 +158,7 @@ void Game::Update(float deltaTime)
             break;
         }
         case EGameState::Run :
-            if (gameplay->TeamIsComplete() && !runStarted) {
+            if (gameplay->teamIsComplete() && !runStarted) {
                 std::vector<Termina::Actor*> gameEntity;
 
                 for (auto& character : gameplay->getActiveCharacters()) {
