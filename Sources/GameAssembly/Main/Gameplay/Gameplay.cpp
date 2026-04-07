@@ -180,7 +180,7 @@ void Gameplay::UpdateFight() {
 
             for (auto& e : speedManagerVec) {
                 if (e->getCurrentHealth() <= 0) {
-                    LogManager::getInstance().AddLog( e->getName() + " is dead.", ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+                    LogManager::getInstance().addLog( e->getName() + " is dead.", ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                 }
             }
 
@@ -343,14 +343,14 @@ void Gameplay::Gameloop()
             LogManager::getInstance().addSeparator();
             std::cout << "Fight started" << std::endl;
             LogManager::getInstance().addSeparator();
-            LogManager::getInstance().AddLog("New Fight");
+            LogManager::getInstance().addLog("New Fight");
             runState = EGameRunState::UpdateFight;
             break;
         case EGameRunState::UpdateFight :
             UpdateFight();
             showEnemiesStats();
             showAlliesStats();
-            LogManager::getInstance().DrawImGui();
+            LogManager::getInstance().drawImGui();
             break;
         case EGameRunState::EndFight :
             EndFight();

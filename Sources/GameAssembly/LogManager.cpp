@@ -8,7 +8,7 @@ LogManager& LogManager::getInstance()
     return instance;
 }
 
-void LogManager::AddLog(const std::string& message, ImVec4 color)
+void LogManager::addLog(const std::string& message, ImVec4 color)
 {
     logs.emplace_back(message, color);
 
@@ -24,7 +24,7 @@ void LogManager::addSeparator(ImVec4 color)
         logs.erase(logs.begin());
 }
 
-void LogManager::DrawImGui()
+void LogManager::drawImGui()
 {
     ImGui::Begin("Fight Log");
 
