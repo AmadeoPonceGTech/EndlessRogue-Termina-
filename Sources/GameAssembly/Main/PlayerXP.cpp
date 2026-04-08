@@ -11,7 +11,7 @@ PlayerXP::PlayerXP() {
 
     XPNeededForLvl2 = 100;
     finalXPNeeded = 100000;
-    currentXP = 0;
+    currentXP = 100;
     XPNeeded = XPNeededForLvl2;
 }
 
@@ -135,7 +135,12 @@ bool PlayerXP::upgradeSystem(int level, std::vector<std::shared_ptr<Entity>> cha
                 float textWidth = ImGui::CalcTextSize(getBonusText(choice).c_str()).x;
                 float avail = ImGui::GetContentRegionAvail().x;
                 ImGui::SetCursorPosX((avail - textWidth) * 0.5f);
-                ImGui::Text("%s", getBonusText(choice).c_str());
+                if (choice.rarity == 1) color = ImVec4(0.8f, 0.8f, 0.8f, 1.0f);
+                else if (choice.rarity == 2) color = ImVec4(0.2f, 0.4f, 1.0f, 1.0f);
+                else if (choice.rarity == 3) color = ImVec4(0.8f, 0.6f, 1.0f, 1.0f);
+                else if (choice.rarity == 4) color = ImVec4(1.0f, 1.0f, 0.0f, 1.0f);
+                else color = ImVec4(1.0f,1.0f,1.0f,1.0f);
+                ImGui::TextColored(color, "%s", getBonusText(choice).c_str());
 
                 ImGui::Dummy(ImVec2(0, 200));
 

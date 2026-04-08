@@ -53,6 +53,8 @@ class PlayerXP {
 
     bool choosing;
 
+    ImVec4 color;
+
     EUpgradeState upgradeState;
 
     std::random_device rd;
