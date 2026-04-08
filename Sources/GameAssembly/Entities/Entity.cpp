@@ -183,7 +183,8 @@ void Entity::setIsStun(bool const newIsStun) { isStun = newIsStun; }
 void Entity::setIsDead(bool const newIsDead) { isDead = newIsDead; }
 
 void Entity::setGeneratedShield(float newShield) { generatedShield = newShield; }
-
 void Entity::setHasARevive(bool _hasARevive) { hasARevive = _hasARevive; }
+
+void Entity::setLevel(int newLevel) { level = newLevel; }
 
 #pragma endregion

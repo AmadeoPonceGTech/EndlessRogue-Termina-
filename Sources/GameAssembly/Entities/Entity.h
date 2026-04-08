@@ -172,6 +172,8 @@ public:
     void setGeneratedShield(float newShield);
     void setHasARevive(bool _hasARevive);
 
+    void setLevel(int newLevel);
+
 #pragma endregion
 
 };
