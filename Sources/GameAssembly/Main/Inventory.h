@@ -17,6 +17,13 @@ class Inventory {
     std::vector<std::shared_ptr<Artefact>> artefactsInventory;
     std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>> mapCharacterToArtefact;
 
+    EInventoryState currentInventoryState;
+
+    std::shared_ptr<Artefact> targetArtefact;
+    std::shared_ptr<Character> selectedCharacter;
+
+    void checkArtefactsInventory();
+
 public:
     Inventory();
     void addItem(const std::string& name, int amount);
@@ -31,20 +38,7 @@ public:
 
     const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& getMapCharacterToArtefact() const;
 
-    void setMapCharacterToArtefact(const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& newMap);
     void setMapCharacterToArtefact(const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& newMap) {
         mapCharacterToArtefact = newMap;
     }
-
-private:
-    std::unordered_map<std::string, int> items;
-    std::vector<std::shared_ptr<Artefact>> artefactsInventory;
-    std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>> mapCharacterToArtefact;
-    EInventoryState currentInventoryState;
-
-    std::shared_ptr<Artefact> targetArtefact;
-    std::shared_ptr<Character> selectedCharacter;
-
-    void checkArtefactsInventory();
-
 };

@@ -41,6 +41,7 @@ void Claire::firstAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+    LogManager::getInstance().addLog("Claire uses \"Wand Hit\"." + target->getName() + " takes damages.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     if (artefact) {
         artefact->onInflictedDamage(*this);

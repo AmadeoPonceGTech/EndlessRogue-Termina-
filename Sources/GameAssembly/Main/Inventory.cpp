@@ -123,3 +123,7 @@ void Inventory::drawArtefactsInventory(std::vector<std::shared_ptr<Entity>>& cha
         }
     }
 }
+
+const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& Inventory::getMapCharacterToArtefact() const {
+    return mapCharacterToArtefact;
+}
