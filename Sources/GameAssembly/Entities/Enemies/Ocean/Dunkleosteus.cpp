@@ -134,6 +134,7 @@ void Dunkleosteus::firstAbility(Character& target) {
     if (target.getClass() == EClass::CLOSEDDPS | target.getClass() == EClass::SUPPORT) { multiplier = 1.2f; }
     float dmgDealt = currentAttackDamage * (1.0f - target.getCurrentArmor() / 100.0f);
     target.setCurrentHealth(std::max(0.0f, target.getCurrentHealth() - dmgDealt * multiplier));
+    LogManager::getInstance().addLog("Dunkleosteus attacks " + target.getName() + " with \"Bite\".", ImVec4(240, 0.518, 0.518, 1));
 }
 
 void Dunkleosteus::secondAbility(Character& target1, Character& target2) {
@@ -141,11 +142,13 @@ void Dunkleosteus::secondAbility(Character& target1, Character& target2) {
     if (target1.getClass() == EClass::CLOSEDDPS | target1.getClass() == EClass::SUPPORT) { multiplier1 = 1.2f; }
     float dmgDealt1 = currentAttackDamage * (1.0f - target1.getCurrentArmor() / 100.0f);
     target1.setCurrentHealth(std::max(0.0f, target1.getCurrentHealth() - dmgDealt1 * multiplier1));
+    LogManager::getInstance().addLog("Dunkleosteus attacks " + target1.getName() + " with \"Abyssal Tail\".", ImVec4(240, 0.518, 0.518, 1));
 
     float multiplier2 = 1.0f;
     if (target2.getClass() == EClass::CLOSEDDPS | target2.getClass() == EClass::SUPPORT) { multiplier2 = 1.2f; }
     float dmgDealt2 = currentAttackDamage * (1.0f - target2.getCurrentArmor() / 100.0f);
     target2.setCurrentHealth(std::max(0.0f, target2.getCurrentHealth() - dmgDealt2 * multiplier2));
+    LogManager::getInstance().addLog("Dunkleosteus attacks " + target2.getName() + " with \"Abyssal Tail\".", ImVec4(240, 0.518, 0.518, 1));
 
     CD2 = 4;
 }
@@ -156,6 +159,7 @@ void Dunkleosteus::thirdAbility(Character& target) {
 
 void Dunkleosteus::fourthAbility() {
     //Cast a wave who give a shield to all allies except self
+    LogManager::getInstance().addLog("Dunkleosteus uses \"Protective Tide\".", ImVec4(240, 0.518, 0.518, 1));
     CD4 = 5;
 }
 
@@ -170,6 +174,7 @@ std::shared_ptr<Artefact> Dunkleosteus::createDrop() {
         return nullptr;
     }
     else if (roll < 15.f) {
+        LogManager::getInstance().addLog("You obtained a Rare Artefact: Scale !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<Scale>();
         return nullptr;
     }

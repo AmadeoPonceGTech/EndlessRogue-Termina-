@@ -39,7 +39,7 @@ void Diane::firstAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
-    LogManager::getInstance().addLog("Diane uses \"Shield Charge\"." + target->getName() + " takes damages.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+    LogManager::getInstance().addLog("Diane uses \"Shield Charge\". " + target->getName() + " takes damages.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     if (artefact) {
         artefact->onInflictedDamage(*this);
@@ -52,7 +52,7 @@ void Diane::secondAbility(std::shared_ptr<Enemy>target)
 {
     target->setIsTaunt(true);
     target->setTauntCD(3);
-    LogManager::getInstance().addLog("Diane uses \"Taunt\"." + target->getName() + " is taunted.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+    LogManager::getInstance().addLog("Diane uses \"Taunt\". " + target->getName() + " is taunted.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD2 = 6;
 }
@@ -61,7 +61,7 @@ void Diane::thirdAbility(std::shared_ptr<Character>target)
 {
     shield += currentAttackPower;
     target->setShield(target->getShield() + currentAttackPower);
-    LogManager::getInstance().addLog("Diane uses \"Shield Buff\"." + target->getName() + " and Diane get a Shield.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+    LogManager::getInstance().addLog("Diane uses \"Shield Buff\". " + target->getName() + " and Diane get a Shield.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD3 = 4;
 }

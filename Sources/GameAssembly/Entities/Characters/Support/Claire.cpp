@@ -41,6 +41,7 @@ void Claire::firstAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+    LogManager::getInstance().addLog("Claire uses \"Wand Hit\". " + target->getName() + " takes damages.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     if (artefact) {
         artefact->onInflictedDamage(*this);
@@ -57,23 +58,23 @@ void Claire::firstAbility(std::shared_ptr<Enemy>target)
 
         if (choice == 1) {
             target->setCurrentAttackDamage(target->getCurrentAttackDamage() - target->getCurrentAttackDamage() * 0.05);
-            LogManager::getInstance().addLog("Claire uses \"Wand Hit\"." + target->getName() + " takes Attack Damage malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+            LogManager::getInstance().addLog("Claire uses \"Wand Hit\". " + target->getName() + " takes Attack Damage malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
         }
         else if (choice == 2) {
             target->setCurrentAttackPower(target->getCurrentAttackPower() - target->getCurrentAttackPower() * 0.05);
-            LogManager::getInstance().addLog("Claire uses \"Wand Hit\"." + target->getName() + " takes Attack Power malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+            LogManager::getInstance().addLog("Claire uses \"Wand Hit\". " + target->getName() + " takes Attack Power malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
         }
         else if (choice == 3) {
             target->setCurrentArmor(target->getCurrentArmor() - target->getCurrentArmor() * 0.05);
-            LogManager::getInstance().addLog("Claire uses \"Wand Hit\"." + target->getName() + " takes Armor malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+            LogManager::getInstance().addLog("Claire uses \"Wand Hit\". " + target->getName() + " takes Armor malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
         }
         else if (choice == 4) {
             target->setCurrentPowerResist(target->getCurrentPowerResist() - target->getCurrentPowerResist() * 0.05);
-            LogManager::getInstance().addLog("Claire uses \"Wand Hit\"." + target->getName() + " takes Power Resist malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+            LogManager::getInstance().addLog("Claire uses \"Wand Hit\". " + target->getName() + " takes Power Resist malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
         }
         else if (choice == 5) {
             target->setCurrentSpeed(target->getCurrentSpeed() + currentAttackPower);
-            LogManager::getInstance().addLog("Claire uses \"Wand Hit\"." + target->getName() + " takes Speed malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+            LogManager::getInstance().addLog("Claire uses \"Wand Hit\". " + target->getName() + " takes Speed malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
         }
     }
 
@@ -84,7 +85,7 @@ void Claire::secondAbility(std::shared_ptr<Character>target)
 {
     target->setCurrentArmor(target->getCurrentArmor() * 1.05);
     target->setCurrentPowerResist(target->getCurrentPowerResist() * 1.05);
-    LogManager::getInstance().addLog("Claire uses \"Resist Buff\"." + target->getName() + " takes Armor and Power Resist bonus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+    LogManager::getInstance().addLog("Claire uses \"Resist Buff\". " + target->getName() + " takes Armor and Power Resist bonus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD2 = 4;
 }
@@ -92,7 +93,7 @@ void Claire::secondAbility(std::shared_ptr<Character>target)
 void Claire::thirdAbility(std::shared_ptr<Enemy>target)
 {
     target->setCurrentSpeed(target->getCurrentSpeed() + currentAttackPower);
-    LogManager::getInstance().addLog("Claire uses \"Slow Debuff\"." + target->getName() + " takes Speed malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+    LogManager::getInstance().addLog("Claire uses \"Slow Debuff\". " + target->getName() + " takes Speed malus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD3 = 6;
 }
@@ -105,7 +106,7 @@ void Claire::fourthAbility(std::shared_ptr<Character>target)
     target->setCurrentPowerResist(target->getCurrentPowerResist() * 1.1);
     target->setCurrentSpeed(target->getCurrentSpeed() - currentAttackPower);
 
-    LogManager::getInstance().addLog("Claire uses \"Mega Buff\"." + target->getName() + " takes a bonus in all stats.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+    LogManager::getInstance().addLog("Claire uses \"Mega Buff\". " + target->getName() + " takes a bonus in all stats.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD4 = 11;
 }

@@ -136,12 +136,14 @@ void Whale::firstAbility(const std::vector<Character*>& targets) {
     for (auto& target : targets) {
         float dmgDealt = currentAttackPower * (1.0f - target->getCurrentPowerResist() / 100.0f);
         target->setCurrentHealth(std::max(0.0f, target->getCurrentHealth() - dmgDealt));
+        LogManager::getInstance().addLog("Whale attacks "+ target->getName() + " with \"Ocean wave\".", ImVec4(240, 0.518, 0.518, 1));
     }
 }
 
 void Whale::secondAbility(const std::vector<Enemy*>& targets) {
     for (auto& target : targets) {
         target->setCurrentHealth(target->getCurrentHealth() + target->getMaxHealth() * 5.0f / 100.0f);
+        LogManager::getInstance().addLog("Whale heals "+ target->getName() + " by 5% her passive with \"Ocean Call\".", ImVec4(240, 0.518, 0.518, 1));
     }
 }
 
@@ -168,6 +170,7 @@ std::shared_ptr<Artefact> Whale::createDrop() {
         return nullptr;
     }
     else if (roll < 17.5f) {
+        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Scale of the Whale !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<ScaleOfTheWhale>();
         return nullptr;
     }

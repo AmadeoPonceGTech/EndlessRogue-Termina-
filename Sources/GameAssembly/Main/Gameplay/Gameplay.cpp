@@ -332,7 +332,7 @@ void Gameplay::drawImGui() {
 
         ImGui::BeginChild(("Character" + std::to_string(i)).c_str(), ImVec2(-1, 200), true);
 
-        ImGui::Text("Character: %s,                    HP : %.0f", chara->getName().c_str(), chara->getCurrentHealth());
+        ImGui::Text("Character: %s               HP : %.2f", chara->getName().c_str(), chara->getCurrentHealth());
         ImGui::Dummy(ImVec2(0,5));
         ImGui::Text("Statistics");
         ImVec2 p_min = ImGui::GetItemRectMin();
@@ -340,11 +340,11 @@ void Gameplay::drawImGui() {
         ImGui::GetWindowDrawList()->AddLine(ImVec2(p_min.x, p_max.y - 1),ImVec2(p_max.x, p_max.y - 1),IM_COL32(255, 255, 255, 255),1.0f );
 
         ImGui::Dummy(ImVec2(0,10));
-        ImGui::Text("Attack Damage : %.0f", chara->getCurrentAttackDamage());
-        ImGui::Text("Magic Damage : %.0f", chara->getCurrentAttackPower());
+        ImGui::Text("Attack Damage : %.2f", chara->getCurrentAttackDamage());
+        ImGui::Text("Magic Damage : %.2f", chara->getCurrentAttackPower());
         ImGui::Text("Armor : %.2f", chara->getCurrentArmor());
         ImGui::Text("Magic Resistance : %.2f", chara->getCurrentPowerResist());
-        ImGui::Text("Speed : %.1f", chara->getCurrentSpeed());
+        ImGui::Text("Speed : %.2f", chara->getCurrentSpeed());
 
         ImGui::EndChild();
 
