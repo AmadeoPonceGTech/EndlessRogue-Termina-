@@ -221,7 +221,7 @@ std::shared_ptr<Artefact> Rat::createDrop() {
     }
     else if (roll < 15.f) {
         LogManager::getInstance().addLog("You obtained a Rare Artefact: Rat tooth !", ImVec4(1, 0, 0, 1));
-        //return std::make_shared<RatTooth>();
+        return std::make_shared<RatTooth>();
         return nullptr;
     }
     else if (roll < 17.f) {

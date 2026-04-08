@@ -17,12 +17,11 @@
 
 // Rare
 //#include "../../Artefacts/Rare/ChaoticArmor.h"
-//#include "../../Artefacts/Rare/Honey.h"
 //#include "../../Artefacts/Rare/KnightsHelmet.h"
 //#include "../../Artefacts/Rare/Scale.h"
 //#include "../../Artefacts/Rare/Feather.h"
 //#include "../../Artefacts/Rare/BurningBone.h"
-//#include "../../Artefacts/Rare/RatTooth.h"
+#include "../../Artefacts/Rare/RatTooth.h"
 //#include "../../Artefacts/Rare/WolfTooth.h"
 
 // Epic

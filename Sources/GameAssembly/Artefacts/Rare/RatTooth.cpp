@@ -1,10 +1,10 @@
 #include "RatTooth.h"
 
 RatTooth::RatTooth() {
-    name = "Bear's Foot";
-    description = "Heal 2% / artefact's level health of every damage dealt.";
-    droppedBy = "Bear";
-    quality = Quality::COMMON;
+    name = "Rat Tooth";
+    description = "Boost poison damage by 20% / artefact's level.";
+    droppedBy = "Rat";
+    quality = Quality::RARE;
 }
 
 void RatTooth::actingArtefact(Entity& target) {
