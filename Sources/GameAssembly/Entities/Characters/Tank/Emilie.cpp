@@ -44,6 +44,11 @@ void Emilie::firstAbility(std::vector<std::shared_ptr<Entity>> enemies)
         if (target != nullptr){
             float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
             target->setCurrentHealth(target->getCurrentHealth() - dmgDealt / 3);
+            LogManager::getInstance().addLog("Emilie uses \"Earthquake\"." + target->getName() + " takes damages.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+
+            if (artefact) {
+                artefact->onInflictedDamage(*this);
+            }
         }
     }
 
@@ -53,6 +58,7 @@ void Emilie::firstAbility(std::vector<std::shared_ptr<Entity>> enemies)
 void Emilie::secondAbility(std::shared_ptr<Character> target)
 {
     target->setCurrentPowerResist(target->getCurrentPowerResist() + maxPowerResist / 2);
+    LogManager::getInstance().addLog("Emilie uses \"Share\"." + target->getName() + " takes Power Resist bonus.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD2 = 5;
 }
@@ -63,6 +69,11 @@ void Emilie::thirdAbility(std::vector<std::shared_ptr<Entity>> enemies)
         float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
         target->setCurrentHealth(target->getCurrentHealth() - dmgDealt / 4);
         target->setIsStun(true);
+        LogManager::getInstance().addLog("Emilie uses \"Punch'em all\"." + target->getName() + " takes damages and is stunned.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
+
+        if (artefact) {
+            artefact->onInflictedDamage(*this);
+        }
     }
 
     CD3 = 5;
@@ -102,6 +113,12 @@ bool Emilie::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
     switch (currentState) {
         case PlayerState::STARTTURN : {
             startTurn();
+
+            if (artefact && !artefactAlreadyUsed) {
+                artefact->actingArtefact(*this);
+                artefactAlreadyUsed = true;
+            }
+
             currentState = PlayerState::CHOOSINGABILITY;
             break;
         }
@@ -208,6 +225,10 @@ bool Emilie::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
 
         case PlayerState::ENDTURN : {
             endTurn();
+            if (artefact) {
+                artefact->actingArtefactEveryTurns(*this);
+            }
+
             currentState = PlayerState::STARTTURN;
             return true;
         }

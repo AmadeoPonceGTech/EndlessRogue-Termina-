@@ -13,6 +13,10 @@ enum class EInventoryState {
 
 
 class Inventory {
+    std::unordered_map<std::string, int> items;
+    std::vector<std::shared_ptr<Artefact>> artefactsInventory;
+    std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>> mapCharacterToArtefact;
+
 public:
     Inventory();
     void addItem(const std::string& name, int amount);
@@ -25,9 +29,7 @@ public:
 
     void drawArtefactsInventory(std::vector<std::shared_ptr<Entity>>& characters);
 
-    const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& getMapCharacterToArtefact() const {
-        return mapCharacterToArtefact;
-    }
+    const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& getMapCharacterToArtefact() const;
 
     void setMapCharacterToArtefact(const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& newMap) {
         mapCharacterToArtefact = newMap;
@@ -44,4 +46,5 @@ private:
 
     void checkArtefactsInventory();
 
+    void setMapCharacterToArtefact(const std::unordered_map<std::shared_ptr<Character>, std::shared_ptr<Artefact>>& newMap);
 };

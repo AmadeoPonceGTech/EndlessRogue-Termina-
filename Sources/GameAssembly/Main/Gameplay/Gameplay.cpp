@@ -188,7 +188,7 @@ void Gameplay::UpdateFight() {
 
             for (auto& e : speedManagerVec) {
                 if (e->getCurrentHealth() <= 0) {
-                    LogManager::getInstance().AddLog( e->getName() + " is dead.", ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+                    LogManager::getInstance().addLog( e->getName() + " is dead.", ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
                 }
             }
 
@@ -201,6 +201,13 @@ void Gameplay::UpdateFight() {
             for (auto& enemy : enemyManager->getEnemies())
             {
                 if (enemy->getCurrentHealth() <= 0) {
+
+                    if (enemy->getHasARevive()) {
+                        enemy->setCurrentHealth(enemy->getMaxHealth() / 2);
+                        enemy->setHasARevive(false);
+                        LogManager::getInstance().addLog(enemy->getName() + " revive !", ImVec4(0, 0, 0, 1));
+                    }
+
                     std::shared_ptr<Enemy> e = std::dynamic_pointer_cast<Enemy>(enemy);
 
                     auto drop = e->createDrop();
@@ -378,14 +385,17 @@ void Gameplay::Gameloop()
 
         case EGameRunState::STARTFIGHT :
             StartFight();
-            LogManager::getInstance().AddLog("New Fight");
+            LogManager::getInstance().addSeparator();
+            std::cout << "Fight started" << std::endl;
+            LogManager::getInstance().addSeparator();
+            LogManager::getInstance().addLog("New Fight");
             runState = EGameRunState::UPDATEFIGHT;
             break;
 
         case EGameRunState::UPDATEFIGHT :
             UpdateFight();
             drawImGui();
-            LogManager::getInstance().DrawImGui();
+            LogManager::getInstance().drawImGui();
             break;
 
         case EGameRunState::ENDFIGHT :

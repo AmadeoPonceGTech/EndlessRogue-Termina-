@@ -43,6 +43,7 @@ void Marcus::firstAbility(std::shared_ptr<Character>target)
 
     target->setCurrentHealth(target->getCurrentHealth() + HPHealed);
     if (target->getCurrentHealth() > target->getMaxHealth()) { target->setCurrentHealth(target->getMaxHealth()); }
+    LogManager::getInstance().addLog("Marcus uses \"Heal\"." + target->getName() + " is healed.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD1 = 1;
 }
@@ -54,6 +55,7 @@ void Marcus::secondAbility(std::vector<std::shared_ptr<Entity>>& characters)
     for (auto& target : characters) {
         target->setCurrentHealth(target->getCurrentHealth() + HPHealed);
         if (target->getCurrentHealth() > target->getMaxHealth()) { target->setCurrentHealth(target->getMaxHealth()); }
+        LogManager::getInstance().addLog("Marcus uses \"Multi-Heal\"." + target->getName() + " is healed.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
     }
 
     CD2 = 4;
@@ -70,6 +72,7 @@ void Marcus::thirdAbility(std::shared_ptr<Character>target)
     target->setCurrentAttackDamage(target->getMaxAttackDamage());
     target->setCurrentArmor(target->getMaxArmor());
     target->setCurrentPowerResist(target->getMaxPowerResist());
+    LogManager::getInstance().addLog("Marcus uses \"Cleans\"." + target->getName() + "'s debuffs are suppressed.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD3 = 3;
 }
@@ -77,6 +80,7 @@ void Marcus::thirdAbility(std::shared_ptr<Character>target)
 void Marcus::fourthAbility(std::shared_ptr<Character>target)
 {
     target->setCurrentHealth(target->getMaxHealth() / 2);
+    LogManager::getInstance().addLog("Marcus uses \"Resurrection\"." + target->getName() + " is revived.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD4 = 11;
 }
@@ -108,7 +112,7 @@ bool Marcus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
             startTurn();
 
             if (artefact && !artefactAlreadyUsed) {
-                artefact->ActingArtefact(*this);
+                artefact->actingArtefact(*this);
                 artefactAlreadyUsed = true;
             }
 
@@ -236,7 +240,7 @@ bool Marcus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::ve
             endTurn();
 
             if (artefact) {
-                artefact->ActingArtefactEveryTurns(*this);
+                artefact->actingArtefactEveryTurns(*this);
             }
 
             currentState = PlayerState::STARTTURN;

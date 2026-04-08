@@ -4,7 +4,7 @@
 Skeleton::Skeleton(int floor) {
     name = "Skeleton";
     entityClass = EClass::CLOSEDDPS;
-    description = "Old pack of bones sticking together";
+    description = "Skeleton, an undead creature made up by a pack of bones sticking up together like if someone had filled it with magic.";
     biome = Biome::GRAVEYARD;
 
     level = floor;
@@ -45,6 +45,8 @@ Skeleton::Skeleton(int floor) {
     burnCD = 0;
     tauntCD = 0;
     isStun = false;
+
+    setHasARevive(true);
 }
 
 void Skeleton::Start() {}
@@ -118,17 +120,15 @@ bool Skeleton::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::
     return false;
 }
 
-void Skeleton::dropArtefacts() {
-
-}
-
 void Skeleton::firstAbility(Character& target) {
     float dmgDealt = currentAttackDamage * (1.0f - target.getCurrentArmor() / 100.0f);
     target.setCurrentHealth(std::max(0.0f, target.getCurrentHealth() - dmgDealt));
+    LogManager::getInstance().addLog("Skeleton " + target.getName() + " with \"Slash\".", ImVec4(240, 0.518, 0.518, 1));
 }
 
 void Skeleton::secondAbility() {
     baseAttackDamage = baseAttackDamage + (baseAttackDamage * 10.0f / 100.0f);
+    LogManager::getInstance().addLog("Skeleton uses \"Calcium\", he takes Attack Damage bonus.", ImVec4(240, 0.518, 0.518, 1));
 
     CD2 = 3;
 }
@@ -138,7 +138,6 @@ void Skeleton::thirdAbility() {
 }
 
 void Skeleton::fourthAbility() {
-
 }
 
 std::shared_ptr<Artefact> Skeleton::createDrop() {
@@ -149,6 +148,7 @@ std::shared_ptr<Artefact> Skeleton::createDrop() {
     float roll = dist(rng);
 
     if (roll < 10.f) {
+        LogManager::getInstance().addLog("You obtained a Common Artefact: Toe Bone !", ImVec4(1, 0, 0, 1));
         return std::make_shared<ToeBone>();
     }
     else if (roll < 15.f) {
@@ -158,6 +158,7 @@ std::shared_ptr<Artefact> Skeleton::createDrop() {
         return nullptr;
     }
     else if (roll < 17.5f) {
+        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Humerus !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<Humerus>();
         return nullptr;
     }

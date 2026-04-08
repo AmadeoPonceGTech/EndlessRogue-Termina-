@@ -76,6 +76,8 @@ protected:
 
     float generatedShield = 0.5f;
 
+    bool hasARevive;
+
 public:
     virtual ~Entity() = default;
 
@@ -138,6 +140,7 @@ public:
     EClass getClass() const;
 
     float getGeneratedShield() const;
+    bool getHasARevive();
 
 #pragma endregion
 
@@ -167,6 +170,7 @@ public:
     void setIsDead(bool newIsDead);
 
     void setGeneratedShield(float newShield);
+    void setHasARevive(bool _hasARevive);
 
 #pragma endregion
 

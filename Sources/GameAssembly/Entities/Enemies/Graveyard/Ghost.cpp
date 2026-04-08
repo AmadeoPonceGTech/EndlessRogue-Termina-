@@ -123,13 +123,10 @@ bool Ghost::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vec
     return false;
 }
 
-void Ghost::dropArtefacts() {
-
-}
-
 void Ghost::firstAbility(Character& target) {
     float dmgDealt = currentAttackPower * (1.0f - target.getCurrentPowerResist() / 100.0f);
     target.setCurrentHealth(std::max(0.0f, target.getCurrentHealth() - dmgDealt));
+    LogManager::getInstance().addLog("Ghost attacks " + target.getName() + " with \"Poltergeist\".", ImVec4(240, 0.518, 0.518, 1));
 }
 
 void Ghost::secondAbility(Character& target) {
@@ -145,18 +142,23 @@ void Ghost::secondAbility(Character& target) {
 
         if (choice == 1) {
             target.setCurrentAttackDamage(std::max(0.0f, target.getCurrentAttackDamage() - debuff));
+            LogManager::getInstance().addLog("Ghost uses \"Haunting\"." + target.getName() + " takes Attack Damage malus.", ImVec4(240, 0.518, 0.518, 1));
         }
         else if (choice == 2) {
             target.setCurrentAttackPower(std::max(0.0f, target.getCurrentAttackPower() - debuff));
+            LogManager::getInstance().addLog("Ghost uses \"Haunting\"." + target.getName() + " takes Attack Power malus.", ImVec4(240, 0.518, 0.518, 1));
         }
         else if (choice == 3) {
             target.setCurrentArmor(std::max(0.0f, target.getCurrentArmor() - debuff));
+            LogManager::getInstance().addLog("Ghost uses \"Haunting\"." + target.getName() + " takes Armor malus.", ImVec4(240, 0.518, 0.518, 1));
         }
         else if (choice == 4) {
             target.setCurrentPowerResist(std::max(0.0f, target.getCurrentPowerResist() - debuff));
+            LogManager::getInstance().addLog("Ghost uses \"Haunting\"." + target.getName() + " takes Power Resist malus.", ImVec4(240, 0.518, 0.518, 1));
         }
         else if (choice == 5) {
             target.setCurrentSpeed(std::max(0.0f, target.getCurrentSpeed() + debuff));
+            LogManager::getInstance().addLog("Ghost uses \"Haunting\"." + target.getName() + " takes Speed malus.", ImVec4(240, 0.518, 0.518, 1));
         }
     }
 
@@ -178,18 +180,23 @@ void Ghost::fourthAbility(Character& target) {
 
             if (choice == 1) {
                 target.setCurrentAttackDamage(std::max(0.0f, target.getCurrentAttackDamage() - debuff));
+                LogManager::getInstance().addLog("Ghost uses \"Ghost Spirits\"." + target.getName() + " takes Attack Damage malus.", ImVec4(240, 0.518, 0.518, 1));
             }
             else if (choice == 2) {
                 target.setCurrentAttackPower(std::max(0.0f, target.getCurrentAttackPower() - debuff));
+                LogManager::getInstance().addLog("Ghost uses \"Ghost Spirits\"." + target.getName() + " takes Attack Power malus.", ImVec4(240, 0.518, 0.518, 1));
             }
             else if (choice == 3) {
                 target.setCurrentArmor(std::max(0.0f, target.getCurrentArmor() - debuff));
+                LogManager::getInstance().addLog("Ghost uses \"Ghost Spirits\"." + target.getName() + " takes Armor malus.", ImVec4(240, 0.518, 0.518, 1));
             }
             else if (choice == 4) {
                 target.setCurrentPowerResist(std::max(0.0f, target.getCurrentPowerResist() - debuff));
+                LogManager::getInstance().addLog("Ghost uses \"Ghost Spirits\"." + target.getName() + " takes Power Resist malus.", ImVec4(240, 0.518, 0.518, 1));
             }
             else if (choice == 5) {
                 target.setCurrentSpeed(std::max(0.0f, target.getCurrentSpeed() + debuff));
+                LogManager::getInstance().addLog("Ghost uses \"Ghost Spirits\"." + target.getName() + " takes Speed malus.", ImVec4(240, 0.518, 0.518, 1));
             }
         }
     }
@@ -208,13 +215,16 @@ std::shared_ptr<Artefact> Ghost::createDrop() {
         return nullptr;
     }
     else if (roll < 15.f) {
+        LogManager::getInstance().addLog("You obtained a Rare Artefact: Burning Bone !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<BurningBone>();
         return nullptr;
     }
     else if (roll < 17.f) {
+        LogManager::getInstance().addLog("You obtained an Epic Artefact: Casper's Encyclopedia !", ImVec4(1, 0, 0, 1));
         return std::make_shared<CasperSEncyclopedia>();
     }
     else if (roll < 17.5f) {
+        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Ectoplasm !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<Ectoplasm>();
         return nullptr;
     }

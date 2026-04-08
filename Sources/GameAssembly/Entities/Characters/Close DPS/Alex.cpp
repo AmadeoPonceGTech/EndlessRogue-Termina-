@@ -43,6 +43,7 @@ void Alex::firstAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+    LogManager::getInstance().addLog("Alex uses \"Sword Slash\"." + target->getName() + " takes damages.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     if (artefact) {
         artefact->onInflictedDamage(*this);
@@ -54,6 +55,7 @@ void Alex::firstAbility(std::shared_ptr<Enemy>target)
 void Alex::secondAbility()
 {
     isParring = true;
+    LogManager::getInstance().addLog("Alex uses \"Parade\".", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
 
     CD2 = 3;
 }
@@ -62,6 +64,7 @@ void Alex::thirdAbility(std::shared_ptr<Enemy>target)
 {
     float dmgDealt = currentAttackDamage * 2 - currentAttackDamage * (target->getCurrentArmor() / 100);
     target->setCurrentHealth(target->getCurrentHealth() - dmgDealt);
+    LogManager::getInstance().addLog("Alex uses \"Heavy Sword Slash\"." + target->getName() + " takes damages.", ImVec4(0.6f, 0.85f, 0.6f, 1.0f));
     if (artefact) {
         artefact->onInflictedDamage(*this);
     }
@@ -172,7 +175,7 @@ bool Alex::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vect
             startTurn();
 
             if (artefact && !artefactAlreadyUsed) {
-                artefact->ActingArtefact(*this);
+                artefact->actingArtefact(*this);
                 artefactAlreadyUsed = true;
             }
 
@@ -262,7 +265,7 @@ bool Alex::entityTurn(std::vector<std::shared_ptr<Entity>> characters, std::vect
             endTurn();
 
             if (artefact) {
-                artefact->ActingArtefactEveryTurns(*this);
+                artefact->actingArtefactEveryTurns(*this);
             }
 
             currentState = PlayerState::STARTTURN;
