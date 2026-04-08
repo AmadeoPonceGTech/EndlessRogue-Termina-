@@ -60,7 +60,7 @@ void Entity::manageStatusEffect()
             isBurnt = false;
             burnCD--;
         }
-        LogManager::getInstance().addLog(this->getName() + "takes damages from its burn !", ImVec4(1.0f, 0.2f, 0.0f, 1.0f));
+        LogManager::getInstance().addLog(this->getName() + " takes damages from its burn !", ImVec4(1.0f, 0.2f, 0.0f, 1.0f));
     }
 
     if (isTaunt)
@@ -75,12 +75,12 @@ void Entity::manageStatusEffect()
             tauntCD--;
             isTaunt = false;
         }
-        LogManager::getInstance().addLog(this->getName() + "is taunt !", ImVec4(1.0f, 0.6f, 0.0f, 1.0f));
+        LogManager::getInstance().addLog(this->getName() + " is taunt !", ImVec4(1.0f, 0.6f, 0.0f, 1.0f));
     }
 
     if (isStun) {
         isStun = false;
-        LogManager::getInstance().addLog(this->getName() + "is stun !", ImVec4(1.0f, 1.0f, 0.0f, 1.0f));
+        LogManager::getInstance().addLog(this->getName() + " is stun !", ImVec4(1.0f, 1.0f, 0.0f, 1.0f));
     }
 }
 
