@@ -6,6 +6,7 @@
 #include "../Termina/Renderer/Components/CameraComponent.hpp"
 #include "../Termina/Renderer/Components/MeshComponent.hpp"
 #include "../Termina/Scripting/API/ScriptableComponent.hpp"
+#include "../Termina/World/Actor.hpp"
 
 #include "Entities/Characters/Close DPS/Alex.h"
 #include "Entities/Characters/Close DPS/Penelope.h"
@@ -167,8 +168,20 @@ void Game::Update(float deltaTime)
 
                         auto entityActor = Instantiate(it->second);
                         entityActor->SetName(character->getName().c_str());
-
                         gameEntity.push_back(entityActor);
+                        for (auto& child : GetChildren()) {
+                            std::string name = child->GetName();
+                            if (name.find("Slot") != std::string::npos) {
+                                size_t pos = name.find("Slot ");
+                                int slotIndex = std::stoi(name.substr(pos + 5)) - 1;
+                                if (slotIndex >= 0 && slotIndex < gameEntity.size()) {
+                                    auto entity = gameEntity[slotIndex];
+                                    glm::vec3 slotPos = child->GetComponent<Termina::Transform>().GetPosition();
+                                    entity->GetComponent<Termina::Transform>().SetPosition(glm::vec3(slotPos.x,entity->GetComponent<Termina::Transform>().GetPosition().y, slotPos.z));
+                                }
+                            }
+                        }
+
                     }
                 }
             }
