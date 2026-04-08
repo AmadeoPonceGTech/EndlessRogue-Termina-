@@ -52,6 +52,8 @@ private:
 
     int currentEntityIndex = 0;
 
+public:
+
     Gameplay();
     void startRun();
     void endRun();

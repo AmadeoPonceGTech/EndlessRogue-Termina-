@@ -377,7 +377,7 @@ void Gameplay::gameloop()
 {
     switch (runState) {
         case EGameRunState::STARTRUN :
-            StartRun();
+            startRun();
             runState = EGameRunState::CHECKUPGRADE;
             break;
 
@@ -387,24 +387,24 @@ void Gameplay::gameloop()
             break;
 
         case EGameRunState::STARTFIGHT :
-            StartFight();
+            startFight();
             LogManager::getInstance().AddLog("New Fight");
             runState = EGameRunState::UPDATEFIGHT;
             break;
 
         case EGameRunState::UPDATEFIGHT :
-            UpdateFight();
+            updateFight();
             drawImGui();
             LogManager::getInstance().DrawImGui();
             break;
 
         case EGameRunState::ENDFIGHT :
-            EndFight();
+            endFight();
             runState = EGameRunState::CHECKUPGRADE;
             break;
 
         case EGameRunState::ENDRUN :
-            EndRun();
+            endRun();
             break;
     }
 }

@@ -9,10 +9,11 @@
 #include "../../ThirdParty/ImGui/imgui.h"
 #include "../../ThirdParty/ImGui/imgui_internal.h"
 
+
+
 #pragma region Gameplayincludes
 #include "../Termina/Scripting/API/ScriptableComponent.hpp"
-#include "Entities/Characters/Range DPS/Brutus.h"
-#include "Main/Gameplay/Gameplay.h"
+#include "Gameplay/Gameplay.h"
 #pragma endregion Gameplayincludes
 
 namespace Termina {
@@ -38,7 +39,8 @@ public:
     void Start()  override;
     void Update(float deltaTime) override;
 
-    void intiRun();
+    void initRun();
+    void cleanGameEntity();
 
 private :
     std::unique_ptr<Gameplay> gameplay;
@@ -51,6 +53,8 @@ private :
 
     bool runStarted = false;
 
+
+
     TerminaScript::Prefab p_Diane;
     TerminaScript::Prefab p_Emilie;
     TerminaScript::Prefab p_Claire;
@@ -61,5 +65,5 @@ private :
     TerminaScript::Prefab p_Penelope;
 
     std::unordered_map<std::string, TerminaScript::Prefab> characterPrefabMap;
-
+    std::vector<Termina::Actor*> gameEntity;
 };

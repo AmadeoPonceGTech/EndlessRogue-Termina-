@@ -76,7 +76,7 @@ void Game::Update(float deltaTime)
 
         case EGameState::Menu :
         {
-
+            //cleanGameEntity();
             ImGui::SetNextWindowSize(ImVec2(800, 800));
             ImGui::Begin("MainWindow");
 
@@ -161,12 +161,12 @@ void Game::Update(float deltaTime)
         }
         case EGameState::Run :
             if (gameplay->teamIsComplete() && !runStarted) {
-                intiRun();
-            }
-            runStarted = true;
-            if (!runStarted) {
-                gameplay->setRunState(EGameRunState::STARTRUN);
+                initRun();
                 runStarted = true;
+            }
+
+            if (runStarted) {
+                gameplay->setRunState(EGameRunState::STARTRUN);
             }
             gameplay->gameloop();
             if (gameplay->getRunEnded()) {
@@ -185,9 +185,7 @@ void Game::Update(float deltaTime)
 
 }
 
-void Game::intiRun() {
-    std::vector<Termina::Actor*> gameEntity;
-
+void Game::initRun() {
     for (auto& character : gameplay->getActiveCharacters()) {
         auto it = characterPrefabMap.find(character->getName());
         if (it != characterPrefabMap.end()) {
@@ -212,5 +210,12 @@ void Game::intiRun() {
     }
     for (auto& ennemi : gameplay->getEnemyVector()) {
         std::cout << ennemi->getName().c_str() << std::endl;
+    }
+}
+
+void Game::cleanGameEntity() {
+    for (auto& entity : gameEntity) {
+        Destroy(entity);
+        gameEntity.clear();
     }
 }
