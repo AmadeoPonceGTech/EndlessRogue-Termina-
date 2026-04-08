@@ -47,6 +47,8 @@ void Game::Start()
     p_Alex = TerminaScript::Prefab("Assets/Prefabs/Alex.trp");
     p_Penelope = TerminaScript::Prefab("Assets/Prefabs/Penelope.trp");
 
+    p_Rat = TerminaScript::Prefab("Assets/Prefabs/Rat.trp");
+
     characterPrefabMap["Diane"] = p_Diane;
     characterPrefabMap["Emilie"] = p_Emilie;
     characterPrefabMap["Claire"] = p_Claire;
@@ -55,6 +57,8 @@ void Game::Start()
     characterPrefabMap["Edward"] = p_Edward;
     characterPrefabMap["Alex"] = p_Alex;
     characterPrefabMap["Penelope"] = p_Penelope;
+
+    characterPrefabMap["Rat"] = p_Rat;
 #pragma endregion
 }
 
@@ -162,13 +166,28 @@ void Game::Update(float deltaTime)
         case EGameState::Run :
             if (gameplay->teamIsComplete() && !runStarted) {
                 initRun();
+                gameplay->setRunState(EGameRunState::STARTRUN);
                 runStarted = true;
             }
 
-            if (runStarted) {
-                gameplay->setRunState(EGameRunState::STARTRUN);
+        gameplay->gameloop();
+        if (gameplay->getEnemySpawned())
+        {
+            for (auto& ennemi : gameplay->getEnemyVector()) {
+                auto it = characterPrefabMap.find(ennemi->getName());
+                if (it != characterPrefabMap.end())
+                {
+                    auto entityActor = Instantiate(it->second);
+                    entityActor->SetName(ennemi->getName().c_str());
+                    gameEntity.push_back(entityActor);
+                    std::cout << ennemi->getName().c_str() << std::endl;
+                }
+                else
+                    std::cout << "Not Found" << std::endl;
             }
-            gameplay->gameloop();
+            gameplay->setEnemySpawned(false);
+        }
+
             if (gameplay->getRunEnded()) {
                 gameState = EGameState::Menu;
                 gameplay->setRunEnded(false);
@@ -208,14 +227,12 @@ void Game::initRun() {
 
         }
     }
-    for (auto& ennemi : gameplay->getEnemyVector()) {
-        std::cout << ennemi->getName().c_str() << std::endl;
-    }
+
 }
 
 void Game::cleanGameEntity() {
     for (auto& entity : gameEntity) {
         Destroy(entity);
-        gameEntity.clear();
     }
+    gameEntity.clear();
 }

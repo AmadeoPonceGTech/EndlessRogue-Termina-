@@ -52,6 +52,8 @@ private:
 
     int currentEntityIndex = 0;
 
+    bool enemySpawned = false;
+
 public:
 
     Gameplay();
@@ -80,6 +82,11 @@ public:
     void setRunEnded(bool gameEnded);
 
     bool getRunEnded() const;
+
+    bool getEnemySpawned() const { return enemySpawned; }
+    bool setEnemySpawned(bool newBool);
+
+
 
 };
 

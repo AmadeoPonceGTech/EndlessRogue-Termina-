@@ -55,6 +55,7 @@ private :
 
 
 
+
     TerminaScript::Prefab p_Diane;
     TerminaScript::Prefab p_Emilie;
     TerminaScript::Prefab p_Claire;
@@ -64,6 +65,9 @@ private :
     TerminaScript::Prefab p_Alex;
     TerminaScript::Prefab p_Penelope;
 
+    TerminaScript::Prefab p_Rat;
+
     std::unordered_map<std::string, TerminaScript::Prefab> characterPrefabMap;
     std::vector<Termina::Actor*> gameEntity;
+    std::vector<Termina::Actor*> enemyEntity;
 };

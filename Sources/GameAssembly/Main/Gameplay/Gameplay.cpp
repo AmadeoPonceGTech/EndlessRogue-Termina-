@@ -164,85 +164,76 @@ void Gameplay::startFight() {
     }
 
     std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
+    enemySpawned = true;
 }
 
-void Gameplay::updateFight() {
-    std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
-    for (auto it = speedManagerVec.begin(); it != speedManagerVec.end(); ) {
-        auto entity = *it;
-        //std::cout << entity->getName() << std::endl;
-        if (entity->entityTurn(activeCharacters, enemyManager->getEnemies())) {
-            it++;
-        };
-        std::erase_if(speedManagerVec, [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; });
-    }
-    std::erase_if(enemyManager->getEnemies(), [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; });
+void Gameplay::updateFight()
+{
+    if (speedManagerVec.empty())
+        return;
 
-    if (!speedManagerVec.empty())
+    // Sécurité index
+    if (currentEntityIndex >= speedManagerVec.size())
+        currentEntityIndex = 0;
+
+    auto& entity = speedManagerVec[currentEntityIndex];
+
+    bool finished = false;
+
+    if (!aliveCharaVec.empty() && !enemyManager->getEnemies().empty()) {
+        finished = entity->entityTurn(aliveCharaVec, enemyManager->getEnemies());
+    }
+
+    if (finished)
     {
-        auto& entity = speedManagerVec[currentEntityIndex];
+        std::cout << entity->getName() << " finished turn " << std::endl;
 
-        bool finished = false;
+        // Passer au prochain
+        currentEntityIndex++;
 
-        if (!aliveCharaVec.empty() and !enemyManager->getEnemies().empty()) {
-            finished = entity->entityTurn(aliveCharaVec, enemyManager->getEnemies());
-        }
+        if (currentEntityIndex >= speedManagerVec.size())
+            currentEntityIndex = 0;
 
-        if (finished)
-        {
-            std::cout << entity->getName() << " finished turn " << std::endl;
-            currentEntityIndex++;
-
-            if (currentEntityIndex >= speedManagerVec.size())
-                currentEntityIndex = 0;
-
-            for (auto& e : speedManagerVec) {
-                if (e->getCurrentHealth() <= 0) {
-                    LogManager::getInstance().AddLog( e->getName() + " is dead.", ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
-                }
-            }
-
-            if (std::erase_if(speedManagerVec, [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; })) {
-                std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
-            }
-            if (std::erase_if(aliveCharaVec, [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; })) {
-                std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
-            }
-            for (auto& enemy : enemyManager->getEnemies())
-            {
-                if (enemy->getCurrentHealth() <= 0) {
-                    std::shared_ptr<Enemy> e = std::dynamic_pointer_cast<Enemy>(enemy);
-
-                    auto drop = e->createDrop();
-                    if (drop != nullptr) {
-                        inventory->addArtefact(drop);
-                    }
-
-                    float xpToAdd = e->getCurrentExpDrop() / 4;
-
-                    for (auto& chara : aliveCharaVec) {
-                        std::shared_ptr<Character> c = std::dynamic_pointer_cast<Character>(chara);
-                        c->addCurrentXP(xpToAdd);
-                    }
-
-                    playerXP->addCurrentXP(e->getCurrentExpDrop());
-                }
-            }
-            if (std::erase_if(enemyManager->getEnemies(), [](const std::shared_ptr<Entity>& entity) { return entity->getCurrentHealth() <= 0; })) {
-                std::sort(speedManagerVec.begin(), speedManagerVec.end(), [](const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b) { return a->getCurrentSpeed() < b->getCurrentSpeed(); });
+        for (auto& e : speedManagerVec) {
+            if (e->getCurrentHealth() <= 0) {
+                LogManager::getInstance().AddLog(
+                    e->getName() + " is dead.",
+                    ImVec4(1.0f, 0.0f, 0.0f, 1.0f)
+                );
             }
         }
+
+        std::erase_if(speedManagerVec, [](const std::shared_ptr<Entity>& e) {
+            return e->getCurrentHealth() <= 0;
+        });
+
+        std::erase_if(aliveCharaVec, [](const std::shared_ptr<Entity>& e) {
+            return e->getCurrentHealth() <= 0;
+        });
+
+        std::erase_if(enemyManager->getEnemies(), [](const std::shared_ptr<Entity>& e) {
+            return e->getCurrentHealth() <= 0;
+        });
+
+        std::sort(speedManagerVec.begin(), speedManagerVec.end(),
+            [](const std::shared_ptr<Entity>& a, const std::shared_ptr<Entity>& b) {
+                return a->getCurrentSpeed() < b->getCurrentSpeed();
+            });
+
+        if (currentEntityIndex >= speedManagerVec.size())
+            currentEntityIndex = 0;
     }
 
-    if (enemyManager->getEnemies().size() == 0) {
+    if (enemyManager->getEnemies().empty()) {
         runState = EGameRunState::ENDFIGHT;
     }
 
     for (auto& chara : activeCharacters) {
-        if (chara->getCurrentHealth() <= 0) chara->setCurrentHealth(0);
+        if (chara->getCurrentHealth() <= 0)
+            chara->setCurrentHealth(0);
     }
 
-    if (aliveCharaVec.size() == 0) {
+    if (aliveCharaVec.empty()) {
         runState = EGameRunState::ENDRUN;
     }
 }
@@ -275,6 +266,7 @@ void Gameplay::endFight() {
         else if (biomeChose == 2) { currentBiome = EBiome::OCEAN; }
         else if (biomeChose == 3) { currentBiome = EBiome::GRAVEYARD; }
     }
+    enemySpawned = false;
 }
 
 void Gameplay::endRun() {
@@ -479,3 +471,9 @@ bool Gameplay::getRunEnded() const { return runEnded; }
 std::vector<std::shared_ptr<Entity> > Gameplay::getActiveCharacters() { return activeCharacters;};
 
 std::vector<std::shared_ptr<Entity> > Gameplay::getEnemyVector() {return enemyManager->getEnemies();}
+
+bool Gameplay::setEnemySpawned(bool newBool)
+{
+    enemySpawned = newBool;
+    return true;
+}
