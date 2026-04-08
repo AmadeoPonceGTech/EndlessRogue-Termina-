@@ -3,7 +3,7 @@
 
 Eel::Eel(int floor) {
     name = "Eel";
-    entityClass = EClass::ASSASSIN;
+    entityClass = EClass::CLOSEDDPS;
     description = "A sneaky fish slipping away when caught.";
     biome = Biome::OCEAN;
 

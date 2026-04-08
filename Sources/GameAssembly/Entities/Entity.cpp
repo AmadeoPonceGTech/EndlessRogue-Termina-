@@ -97,8 +97,6 @@ void Entity::resetStats() {
 std::string Entity::getName() const { return name; }
 std::string Entity::getStringClass() const {
     switch (entityClass) {
-        case EClass::ASSASSIN :
-            return "Assassin";
         case EClass::CLOSEDDPS :
             return "Close DPS";
         case EClass::RANGEDDPS :

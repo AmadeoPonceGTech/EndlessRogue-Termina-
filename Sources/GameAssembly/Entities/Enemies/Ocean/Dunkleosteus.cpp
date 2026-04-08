@@ -131,19 +131,19 @@ bool Dunkleosteus::entityTurn(std::vector<std::shared_ptr<Entity>> characters, s
 
 void Dunkleosteus::firstAbility(Character& target) {
     float multiplier = 1.0f;
-    if (target.getClass() == EClass::ASSASSIN | target.getClass() == EClass::SUPPORT) { multiplier = 1.2f; }
+    if (target.getClass() == EClass::CLOSEDDPS | target.getClass() == EClass::SUPPORT) { multiplier = 1.2f; }
     float dmgDealt = currentAttackDamage * (1.0f - target.getCurrentArmor() / 100.0f);
     target.setCurrentHealth(std::max(0.0f, target.getCurrentHealth() - dmgDealt * multiplier));
 }
 
 void Dunkleosteus::secondAbility(Character& target1, Character& target2) {
     float multiplier1 = 1.0f;
-    if (target1.getClass() == EClass::ASSASSIN | target1.getClass() == EClass::SUPPORT) { multiplier1 = 1.2f; }
+    if (target1.getClass() == EClass::CLOSEDDPS | target1.getClass() == EClass::SUPPORT) { multiplier1 = 1.2f; }
     float dmgDealt1 = currentAttackDamage * (1.0f - target1.getCurrentArmor() / 100.0f);
     target1.setCurrentHealth(std::max(0.0f, target1.getCurrentHealth() - dmgDealt1 * multiplier1));
 
     float multiplier2 = 1.0f;
-    if (target2.getClass() == EClass::ASSASSIN | target2.getClass() == EClass::SUPPORT) { multiplier2 = 1.2f; }
+    if (target2.getClass() == EClass::CLOSEDDPS | target2.getClass() == EClass::SUPPORT) { multiplier2 = 1.2f; }
     float dmgDealt2 = currentAttackDamage * (1.0f - target2.getCurrentArmor() / 100.0f);
     target2.setCurrentHealth(std::max(0.0f, target2.getCurrentHealth() - dmgDealt2 * multiplier2));
 

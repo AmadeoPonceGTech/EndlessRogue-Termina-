@@ -9,7 +9,6 @@
 #include "../LogManager.h"
 
 enum class EClass {
-    ASSASSIN,
     CLOSEDDPS,
     RANGEDDPS,
     TANK,

@@ -3,7 +3,7 @@
 Penelope::Penelope()
 {
     name = "Penelope";
-    entityClass = EClass::ASSASSIN;
+    entityClass = EClass::CLOSEDDPS;
     description = "Penelope, hidden in the shadows, secretly eliminates all that appears in her way with her poisonous blades.";
 
     baseHealth = 25;

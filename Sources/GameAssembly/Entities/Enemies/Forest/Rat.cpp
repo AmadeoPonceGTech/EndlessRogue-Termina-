@@ -5,7 +5,7 @@
 
 Rat::Rat(int floor) {
     name = "Rat";
-    entityClass = EClass::ASSASSIN;
+    entityClass = EClass::CLOSEDDPS;
     description = "The rat is a discreet animal, very close to humans.";
     biome = Biome::FOREST;
 

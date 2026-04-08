@@ -372,21 +372,26 @@ void Gameplay::drawImGui() {
 
 void Gameplay::Gameloop()
 {
+    bool finished = false;
+
     switch (runState) {
         case EGameRunState::STARTRUN :
             StartRun();
+            playerXP->startRun();
             runState = EGameRunState::CHECKUPGRADE;
             break;
 
-        case EGameRunState::CHECKUPGRADE :
-            playerXP->upgradeSystem(currentLevel);
-            if (!playerXP->getChoosing()) runState = EGameRunState::STARTFIGHT;
+        case EGameRunState::CHECKUPGRADE : {
+            finished = playerXP->upgradeSystem(currentLevel, activeCharacters);
+            if (finished) runState = EGameRunState::STARTFIGHT;
+            }
             break;
 
         case EGameRunState::STARTFIGHT :
             StartFight();
-            LogManager::getInstance().addSeparator();
             std::cout << "Fight started" << std::endl;
+            playerXP->applyBonuses(aliveCharaVec);
+            LogManager::getInstance().addSeparator();
             LogManager::getInstance().addSeparator();
             LogManager::getInstance().addLog("New Fight");
             runState = EGameRunState::UPDATEFIGHT;
