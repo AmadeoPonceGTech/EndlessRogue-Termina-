@@ -30,12 +30,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="finished ui correction with printing status effect on characters and enemies">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Close DPS/Alex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Close DPS/Alex.cpp" afterDir="false" />
+    <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="draw artefacts info on chara">
       <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Enemies/Forest/Rat.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Enemies/Forest/Rat.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,15 +157,7 @@
       <workItem from="1775112090624" duration="163000" />
       <workItem from="1775198857203" duration="2479000" />
       <workItem from="1775716999928" duration="1817000" />
-      <workItem from="1775718852550" duration="4717000" />
-    </task>
-    <task id="LOCAL-00010" summary="added penelope and claire need to finish claire">
-      <option name="closed" value="true" />
-      <created>1774005842751</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1774005842751</updated>
+      <workItem from="1775718852550" duration="4759000" />
     </task>
     <task id="LOCAL-00011" summary="finish claire 1st ability">
       <option name="closed" value="true" />
@@ -555,7 +543,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775722593219</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="draw artefacts info on chara">
+      <option name="closed" value="true" />
+      <created>1775723597899</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1775723597899</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -585,7 +581,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added bear's salmon and cursed shield artefact" />
     <MESSAGE value="fix" />
     <MESSAGE value="added inventory" />
     <MESSAGE value="added CasperSEncyclopedia artefact" />
@@ -610,7 +605,8 @@
     <MESSAGE value="merged playerXpSystem into main" />
     <MESSAGE value="adjusted title screen + selection screen" />
     <MESSAGE value="finished ui correction with printing status effect on characters and enemies" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished ui correction with printing status effect on characters and enemies" />
+    <MESSAGE value="draw artefacts info on chara" />
+    <option name="LAST_COMMIT_MESSAGE" value="draw artefacts info on chara" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
