@@ -228,7 +228,6 @@ std::shared_ptr<Artefact> Rat::createDrop() {
         return std::make_shared<RattataSkull>();
     }
     else if (roll < 17.5f) {
-        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Rat Eye Talisman !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<RatEyeTalisman>();
         return nullptr;
     }

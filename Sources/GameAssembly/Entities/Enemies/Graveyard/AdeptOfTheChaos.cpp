@@ -183,7 +183,6 @@ std::shared_ptr<Artefact> AdeptOfTheChaos::createDrop() {
         return std::make_shared<SmokeBomb>();
     }
     else if (roll < 15.f) {
-        LogManager::getInstance().addLog("You obtained a Rare Artefact: Chaotic Armor !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<ChaoticArmor>();
         return nullptr;
     }

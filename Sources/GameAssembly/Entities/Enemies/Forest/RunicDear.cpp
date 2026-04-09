@@ -184,7 +184,6 @@ std::shared_ptr<Artefact> RunicDear::createDrop() {
         return nullptr;
     }
     else if (roll < 17.5f) {
-        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Forest Rune's !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<ForestRuneS>();
         return nullptr;
     }

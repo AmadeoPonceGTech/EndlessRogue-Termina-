@@ -199,7 +199,6 @@ std::shared_ptr<Artefact> Wolf::createDrop() {
         return nullptr;
     }
     else if (roll < 17.5f) {
-        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Alpha Medal !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<AlphaMedal>();
         return nullptr;
     }

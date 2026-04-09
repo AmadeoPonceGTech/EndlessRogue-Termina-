@@ -215,7 +215,6 @@ std::shared_ptr<Artefact> Ghost::createDrop() {
         return nullptr;
     }
     else if (roll < 15.f) {
-        LogManager::getInstance().addLog("You obtained a Rare Artefact: Burning Bone !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<BurningBone>();
         return nullptr;
     }
@@ -224,7 +223,6 @@ std::shared_ptr<Artefact> Ghost::createDrop() {
         return std::make_shared<CasperSEncyclopedia>();
     }
     else if (roll < 17.5f) {
-        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Ectoplasm !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<Ectoplasm>();
         return nullptr;
     }

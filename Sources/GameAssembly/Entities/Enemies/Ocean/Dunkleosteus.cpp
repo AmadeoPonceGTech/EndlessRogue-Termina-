@@ -174,7 +174,6 @@ std::shared_ptr<Artefact> Dunkleosteus::createDrop() {
         return nullptr;
     }
     else if (roll < 15.f) {
-        LogManager::getInstance().addLog("You obtained a Rare Artefact: Scale !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<Scale>();
         return nullptr;
     }

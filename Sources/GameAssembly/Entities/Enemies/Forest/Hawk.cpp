@@ -208,7 +208,6 @@ std::shared_ptr<Artefact> Hawk::createDrop() {
         return nullptr;
     }
     else if (roll < 15.f) {
-        LogManager::getInstance().addLog("You obtained a Common Artefact: Feather !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<Feather>();
         return nullptr;
     }

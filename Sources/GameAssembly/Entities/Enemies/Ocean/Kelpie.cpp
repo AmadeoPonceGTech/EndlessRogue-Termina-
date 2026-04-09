@@ -242,7 +242,6 @@ std::shared_ptr<Artefact> Kelpie::createDrop() {
         return nullptr;
     }
     else if (roll < 17.5f) {
-        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Seaweed !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<Seaweed>();
         return nullptr;
     }

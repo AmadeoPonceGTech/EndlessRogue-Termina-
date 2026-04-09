@@ -170,7 +170,6 @@ std::shared_ptr<Artefact> Whale::createDrop() {
         return nullptr;
     }
     else if (roll < 17.5f) {
-        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Scale of the Whale !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<ScaleOfTheWhale>();
         return nullptr;
     }

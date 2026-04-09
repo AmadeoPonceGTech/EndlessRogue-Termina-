@@ -158,7 +158,6 @@ std::shared_ptr<Artefact> Skeleton::createDrop() {
         return nullptr;
     }
     else if (roll < 17.5f) {
-        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Humerus !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<Humerus>();
         return nullptr;
     }

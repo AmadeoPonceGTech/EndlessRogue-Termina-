@@ -169,7 +169,6 @@ std::shared_ptr<Artefact> DarkKnight::createDrop() {
         return std::make_shared<KnightSBadge>();
     }
     else if (roll < 15.f) {
-        LogManager::getInstance().addLog("You obtained a Rare Artefact: Knight's Helmet !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<KnightSHelmet>();
         return nullptr;
     }
@@ -178,7 +177,6 @@ std::shared_ptr<Artefact> DarkKnight::createDrop() {
         return std::make_shared<CursedShield>();
     }
     else if (roll < 17.5f) {
-        LogManager::getInstance().addLog("You obtained a Legendary Artefact: Dark Sword !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<DarkSword>();
         return nullptr;
     }

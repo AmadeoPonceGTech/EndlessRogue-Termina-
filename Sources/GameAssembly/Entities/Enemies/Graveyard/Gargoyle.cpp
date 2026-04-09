@@ -164,7 +164,6 @@ std::shared_ptr<Artefact> Gargoyle::createDrop() {
         return nullptr;
     }
     else if (roll < 17.6f) {
-        LogManager::getInstance().addLog("You obtained a Unique Artefact: Gargoyle Skull !", ImVec4(1, 0, 0, 1));
         //return std::make_shared<GargoyleSkull>();
     }
     return nullptr;
