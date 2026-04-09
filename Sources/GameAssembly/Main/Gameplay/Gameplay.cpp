@@ -166,6 +166,7 @@ void Gameplay::StartFight() {
 }
 
 void Gameplay::UpdateFight() {
+    inventory->checkArtefactsInventory();
 
     if (!speedManagerVec.empty())
     {

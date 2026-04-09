@@ -21,13 +21,12 @@ class Inventory {
     std::shared_ptr<Artefact> targetArtefact;
     std::shared_ptr<Character> selectedCharacter;
 
-    void checkArtefactsInventory();
-
 public:
     Inventory();
     void addItem(const std::string& name, int amount);
     int getItemCount(const std::string& name) const;
     void removeItem(const std::string& name, int amount);
+    void checkArtefactsInventory();
 
     void addArtefact(std::shared_ptr<Artefact> artefact);
     std::vector<std::shared_ptr<Artefact>> getArtefactsInventory() const;
