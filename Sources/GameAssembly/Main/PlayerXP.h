@@ -74,6 +74,8 @@ class PlayerXP {
     Bonus generateBonus(int rarity);
     std::string getBonusText(const Bonus& bonus);
 
+    std::string getRarityString(int rarity);
+
 public:
     PlayerXP();
 

@@ -132,14 +132,23 @@ bool PlayerXP::upgradeSystem(int level, std::vector<std::shared_ptr<Entity>> cha
 
                 ImGui::Dummy(ImVec2(0, 250));
 
-                float textWidth = ImGui::CalcTextSize(getBonusText(choice).c_str()).x;
-                float avail = ImGui::GetContentRegionAvail().x;
-                ImGui::SetCursorPosX((avail - textWidth) * 0.5f);
+
                 if (choice.rarity == 1) color = ImVec4(0.8f, 0.8f, 0.8f, 1.0f);
                 else if (choice.rarity == 2) color = ImVec4(0.2f, 0.4f, 1.0f, 1.0f);
                 else if (choice.rarity == 3) color = ImVec4(0.8f, 0.6f, 1.0f, 1.0f);
                 else if (choice.rarity == 4) color = ImVec4(1.0f, 1.0f, 0.0f, 1.0f);
                 else color = ImVec4(1.0f,1.0f,1.0f,1.0f);
+
+                float textWidthRarity = ImGui::CalcTextSize(getRarityString(choice.rarity).c_str()).x;
+                float availRarity = ImGui::GetContentRegionAvail().x;
+                ImGui::SetCursorPosX((availRarity - textWidthRarity) * 0.5f);
+                ImGui::TextColored(color, "%s", getRarityString(choice.rarity).c_str());
+
+                ImGui::Separator();
+
+                float textWidth = ImGui::CalcTextSize(getBonusText(choice).c_str()).x;
+                float avail = ImGui::GetContentRegionAvail().x;
+                ImGui::SetCursorPosX((avail - textWidth) * 0.5f);
                 ImGui::TextColored(color, "%s", getBonusText(choice).c_str());
 
                 ImGui::Dummy(ImVec2(0, 200));
@@ -296,3 +305,19 @@ void PlayerXP::applyBonuses(std::vector<std::shared_ptr<Entity>> characters) {
 bool PlayerXP::getChoosing() const { return choosing; }
 
 void PlayerXP::addCurrentXP(int xpToAdd) { currentXP += xpToAdd; }
+
+std::string PlayerXP::getRarityString(int rarity) {
+    switch (rarity) {
+        case 1:
+            return "Common";
+        case 2:
+            return "Rare";
+        case 3:
+            return "Epic";
+        case 4:
+            return "Legendary";
+        default:
+            return "Unknown";
+            break;
+    }
+}
