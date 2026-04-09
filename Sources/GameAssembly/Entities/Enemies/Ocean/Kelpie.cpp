@@ -183,7 +183,7 @@ void Kelpie::manageKelpieEffects()
             poisonCD--;
             isPoisoned = false;
         }
-        LogManager::getInstance().addLog("The passive \"Healing Poison\" of Kelpie cured her.", ImVec4(240, 0.518, 0.518, 1));
+        LogManager::getInstance().addLog("The passive \"Healing Poison\" of Kelpie cured her.", ImVec4(0.141f, 0.039f, 0.200f, 1.0f));
     }
 
     if (isBurnt)

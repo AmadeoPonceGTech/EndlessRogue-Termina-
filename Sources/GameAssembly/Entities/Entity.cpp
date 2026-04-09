@@ -42,7 +42,7 @@ void Entity::manageStatusEffect()
             poisonCD--;
             isPoisoned = false;
         }
-        LogManager::getInstance().addLog(this->getName() + " takes damages from the poison !", ImVec4(0.5f, 0.0f, 0.5f, 1.0f));
+        LogManager::getInstance().addLog(this->getName() + " takes damages from the poison !", ImVec4(0.141f, 0.039f, 0.200f, 1.0f));
     }
 
     if (isBurnt)

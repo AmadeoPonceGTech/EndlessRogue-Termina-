@@ -91,6 +91,13 @@ bool PlayerXP::upgradeSystem(int level, std::vector<std::shared_ptr<Entity>> cha
 {
     static std::mt19937 rng2(rd());
 
+    ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImVec4 BgColor = ImVec4(0.200f, 0.133f, 0.075f, 1.0f);
+
+    ImVec4 normalColor  = ImVec4(0.231f, 0.153f, 0.086f, 1.0f);
+    ImVec4 hoverColor   = ImVec4(0.212f, 0.133f, 0.071f, 1.0f);
+    ImVec4 activeColor  = ImVec4(0.161f, 0.094f, 0.043f, 1.0f);
+
     switch (upgradeState) {
         case EUpgradeState::CHECKINGXP : {
             if (!levelUp(level))
@@ -122,13 +129,18 @@ bool PlayerXP::upgradeSystem(int level, std::vector<std::shared_ptr<Entity>> cha
 
         case EUpgradeState::CHOOSINGUPGRADE : {
 
-            ImGui::Begin("Choose an upgrade");
+            ImGui::SetNextWindowPos(ImVec2(0, 0));
+            ImGui::SetNextWindowSize(ImVec2(viewport->Size));
+            ImGui::PushStyleColor(ImGuiCol_WindowBg, BgColor);
+            ImGui::Begin("Choose an upgrade", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
             ImGui::Columns(3, nullptr, true);
+
+            ImGui::SetWindowFontScale(3.f);
 
             for (int i = 0; i < bonusChoices.size(); i++) {
                 auto& choice = bonusChoices[i];
                 std::string label = "Choice" + std::to_string(i + 1);
-                ImGui::BeginChild(label.c_str(), ImVec2(0, 600), true);
+                ImGui::BeginChild(label.c_str(), ImVec2(0, -1), true);
 
                 ImGui::Dummy(ImVec2(0, 250));
 
@@ -142,6 +154,7 @@ bool PlayerXP::upgradeSystem(int level, std::vector<std::shared_ptr<Entity>> cha
                 float textWidthRarity = ImGui::CalcTextSize(getRarityString(choice.rarity).c_str()).x;
                 float availRarity = ImGui::GetContentRegionAvail().x;
                 ImGui::SetCursorPosX((availRarity - textWidthRarity) * 0.5f);
+                ImGui::SetWindowFontScale(2.f);
                 ImGui::TextColored(color, "%s", getRarityString(choice.rarity).c_str());
 
                 ImGui::Separator();
@@ -149,16 +162,21 @@ bool PlayerXP::upgradeSystem(int level, std::vector<std::shared_ptr<Entity>> cha
                 float textWidth = ImGui::CalcTextSize(getBonusText(choice).c_str()).x;
                 float avail = ImGui::GetContentRegionAvail().x;
                 ImGui::SetCursorPosX((avail - textWidth) * 0.5f);
+                ImGui::SetWindowFontScale(2.f);
                 ImGui::TextColored(color, "%s", getBonusText(choice).c_str());
 
                 ImGui::Dummy(ImVec2(0, 200));
 
-                float buttonWidth = 120.0f;
+                float buttonWidth = viewport->Size.x / 6.0f;
                 ImGui::SetCursorPosX((avail - buttonWidth) * 0.5f);
+                ImGui::SetCursorPosY(viewport->Size.y * 4.0f / 5.0f);
 
                 std::string labelB = "Choose##" + std::to_string(i);
 
                 {
+                    ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
                     if (ImGui::Button(labelB.c_str(), ImVec2(buttonWidth, 0))) {
                         bonusesToApply.push_back(std::make_unique<Bonus>(choice));
                         if (bonusesToApply.back()->type == EBonusType::CLASSSTATS) {
@@ -175,6 +193,7 @@ bool PlayerXP::upgradeSystem(int level, std::vector<std::shared_ptr<Entity>> cha
                         else
                             upgradeState = EUpgradeState::CHECKINGXP;
                     }
+                    ImGui::PopStyleColor(3);
                 }
 
                 ImGui::EndChild();
@@ -184,44 +203,86 @@ bool PlayerXP::upgradeSystem(int level, std::vector<std::shared_ptr<Entity>> cha
             }
             ImGui::Columns(1);
             ImGui::End();
+            ImGui::PopStyleColor();
             return false;
         }
 
         case EUpgradeState::SELECTTARGET : {
-            ImGui::Begin("Choose target");
+            ImGui::SetNextWindowPos(ImVec2(0, 0));
+            ImGui::SetNextWindowSize(ImVec2(viewport->Size));
+            ImGui::PushStyleColor(ImGuiCol_WindowBg, BgColor);
+            ImGui::Begin("Choose target", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+
+            ImGui::SetWindowFontScale(5.f);
+
             for (int i = 0; i < characters.size(); i++)
             {
                 std::string label = characters[i]->getName() + "##" + std::to_string(i);
 
+                float textWidth = ImGui::CalcTextSize(label.c_str()).x;
+                float avail = ImGui::GetContentRegionAvail().x;
+                ImGui::SetCursorPosX((avail - textWidth) * 0.5f);
+
+                ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+                ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
                 if (ImGui::Button(label.c_str())) {
                     bonusesToApply.back()->character = characters[i];
                     upgradeState = EUpgradeState::CHECKINGXP;
                 }
+                ImGui::PopStyleColor(3);
+                ImGui::Separator();
             }
             ImGui::End();
+            ImGui::PopStyleColor();
 
             return false;
         }
 
         case EUpgradeState::SELECTCLASS : {
-            ImGui::Begin("Choose Class");
+            ImGui::SetNextWindowPos(ImVec2(0, 0));
+            ImGui::SetNextWindowSize(ImVec2(viewport->Size));
+            ImGui::PushStyleColor(ImGuiCol_WindowBg, BgColor);
+            ImGui::Begin("Choose Class", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+
+            ImGui::SetWindowFontScale(5.f);
+
+            ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
             if (ImGui::Button("CloseDPS")) {
                 bonusesToApply.back()->bonusClass = EClass::CLOSEDDPS;
                 upgradeState = EUpgradeState::CHECKINGXP;
             }
+            ImGui::PopStyleColor(3);
+            ImGui::Separator();
+            ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
             if (ImGui::Button("RangeDPS")) {
                 bonusesToApply.back()->bonusClass = EClass::RANGEDDPS;
                 upgradeState = EUpgradeState::CHECKINGXP;
             }
+            ImGui::PopStyleColor(3);
+            ImGui::Separator();
+            ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
             if (ImGui::Button("Tank")) {
                 bonusesToApply.back()->bonusClass = EClass::TANK;
                 upgradeState = EUpgradeState::CHECKINGXP;
             }
+            ImGui::PopStyleColor(3);
+            ImGui::Separator();
+            ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
             if (ImGui::Button("Support")) {
                 bonusesToApply.back()->bonusClass = EClass::SUPPORT;
                 upgradeState = EUpgradeState::CHECKINGXP;
             }
             ImGui::End();
+            ImGui::PopStyleColor();
 
             return false;
         }

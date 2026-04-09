@@ -41,6 +41,10 @@ void Game::Update(float deltaTime)
     ImVec4 BgColor = ImVec4(0.200f, 0.133f, 0.075f, 1.0f);
     ImVec4 ItemsColor = ImVec4(0.349f, 0.251f, 0.169f, 1.0f);
 
+    ImVec4 normalColor  = ImVec4(0.231f, 0.153f, 0.086f, 1.0f);
+    ImVec4 hoverColor   = ImVec4(0.212f, 0.133f, 0.071f, 1.0f);
+    ImVec4 activeColor  = ImVec4(0.161f, 0.094f, 0.043f, 1.0f);
+
     switch (gameState)
     {
 
@@ -62,7 +66,11 @@ void Game::Update(float deltaTime)
 
             float buttonWidth = 120.0f;
             ImGui::SetCursorPosX((avail - buttonWidth) * 0.5f);
+            ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
             if (ImGui::Button("Play")) { gameState = EGameState::Menu; }
+            ImGui::PopStyleColor(3);
 
             ImGui::End();
             ImGui::PopStyleColor();
@@ -80,9 +88,13 @@ void Game::Update(float deltaTime)
             ImGui::Text("Select your characters");
             ImGui::SameLine();
             ImGui::BeginDisabled(!gameplay->TeamIsComplete());
+            ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
             if (ImGui::Button("Launch Run")) {
                 gameState = EGameState::Run;
             };
+            ImGui::PopStyleColor(3);
             ImGui::EndDisabled();
 
             // ===== LAYOUT SIMPLE =====
@@ -154,15 +166,23 @@ void Game::Update(float deltaTime)
                 ImGui::Dummy(ImVec2(0,20));
 
                 ImGui::BeginDisabled(gameplay->IsInTeam(character) or gameplay->TeamIsComplete());
+                ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+                ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
                 if (ImGui::Button("Select")) {
                     gameplay->AddToTeam(character);
                 }
+                ImGui::PopStyleColor(3);
                ImGui::EndDisabled();
 
+                ImGui::PushStyleColor(ImGuiCol_Button, normalColor);
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hoverColor);
+                ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeColor);
                 ImGui::BeginDisabled(!gameplay->IsInTeam(character));
                 if (ImGui::Button("UnSelect")) {
                     gameplay->RemoveFromTeam(character);
                 }
+                ImGui::PopStyleColor(3);
                 ImGui::EndDisabled();
             }
             else {
