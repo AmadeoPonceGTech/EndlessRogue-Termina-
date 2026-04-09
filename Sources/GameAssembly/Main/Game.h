@@ -72,6 +72,7 @@ private :
     TerminaScript::Prefab p_Gargoyle;
     TerminaScript::Prefab p_Skeleton;
     TerminaScript::Prefab p_AdeptOfTheChaos;
+    TerminaScript::Prefab p_DarkKnight;
 
     TerminaScript::Prefab p_Dunkleosteus;
     TerminaScript::Prefab p_Eel;

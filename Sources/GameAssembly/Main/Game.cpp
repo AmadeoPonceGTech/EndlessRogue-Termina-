@@ -56,6 +56,7 @@ void Game::Start()
     p_Gargoyle = TerminaScript::Prefab("Assets/Prefabs/Gargoyle.trp");
     p_Skeleton = TerminaScript::Prefab("Assets/Prefabs/Skeleton.trp");
     p_AdeptOfTheChaos = TerminaScript::Prefab("Assets/Prefabs/AdeptOfTheChaos.trp");
+    p_DarkKnight = TerminaScript::Prefab("Assets/Prefabs/DarkKnight.trp");
 
     p_Dunkleosteus = TerminaScript::Prefab("Assets/Prefabs/Dunkleosteus.trp");
     p_Eel = TerminaScript::Prefab("Assets/Prefabs/Eel.trp");
@@ -83,6 +84,7 @@ void Game::Start()
     characterPrefabMap["Gargoyle"] = p_Gargoyle;
     characterPrefabMap["Skeleton"] = p_Skeleton;
     characterPrefabMap["Adept Of The Chaos"] = p_AdeptOfTheChaos;
+    characterPrefabMap["DarkKnight"] = p_DarkKnight;
 
     characterPrefabMap["Dunkleosteus"] = p_Dunkleosteus;
     characterPrefabMap["Eel"] = p_Eel;
