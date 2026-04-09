@@ -203,6 +203,9 @@ void Gameplay::UpdateFight() {
             }
             for (auto& enemy : enemyManager->getEnemies())
             {
+                if (enemy->getCurrentHealth() > enemy->getMaxHealth()) {
+                    enemy->setCurrentHealth(enemy->getMaxHealth());
+                }
                 if (enemy->getCurrentHealth() <= 0) {
 
                     if (enemy->getHasARevive()) {
