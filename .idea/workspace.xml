@@ -30,18 +30,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="merged playerXpSystem into main">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_01_04_2026_09_35_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_01_04_2026_09_35__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_02_04_2026_08_46_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_02_04_2026_08_46__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_04_2026_09_11_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_04_2026_09_11__Changes_.xml" beforeDir="false" />
+    <list default="true" id="1f6597e6-b263-4ce3-a757-0015d1b86ee5" name="Changes" comment="adjusted title screen + selection screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Main/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Main/Game.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Close DPS/Alex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Entities/Characters/Close DPS/Alex.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/GameAssembly/Main/Gameplay/Gameplay.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,15 +160,7 @@
       <workItem from="1775112090624" duration="163000" />
       <workItem from="1775198857203" duration="2479000" />
       <workItem from="1775716999928" duration="1817000" />
-      <workItem from="1775718852550" duration="505000" />
-    </task>
-    <task id="LOCAL-00008" summary="added xpmanagement in end run function in character finished and fixed every character">
-      <option name="closed" value="true" />
-      <created>1774001365586</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1774001365586</updated>
+      <workItem from="1775718852550" duration="3569000" />
     </task>
     <task id="LOCAL-00009" summary="remove if for cleans to marcus">
       <option name="closed" value="true" />
@@ -562,7 +546,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775644462547</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="adjusted title screen + selection screen">
+      <option name="closed" value="true" />
+      <created>1775719429149</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1775719429149</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,7 +584,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added wolf fur artefact" />
     <MESSAGE value="added malicious eye artefact" />
     <MESSAGE value="added bear's salmon and cursed shield artefact" />
     <MESSAGE value="fix" />
@@ -617,7 +608,8 @@
     <MESSAGE value="fix returns in CreateArtefact functions" />
     <MESSAGE value="update logs" />
     <MESSAGE value="merged playerXpSystem into main" />
-    <option name="LAST_COMMIT_MESSAGE" value="merged playerXpSystem into main" />
+    <MESSAGE value="adjusted title screen + selection screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjusted title screen + selection screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
