@@ -37,10 +37,6 @@ Alex::Alex()
     baseSpeed = currentSpeed;
 
     isParring = false;
-
-    isPoisoned = true;
-    isBurnt = true;
-    isStun = true;
 }
 
 void Alex::firstAbility(std::shared_ptr<Enemy>target)

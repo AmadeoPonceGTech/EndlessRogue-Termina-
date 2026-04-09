@@ -35,7 +35,6 @@ Gameplay::Gameplay() {
     }
 
     currentBiome = EBiome::FOREST;
-
 }
 
 void Gameplay::StartRun() {
@@ -378,7 +377,11 @@ void Gameplay::drawImGui() {
         ImGui::Text("Armor : %.2f", chara->getCurrentArmor());
         ImGui::Text("Magic Resistance : %.2f", chara->getCurrentPowerResist());
         ImGui::Text("Speed : %.2f", chara->getCurrentSpeed());
-
+        ImGui::Dummy(ImVec2(0,5));
+        std::shared_ptr<Character> c = static_pointer_cast<Character>(chara);
+        if (c->getArtefact() != nullptr) {
+            ImGui::Text("Artefact : %s", c->getArtefact()->getName().c_str());
+        }
 
         ImGui::EndChild();
 

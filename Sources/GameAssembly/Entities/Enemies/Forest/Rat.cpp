@@ -211,7 +211,7 @@ void Rat::fourthAbility(const std::vector<Character*>& targets) {
 std::shared_ptr<Artefact> Rat::createDrop() {
     static std::random_device rd;
     static std::mt19937 rng(rd());
-    std::uniform_real_distribution<float> dist(0.f, 100.f);
+    std::uniform_real_distribution<float> dist(0.f, 17.5f);
 
     float roll = dist(rng);
 
